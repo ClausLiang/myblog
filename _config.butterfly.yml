@@ -80,14 +80,14 @@ favicon: /img/favicon.png
 
 # Avatar (頭像)
 avatar:
-  img: https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png
+  img: https://liangyonggang.com/img/avatar.gif # 头像lyg
   effect: false
 
 # Disable all banner image
 disable_top_img: false
 
 # The banner image of home page
-index_img:
+index_img: https://liangyonggang.com/img/bg2.jpg # 首页banner lyg
 
 # If the banner of page not setting, it will show the top_img
 default_top_img:
@@ -115,8 +115,8 @@ category_per_img:
 
 cover:
   # display the cover or not (是否顯示文章封面)
-  index_enable: true
-  aside_enable: true
+  index_enable: false # 关闭文章封面 lyg
+  aside_enable: false # 关闭侧边栏最新文章图标 lyg
   archives_enable: true
   # the position of cover in home page (封面顯示的位置)
   # left/right/both
@@ -655,12 +655,12 @@ aside:
     enable: true
     description:
     button:
-      enable: true
+      enable: false # 关闭follow按钮lyg
       icon: fab fa-github
       text: Follow Me
       link: https://github.com/xxxxxx
   card_announcement:
-    enable: true
+    enable: false # 关闭公告lyg
     content: This is my Blog
   card_recent_post:
     enable: true
