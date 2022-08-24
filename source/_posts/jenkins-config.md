@@ -5,7 +5,8 @@ tags: jenkins
 categories: 进阶
 ---
 ## 安装jenkins
-上jenkins官网查看其安装方法https://www.jenkins.io/zh/download/，第一次选了稳定版，但是在装插件的过程中出现插件不适应于当前版本的问题（稳定版更新较慢），遂将其卸载，安装了定期发布版。安装命令如下：
+上jenkins官网查看其安装方法 https://www.jenkins.io/zh/download/
+第一次选了稳定版，但是在装插件的过程中出现插件不适应于当前版本的问题（稳定版更新较慢），遂将其卸载，安装了定期发布版。安装命令如下：
 ```zsh
 # 下载repo 文件
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
