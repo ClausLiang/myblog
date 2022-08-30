@@ -1,5 +1,5 @@
 ---
-title: Hello hexo
+title: Hello hexo 如何用hexo搭建一个自己的博客网站
 date: 2022-08-18
 tags: hexo
 categories: 进阶
