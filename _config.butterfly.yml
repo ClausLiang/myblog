@@ -421,7 +421,7 @@ footer:
   owner:
     enable: true
     since: 2019 # 博客年份 lyg
-  custom_text:
+  custom_text: <a href="https://beian.miit.gov.cn/">京ICP备18012831号</a> | <a href="//liangyonggang.com">去我的主页liangyonggang.com</a>
   copyright: true # Copyright of theme and framework
 
 # Analysis
