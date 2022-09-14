@@ -43,7 +43,9 @@ categories: #分类（不适用于分页）
 分类具有顺序和层次性，标签没有。简单处理就是一篇文章设置一个分类就好了，标签可以设置多个。当然也可以设置多级分类，详情参考hexo官方文档，里面说的比较明白。
 ## 6.yaml
 科普：不是一种标记语言，仍是一种标记语言。后缀.yml
-## 7.创建标签页面
+## 7.创建几个必要页面
+
+### 创建标签页面
 在主题官网的文档里查到创建标签页面`hexo new page tags`，找到文件`source/tags/index.md`,添加type: “tags"
 ```
 ---
@@ -52,9 +54,9 @@ date: 2018-01-01 00:00:00
 type: "tags"
 ---
 ```
-## 8.同上创建分类页面
+### 创建分类页面
 `hexo new page categories`，并修改文件`source/categories/index.md`,添加type: “categories"
-## 9.创建友情链接
+### 创建友情链接
 `hexo new page link`，并修改文件`source/link/index.md`,添加type: "link"
 
 在Hexo博客目录中的source/_data（如果没有 _data 文件夹，请自行创建），创建一个文件link.yml
@@ -70,8 +72,8 @@ type: "tags"
 ```
 友情链接界面也可以由用户自己自定义，只需要在友情链接的md档设置就行，以普通的Markdown格式书写。
 
-## 10.修改主题的配置文件_config.butterfly.yml
-展示主页顶部的菜单
+## 8.修改主题的配置文件_config.butterfly.yml
+修改主页顶部的菜单方便其正确展示
 ```yml
 menu:
   主页: / || fas fa-home
@@ -79,3 +81,29 @@ menu:
   标签: /tags/ || fas fa-tags
   分类: /categories/ || fas fa-folder-open
 ```
+修改头像avatar
+```yml
+avatar:
+  img: https://cdn.liangyonggang.com/img/avatar.gif
+  effect: false # true会一直转
+```
+修改首页banner index_img
+```yml
+# The banner image of home page
+index_img: https://cdn.liangyonggang.com/img/bg2.jpg # 首页banner
+```
+修改首页文章的封面相关 cover
+```yml
+cover:
+  # display the cover or not (是否顯示文章封面)
+  index_enable: false # 关闭文章封面
+  aside_enable: false # 关闭侧边栏最新文章图标
+  archives_enable: true
+  # the position of cover in home page (封面顯示的位置)
+  # left/right/both
+  position: both
+  # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
+  default_cover:
+    # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
+```
+等等，很多配置可以根据自己喜好修改

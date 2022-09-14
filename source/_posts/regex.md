@@ -109,4 +109,15 @@ console.log(res) // 'abcd'
 ```javaScript
 '12456.33'.replace(/\B(?=(\d{3})+(?!\d))/g,",")
 ```
-
+### 5.判断一个串是否符合规则
+```javaScript
+{validator:(rule, value, callback) => {
+    var reg = /^[0-9a-zA-Z]*$/g
+    if (!reg.test(value)) {
+        callback('只能输入数字字母')
+    }
+    callback()
+},trigger: 'blur'}
+// /^[0-9a-zA-Z]*$/g.test('faf,')
+// false
+```
