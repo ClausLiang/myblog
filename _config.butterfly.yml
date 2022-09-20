@@ -291,7 +291,7 @@ livere:
 gitalk:
   client_id: e3642d467a0516e1686b
   client_secret: ae11a444446c9f57724acaae92dceb75101b3c29
-  repo: https://github.com/ClausLiang/myblogcomments.git
+  repo: myblogcomments
   owner: ClausLiang
   admin: [ClausLiang]
   option:
