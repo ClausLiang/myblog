@@ -256,10 +256,10 @@ addtoany:
 # Comments System
 # --------------------------------------
 
-comments:
+comments: # 评论 lyg
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42/Artalk
-  use: # Valine,Disqus
+  use: gitalk
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
@@ -289,11 +289,11 @@ livere:
 # gitalk
 # https://github.com/gitalk/gitalk
 gitalk:
-  client_id:
-  client_secret:
-  repo:
-  owner:
-  admin:
+  client_id: e3642d467a0516e1686b
+  client_secret: ae11a444446c9f57724acaae92dceb75101b3c29
+  repo: https://github.com/ClausLiang/myblogcomments.git
+  owner: ClausLiang
+  admin: [ClausLiang]
   option:
 
 # valine
