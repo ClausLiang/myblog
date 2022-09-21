@@ -5,24 +5,26 @@ tags:
     - hexo
 categories: 进阶
 ---
-> 想不用框架搭建一个自己的博客网站，后来发现hexo真香。
+> 作为一个前端一开始想不用框架，自己开发搭建一个博客网站，后来发现hexo真香。
+
+# 一、了解学习hexo的使用方式
 ## 1.安装hexo
-```zsh
+```bash
 npm install -g hexo-cli
 ```
 ## 2.初始化项目
-```zsh
+```bash
 hexo init myblog
 ```
-## 3.比较好看的主题
+## 3.选一个比较好看的主题安装
 查阅了很多文章，知乎上有篇文章写的比较好。总结下推荐3款：butterfly、shoka、kaze
 
 我选了比较流行的butterfly，根据butterfly的文档安装将其到项目里
 
 将butterfly的配置文件内容复制到_config.butterfly.yml中，_config.butterfly.yml的优先级高，这样可以避免butterfly升级后带来的不必要的麻烦。
 
-## 4.常用基本命令
-```zsh
+## 4.hexo常用基本命令
+```bash
 hexo g # 生成静态文件
 hexo new abc # 生成文章，会在source/_posts目录下生成一个abc.md文件
 Hero new page about # 生成页面
@@ -31,7 +33,7 @@ hexo clean # 清除缓存文件 (db.json) 和已生成的静态文件 (public)
 ```
 ## 5.了解front-matter
 文件最上方以’---'分隔的区域，用以指定单个文件的变量，常用参数有下列几个：
-```
+```md
 layout: # 布局 默认是post
 title: # 标题
 date: # 创建时间
@@ -42,12 +44,12 @@ categories: #分类（不适用于分页）
 ```
 分类具有顺序和层次性，标签没有。简单处理就是一篇文章设置一个分类就好了，标签可以设置多个。当然也可以设置多级分类，详情参考hexo官方文档，里面说的比较明白。
 ## 6.yaml
-科普：不是一种标记语言，仍是一种标记语言。后缀.yml
+在项目中发现很多.yml后缀的文件，这些是yaml文件，科普：yet another markup language，不是一种标记语言，仍是一种标记语言。
 ## 7.创建几个必要页面
 
 ### 创建标签页面
 在主题官网的文档里查到创建标签页面`hexo new page tags`，找到文件`source/tags/index.md`,添加type: “tags"
-```
+```md
 ---
 title: 标籤
 date: 2018-01-01 00:00:00
@@ -92,7 +94,7 @@ avatar:
 # The banner image of home page
 index_img: https://cdn.liangyonggang.com/img/bg2.jpg # 首页banner
 ```
-修改首页文章的封面相关 cover
+修改首页文章卡片的封面相关
 ```yml
 cover:
   # display the cover or not (是否顯示文章封面)
@@ -106,4 +108,18 @@ cover:
   default_cover:
     # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
 ```
-等等，很多配置可以根据自己喜好修改
+等等，很多配置可以根据自己喜好修改，不再赘述
+## 给文章引入评论系统
+查看文档butterfly支持很多评论系统，有disqus，livere，gitalk，valine，waline，twikoo等等，我一开始准备选gitalk，因为其是基于github issues的插件，想着是可能比较稳定，结果测试半天发现在国内几乎没法使用，被墙的严重。后尝试发现`livere`是真的好用，只需在livere官网注册一个应用，拿到一个id，在hexo中配一下id即可。非常好用。
+
+# 二、将博客系统部署到服务器
+如果想不花一分钱，可以直接将博客项目部署到github page或者gitee page，优点就是免费，只此一个优点吊打所有。
+
+也可以像我一样花点小钱，在阿里云先买个域名再买台云服务器，这样的话，就可以拥有一个属于自己的域名，也不能干啥特别的事，就当是给自己做的一个名片吧。一个域名5年几百块钱，一台ecs一个月几十块钱。
+
+云服务器根据自己需要买适合的配置，我一开始买了一个最低配的1核1G的，后发现跑服务太卡所以给它多花了一块钱升级了一下，改成了突发性能型的，因为我大部分时间对性能要求不高，只需跑命令的时候性能好点就行，突发性能的性价比高。
+
+学习相关知识在服务器搭建一个nginx，再搭一个Jenkins方便部署博客。
+
+大功告成。
+
