@@ -34,6 +34,16 @@ concat slice indexOf join toString valueOf
 es6中新增的方法有：
 forEach(fn) map(fn) filter(fn) find(fn) findIndex(fn) every(fn) some(fn) reduce(fn) reduceRight(fn) keys() values() entries()
 
+`map和forEach的区别：`
+1.map的速度比forEach快
+2.map会返回一个新的数组，不对原数组产生影响，forEach不产生新的数组，forEach返回undefined
+3.map因为产生新的数组可以链式操作，forEach不能。
+4.map里可以用return（return什么相当于把这一项变为什么），而forEach里用return不起作用，forEach不能用break，会直接报错。
+
+`for循环中return break continue的区别`
+return是使整个函数返回，后面的不管是循环内还是循环外的都不执行了。
+break中断循环，但不会跳出函数，continue是跳过该次循环。
+
 **`3.typeOf`**
 typeof对于基本类型，初了null都可以显示正确的类型
 typeof null // 'object'
@@ -134,20 +144,147 @@ call和apply的区别：
 都是为了改变this的指向，作用是相同的，只是传参的方式不同；除了第一个参数，call逐一接受参数，apply只接受一个参数数组。
 bind和其他两个方法的作用也是一致的，只是该方法会返回一个函数。并且我们通过bind实现柯里化。
 
+**`10.es6有哪些新特性`**
+1.let const
+2.symbol 新增的一个基本类型，用于表示一个独一无二的值，不能与其他数据类型进行运算。
+3.模版字符串
+4.解构表达式。它是一种针对数组或者对象进行模式匹配，然后对其中的变量进行赋值。
+5.对象方面
+  新增对象map set
+  数组新增了一些方法
+  Object新增了一些方法 Object.assign Object.keys Object.values Object.entries
+  对象声明简写 let person = {name,age}
+  对象扩展符 ...
+6.箭头函数。三个特点：不需要关键字function 省略return关键字 继承上下文的this关键字
+7.class
+8.promise proxy
+9.模块化
+10.运算符
+扩展运算符...
+可选链?.
+
+**`11.http的请求方式`**
+get、post、put、delete、head、options、connect
+
+**`12.a和b不通过第三个变量交换值`**
+```js
+let a=3,b=5
+a = a + b
+b = a - b
+a = a - b
+```
+
 # 浏览器
 **`1.跨域`**
+同源策略：它是一种约定，它是浏览器最核心也最基本的安全功能，如果少了同源策略，浏览器的正常功能都会受影响。同源策略是浏览器的行为，是为了保护本地数据不被js代码获取回来的数据污染，拦截的是数据接收。即请求发送了，服务器响应了，但是无法被浏览器接收。
 因为浏览器出于安全考虑，有同源策略。也就是说，如果协议、域名、端口有一个不同就是跨域，ajax就会请求失败。
 我们可以通过以下几种方式进行跨域：
-1.jsonp：利用script标签没有跨域限制的漏洞。通过script标签指向一个需要访问的地址并提供一个回调函数来接受数据当需要通讯时。只限于get请求。
+1.jsonp
+利用script标签没有跨域限制的漏洞。通过script标签指向一个需要访问的地址并提供一个回调函数来接受数据当需要通讯时。只限于get请求。
 2.CORS
 CORS需要浏览器和后端同时支持。浏览器会自动进行CORS通信，实现CORS通信的关键是后端，只要后端实现了CORS，就实现了跨域。服务端设置Access-Control-Allow-Origin就可以开启CORS。
-3.document.domain
+3.node中间件代理
+ a.接受客户端请求 b.将请求转发给服务器 c.拿到服务器响应的数据 d.将响应转发给客户端
+4.nginx反向代理
+最简单的跨域方式，只需修改nginx配置即可解决跨域。实现思路：通过nginx配置一个代理服务器（域名与domain1相同，端口不同）做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中的domain信息，方便当前域cookie写入，实现跨域登录。
+5.document.domain
 该方式只能用于二级域名相同的情况下，比如a.test.com和b.test.com适用于该方式。只需给页面添加document.domain = 'test.com'表示二级域名都相同就可以实现跨域
-4.postMessage
+6.postMessage
 这种方式常用于获取嵌入页面中的第三方页面数据。一个页面发送消息，另一个页面判断来源并接受消息。
 
 **`2.事件轮询（event loop）`**
 js是门非阻塞单线程语言，因为在最初js就是为和浏览器交互而诞生的。（如果js是多线程，我们在多个线程中处理dom就会有问题，当然引入读写锁可以解决）
+js在执行的过程中会产生执行环境，这些执行环境会被顺序的加入执行栈中。如果遇到异步的代码，会被挂起并加入task队列（微任务队列、宏任务队列），一旦执行栈为空，event loop就会从task队列中拿出需要执行的代码放入执行栈中执行。
+
+同步任务 --> 微任务 --> 宏任务
+
+微任务：promise.then
+宏任务：setTimeout I/O UI渲染
+
+争议点：同步任务是宏任务吗？看了很多文章，解释各不相同
+
+**`3.浏览器渲染机制`**
+1.处理html并构建dom树。
+2.处理css并构建cssom树。
+3.将dom和cssom合并成一个渲染树。
+4.根据渲染树来布局，计算每个节点的位置。
+5.调用GPU绘制，合成图册，显示在屏幕上。
+
+**`4.重绘（repaint）和回流（reflow）`**
+重绘：是当节点需要更改外观而不影响布局的，比如改变颜色
+回流：布局或几何属性需要改变
+
+回流必定会发生重绘，重绘不一定会引发回流。回流所需要的成本比重绘高的多，改变深层次的节点很可能导致父节点的一系列回流。
+所以以下几个动作可能导致性能问题：
+改变window大小
+改变字体
+添加或删除样式
+文字改变
+定位或者浮动
+盒模型
 
 # VUE
-# 小程序
+**`1.组件之间传值`**
+1.父->子：通过属性的方式向子组件传值，子组件通过props接收。
+2.子->父：子组件通过$emit派发事件，父组件通过绑在子组件上的事件来接收数据。
+3.非父子通过eventBus来传值：new一个vue实例，在要传值的文件中导入这个实例（也可以main.js全局引入）,bus.$emit派发事件,bus.$on接收。
+4.provide/inject
+`5.vuex：`
+state: 基本数据
+getter: 从state派生的数据，相当于state的计算属性
+mutations: 提交更改数据的方法，同步。store.commit提交mutation
+actions: 可以进行异步操作，通过store.dispatch提交action
+modules: 模块化vuex
+
+页面通过this.$store.dispatch提交action(页面通过mapAction提交异步提交事件到action)，action异步请求数据，拿到数据后通过commit提交到mutation，mutation会修改state的值。最后通过getter把对应的数据跑出去，在页面的计算属性中，通过mapGetter来动态获取state的值。
+
+**`2.生命周期`**
+beforeCreat/created beforeMount/mounted beforeUpdate/undated beforeDestroy/destroy
+beforeUnmount/unmount(vue3)
+
+beforeCreate vue创建前，实例初始化之后，this指向创建的实例，data method均不能访问
+created vue创建后，data method初始化导入之后，未挂载dom
+beforeMount 模版已经编译好了，但未挂载到页面中
+mounted 只要执行完mounted表示整个vue实例已经初始化完成了，此时组件已经脱离了创建阶段，进入运行阶段
+
+父beforeCreate -> 父created -> 父beforeMount -> 子beforeCreate -> 子created -> 子beforeMount -> 子mounted -> 父mounted
+
+父beforeUpdate -> 子beforeUpdate -> 子updated -> 父updated
+
+父beforeDestroy -> 子beforeDestroy -> 子destroy -> 父destroy
+
+**`3.vue2与vue3的区别`**
+vue3相对于vue2
+`更快`
+1.virtual dom 完全重写，只针对变化的层进行diff，vue2是对所有的dom进行diff
+2.更多编译时（compile-time）提醒以减少runtime开销
+3.基于proxy观察者机制以满足全语言覆盖以及更好的性能
+4.放弃Object.defineProperty,使用更快的原生proxy
+5.组件实例初始化提速，内存使用减少
+`更小`
+1.tree-shaking 更友好
+2.新的core runtime,体积更小
+`架构方面`
+1.monorepo代码管理模式，各核心模块独立，而vue2各模块相互依赖耦合度高，很多常规不用的模块也在核心包
+2.ts重构
+`语法方面`
+1.composition api。setup入口。setup是新增的生命周期函数，存在于beforeCreate和created之间。setup选项是一个接收props和content的函数。setup可以定义数据和方法，如果想在模版中使用，必须通过return返回，暴露给组件的其余部分（计算属性、方法、生命周期钩子等）及组件等模版。
+2.往vue实例上挂载属性 app.config.globalProperties.$axios = xxx
+3.template里可以有多个节点。
+
+**`4.v-for循环中为什么一定要绑定key`**
+给每个dom元素加上key作为唯一标识，diff算法可以正确的识别这个节点，使页面渲染更加迅速。
+`key可以是哪些值，index为什么影响性能`
+key需要不变的唯一的值比如id。如果index作为key，index易变化，diff算法就会认为dom发生变化，执行更新过程，造成不必要的性能开销。dom更新非常消耗性能。
+
+**`5.v-for和v-if为什么不能同时使用`**
+v-for的优先级高于v-if，每次渲染都会先循环再判断，带来性能方面的浪费。
+
+**`6.v-show 和 v-if 有什么区别`**
+v-show通过控制元素的样式display控制元素的显示与否，v-if控制元素渲染与否。v-show只编译一次，后面就是控制css，而v-if会不停的创建和销毁，故v-show性能更好一些。
+
+**`7.computed watch`**
+如果一个值依赖多个属性，用computed更方便。如果一个值变化后会引起一系列的操作或变化，用watch更方便。watch支持异步computed不支持。
+
+**`8.vue data为什么是函数`**
+data之所以是一个函数，是因为一个组件可能会多处调用，而每次调用就会执行data函数并返回新的数据对象，这样，就可以避免多处调用之间的数据污染。
