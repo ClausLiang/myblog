@@ -45,7 +45,7 @@ return是使整个函数返回，后面的不管是循环内还是循环外的�
 break中断循环，但不会跳出函数，continue是跳过该次循环。
 
 **`3.typeOf`**
-typeof对于基本类型，初了null都可以显示正确的类型
+typeof对于基本类型，除了null都可以显示正确的类型
 typeof null // 'object'
 typeof对于对象，除了函数都显示'object'
 
@@ -137,7 +137,7 @@ commonjs的模块化 require module.exports 浏览器中需要用browserify解�
 1.前者支持动态导入，也就是require(${path}/a.js)，后者目前不支持，但是已有提案
 2.前者是同步导入，因为用于服务端，文件都在本地，即使卡住主线程也影响不大。后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响。
 3.前者在导出时是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。后者采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化。
-4.后者会变异成 require/exports 来执行
+4.后者会编译成 require/exports 来执行
 
 **`9.call apply bind的区别`**
 call和apply的区别：
@@ -272,6 +272,9 @@ vue3相对于vue2
 2.往vue实例上挂载属性 app.config.globalProperties.$axios = xxx
 3.template里可以有多个节点。
 
+**`3.1.为什么vue3用了proxy性能更好`**
+proxy的机制是只要对象的属性发生改变就能检测到，defineProperty是递归遍历属性，比proxy慢。
+
 **`4.v-for循环中为什么一定要绑定key`**
 给每个dom元素加上key作为唯一标识，diff算法可以正确的识别这个节点，使页面渲染更加迅速。
 `key可以是哪些值，index为什么影响性能`
@@ -288,3 +291,48 @@ v-show通过控制元素的样式display控制元素的显示与否，v-if控制
 
 **`8.vue data为什么是函数`**
 data之所以是一个函数，是因为一个组件可能会多处调用，而每次调用就会执行data函数并返回新的数据对象，这样，就可以避免多处调用之间的数据污染。
+
+**`9.自定义组件v-model怎么实现数据双向绑定`**
+vue2
+一个组件上的v-model会默认利用名为value的prop和名为input的事件
+```html
+<custome v-model="search"/> // 等价于
+<custome :value="search" @input = "newValue => search = newValue"/>
+```
+vue3
+v-model使用modelValue，在一个组件上v-model会被展开为如下形式
+```html
+<custome v-model="search"/> // 等价于
+<custome :modelValue="search" @update:modelValue = "newValue => search = newValue"/>
+```
+因此自定义组件要用props接收value或modelValue，处理完逻辑再通过派发事件input或者update:modelValue通知到父组件。
+
+**`10.keep-alive怎么用，怎么销毁`**
+<keep-alive>包裹动态组件，会缓存不活动的组件实例。把要缓存的组件name放到includes属性里。如果要销毁，去掉includes里对应的组件。
+
+**`11.$set的使用场景`**
+1.通过数组的下标修改数组的值，数据已经被修改，但是不触发updated函数，视图不更新
+2.vue中检测不到对象属性的添加和删除。
+vue2在创建实例的时候把data深度遍历所有属性，并使用Object.defineProperty把这些属性全部转为getter/setter。让vue追踪依赖，在属性被访问和修改时通知变化。所以属性必须在data对象上存在才能让vue转化它，这样才能让它时响应的。当你在对象上新加了一个属性，该属性并没有加入vue检测数据更新的机制。vue.$set是能让vue知道你添加了属性，它会给你做处理。
+
+**`12.$nextTick的使用场景`**
+主要用于处理数据动态变化后dom还未及时更新的问题，用$nextTick可以获取最新dom的变化
+场景：
+1.有时需要根据数据动态的为某些dom添加事件，这要求在dom渲染完毕时设置，但是mounted函数执行时一般dom并没有渲染完毕，就出现获取不到的问题，这时需要用$nextTick
+2.在使用某个第三方插件时，希望在vue生成某些dom动态发生变化时重新应用该插件，这时需要在$nextTick的回调中执行重新应用插件的方法。
+
+vue有一个重要的概念：异步更新队列。vue在观察到数据的变化时并不是直接更新dom，而是开启一个队列，并缓存在同一个事件循环中的所有数据变化。在缓冲中会去除重复数据，从而避免不必要的计算和dom操作。然后在下一个事件循环tick中，vue刷新队列并执行实际的工作。所以如果用一个for循环来动态改变数据100次，其实它只会应用最后一次变化。如果没有这种机制，dom就要重绘100次，这是一个非常大的开销。$nextTick就是知道什么时候dom更新完成。
+
+**`13.动态路由`**
+router.addRoutes动态添加路由
+
+**`14.插槽`**
+概念：封装组件期间为用户预留的内容的占位符
+匿名插槽：
+  <slot></slot>
+具名插槽：
+  定义：<slot name="foot"></slot>
+  为具名插槽提供内容 <template #foot></template>
+作用域插槽：
+  让父组件使用插槽时插槽内容可以访问子组件中的数据
+  
