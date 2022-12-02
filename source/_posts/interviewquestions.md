@@ -183,6 +183,9 @@ b = a - b
 a = a - b
 ```
 
+**`13.async await是什么？它有什么作用？`**
+async await是es7的新增，async用于声明一个函数，await用于等待一个异步方法执行完成。async函数返回的是一个promise对象，可以用.then方法添加回调函数，在函数的执行中，一旦遇到await就先返回，等到这个异步执行完成后，它再执行函数体内后面的语句。
+
 # 浏览器
 **`1.跨域`**
 同源策略：它是一种约定，它是浏览器最核心也最基本的安全功能，如果少了同源策略，浏览器的正常功能都会受影响。同源策略是浏览器的行为，是为了保护本地数据不被js代码获取回来的数据污染，拦截的是数据接收。即请求发送了，服务器响应了，但是无法被浏览器接收。
@@ -211,6 +214,160 @@ js在执行的过程中会产生执行环境，这些执行环境会被顺序的
 宏任务：setTimeout I/O UI渲染
 
 争议点：同步任务是宏任务吗？看了很多文章，解释各不相同
+
+题目1，promise和setTimeout的执行顺序：
+```js
+setTimeout(() => {
+    console.log("4");
+    setTimeout(() => {
+        console.log("8");
+    }, 0);
+    new Promise((r) => {
+        console.log("5");//构造函数是同步的
+        r();
+    }).then(() => {
+        console.log("7");//then()是异步的，这里已经入队
+    });
+    console.log("6");
+}, 0);
+
+new Promise((r) => {
+    console.log("1");//构造函数是同步的
+    r();
+}).then(() => {
+    console.log("3");//then()是异步的，这里已经入队
+});
+console.log("2");
+
+// 执行结果 1 2 3 4 5 6 7 8
+```
+题目2: promise async await的执行顺序，await跟着的是一个变量，这种情况把await后面的代码注册为一个微任务，然后跳出async1，执行其他代码，当遇到promise会注册promise.then到微任务队列，此时队列中已有await后面的那个微任务，所以先执行async1 end，再执行promise1.
+```js
+async function async1(){
+    console.log('async1 start')
+    await async2()
+    console.log('async1 end')
+}
+
+async function async2(){
+    console.log('async2')
+}
+
+console.log('script start')
+
+setTimeout(() => {
+    console.log('settimeout')
+}, 0);
+
+async1()
+
+new Promise(function(resolve){
+    console.log('promise')
+    resolve()
+}).then(function(){
+    console.log('promise1')
+})
+
+console.log('script end')
+
+// 输出结果：
+/**
+ * script start
+ * async1 start
+ * async2
+ * promise
+ * script end // 至此都是同步
+ * async1 end // 微任务
+ * promise1   // 微任务
+ * setTimeout // 宏任务
+ */
+
+```
+题目3: promise async await的执行顺序，await跟着的是一个异步函数的调用（async2中的return是关键，有和没有差别较大），并不会先把await后面的代码注册到微任务，而是执行完await后直接跳出 async1，执行其他代码。当遇到promise.then将其注册到微任务，其他代码执行完成后，回到async1中执行await后面的代码，将其注册到微任务队列，这时队列中有之前promise.then注册的任务。所以跟上面的区别是先执行 promise1，后执行async1 end
+```js
+console.log('script start')
+
+async function async1() {
+    console.log('async1 start')
+    await async2()
+    console.log('async1 end')
+}
+async function async2() {
+    console.log('async2 start')
+    return Promise.resolve().then(() => {
+        console.log('async2 end')
+    })
+}
+async1()
+
+setTimeout(function () {
+    console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+    console.log('Promise')
+    resolve()
+}).then(function () {
+    console.log('promise1')
+})
+
+console.log('script end')
+
+/** 题目3
+ * script start
+ * async1 start
+ * async2 start
+ * Promise
+ * script end // 至此都是同步
+ * async2 end // 微任务
+ * promise1   // 微任务
+ * async1 end // 跟上面的区别是后执行了这个代码
+ * setTimeout // 宏任务
+ */
+```
+题目4: 将上题中async2中的return去掉就变成先执行async1 end，后执行promise1
+```js
+console.log('script start')
+
+async function async1() {
+    console.log('async1 start')
+    await async2()
+    console.log('async1 end')
+}
+async function async2() {
+    console.log('async2 start')
+    Promise.resolve().then(() => {
+        console.log('async2 end')
+    })
+}
+async1()
+
+setTimeout(function () {
+    console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+    console.log('Promise')
+    resolve()
+}).then(function () {
+    console.log('promise1')
+})
+
+console.log('script end')
+
+/** 题目4
+ * script start
+ * async1 start
+ * async2 start
+ * Promise
+ * script end // 至此都是同步
+ * async2 end // 微任务
+ * async1 end // 与上述的区别之处
+ * promise1   // 微任务
+ * setTimeout // 宏任务
+ */
+```
+参考：https://blog.csdn.net/qq_39341415/article/details/124752454
 
 **`3.浏览器渲染机制`**
 1.处理html并构建dom树。
@@ -396,6 +553,6 @@ router.addRoutes动态添加路由
 4.样式优化：避免在html中写style、避免css表达式，移除css空规则，正确使用display
 5.脚本优化：减少重绘和回流，缓存dom选择与计算，缓存.length的值，尽量使用事件代理，尽量使用id选择器，touch事件优化。
 6.代码优化：不实用table布局，减少无意义的dom元素，减少dom元素的数量与层级，减少css的嵌套。js方面：拆分函数，将复杂的函数拆分成小函数；优化分支结构；
-https://blog.csdn.net/weixin_44730897/article/details/111247844
+参考：https://blog.csdn.net/weixin_44730897/article/details/111247844
 
 
