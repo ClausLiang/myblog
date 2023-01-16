@@ -7,7 +7,12 @@ categories: 基础
 ---
 
 # HTML CSS
-## **`1.响应式布局的实现方式和原理`**
+## `1.css垂直居中`
+1. vertical-align: middle; display: inline-block(前提)
+2. position: absolute; top: 50%; transform: translateY(-50%)
+3. display: flex; 子元素： align-self: center; (align-self可以覆盖父容器align-item的属性)
+
+## **`2.响应式布局的实现方式和原理`**
 `响应式布局`就是让网站同时适配不同的手机和分辨率
 方式有：
 1.百分比布局：百分比布局是相对于父元素来说的，我们可以设置的属性有：margin padding width height，对于元素的font-size border是无法设置的。
@@ -16,7 +21,7 @@ categories: 基础
 4.vw布局：css3引入的新单位，视口宽度是100vw，通过使用插件可以自动计算出每个元素的大小是多少vw
 5.flex布局
 
-## **`2.sass用过哪些功能`**
+## **`3.sass用过哪些功能`**
 1.使用变量
 2.嵌套
 3.导入sass文件：css的import只有在执行的时候才会导入会导致加载变慢，sass的@import在编译的时候就会把相关文件导入
@@ -521,6 +526,9 @@ v-model使用modelValue，在一个组件上v-model会被展开为如下形式
 ## **`10.keep-alive怎么用，怎么销毁`**
 `<keep-alive>`包裹动态组件，会缓存不活动的组件实例。把要缓存的组件name放到includes属性里。如果要销毁，去掉includes里对应的组件。
 
+`keep-alive实现原理：`
+在created钩子函数调用时将需要缓存的vnode节点保存在this.cache中，在页面渲染时，如果vnode的name符合缓存条件，则会从this.cache中取出之前缓存的vnode实例进行渲染
+
 ## **`11.$set的使用场景`**
 1.通过数组的下标修改数组的值，数据已经被修改，但是不触发updated函数，视图不更新
 2.vue中检测不到对象属性的添加和删除。
@@ -534,10 +542,7 @@ vue2在创建实例的时候把data深度遍历所有属性，并使用Object.de
 
 vue有一个重要的概念：异步更新队列。vue在观察到数据的变化时并不是直接更新dom，而是开启一个队列，并缓存在同一个事件循环中的所有数据变化。在缓冲中会去除重复数据，从而避免不必要的计算和dom操作。然后在下一个事件循环tick中，vue刷新队列并执行实际的工作。所以如果用一个for循环来动态改变数据100次，其实它只会应用最后一次变化。如果没有这种机制，dom就要重绘100次，这是一个非常大的开销。$nextTick就是知道什么时候dom更新完成。
 
-## **`13.动态路由`**
-router.addRoutes动态添加路由
-
-## **`14.插槽`**
+## **`13.插槽`**
 概念：封装组件期间为用户预留的内容的占位符
 匿名插槽：
   `<slot></slot>`
@@ -546,13 +551,39 @@ router.addRoutes动态添加路由
   为具名插槽提供内容 `<template #foot></template>`
 作用域插槽：
   让父组件使用插槽时插槽内容可以访问子组件中的数据
-  
-## **`15.vue router有几种跳转方式`**
-$router.push
-$router.replace
-`<router-link>`
-$router.go(n)
 
+## **`14.动态路由`**
+router.addRoutes动态添加路由
+
+## **`15.vue router有几种跳转方式`**
+```html
+<router-link>
+this.$router.push
+this.$router.replace
+this.$router.go(n)
+```
+
+## `16.vue router传参的方式，有什么区别`
+
+1.params传参，不显示参数，只能用name，不能用path，页面刷新后获取不到参数
+this.$router.push({
+    name: 'abc',
+    params: {id: 1}
+})
+2.params传参，显示参数
+路由需要提前配好
+{path: '/abc/:id', component: abc}
+this.$router.push({
+    path: '/abc/1'
+})
+3.query传参，name path都可以，页面刷新后依然能获取到参数
+
+## `17.vue router的原理`
+hash模式：
+history模式：
+
+## `18.vue的diff算法`
+在数据发生变化时，vue先是根据真实dom生成一个virtual dom，当virtual dom某个节点的数据改变后会生成一个新的vnode，然后vnode和oldVnode做对比，发现有不一样的地方就直接改在真实的dom上，然后使oldVnode的值改为vnode，来更新节点。
 
 # 架构方面
 
@@ -576,3 +607,17 @@ $router.go(n)
 4.处理事件的方法写在父组件中
 5.不依赖vuex
 遵循易用性、拓展性、可维护、可重用、单一职责等几个原则
+
+## **`4.webpack配置优化`**
+总的来说webpack的性能优化主要做两件事：加速打包速度，加速代码运行速度。
+
+## `5.服务端渲染的优缺点`
+优点：
+  >前端耗时少，因为后端拼接了html，浏览器只需要渲染出来就行。
+  利于seo。
+  无需占用客户端资源。
+  后端生成静态页面，减少查询数据库浪费的时间。
+
+缺点：
+  >不利于前后端分离，开发效率低。使用服务端渲染，不利于分工合作。一般前端写一个html，后端再修改为模版，非常低效。并且常常需要前后端共同完成修改。
+  占用服务端资源。服务端完成html模板的解析，如果请求较多，会对服务端造成一定的访问压力。如果是客户端渲染就把这些解析压力分担到客户端了。
