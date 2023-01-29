@@ -242,7 +242,7 @@ js在执行的过程中会产生执行环境，这些执行环境会被顺序的
 
 争议点：同步任务是宏任务吗？看了很多文章，解释各不相同
 
-题目1，promise和setTimeout的执行顺序：
+`题目1，promise和setTimeout的执行顺序：`
 ```js
 setTimeout(() => {
     console.log("4");
@@ -268,130 +268,104 @@ console.log("2");
 
 // 执行结果 1 2 3 4 5 6 7 8
 ```
-题目2: promise async await的执行顺序，await跟着的是一个变量，这种情况把await后面的代码注册为一个微任务，然后跳出async1，执行其他代码，当遇到promise会注册promise.then到微任务队列，此时队列中已有await后面的那个微任务，所以先执行async1 end，再执行promise1.
+`题目2: promise async await的执行顺序，await跟的是变量`
+
 ```js
 async function async1(){
-    console.log('async1 start')
-    await async2()
-    console.log('async1 end')
+    console.log('async1 start')  // 1
+    await async2() // await跟的变量
+    // await后面的代码注册为一个微任务
+    console.log('async1 end')    // 4
 }
-
 async function async2(){
-    console.log('async2')
+    console.log('async2')        // 2
 }
-
-console.log('script start')
-
 setTimeout(() => {
-    console.log('settimeout')
+    console.log('settimeout')    // 6
 }, 0);
-
 async1()
-
 new Promise(function(resolve){
-    console.log('promise')
+    console.log('promise')       // 3
     resolve()
 }).then(function(){
-    console.log('promise1')
+    console.log('promise1')      // 5
 })
-
-console.log('script end')
 
 // 输出结果：
 /**
- * script start
  * async1 start
  * async2
- * promise
- * script end // 至此都是同步
+ * promise  // 至此都是同步
  * async1 end // 微任务
  * promise1   // 微任务
  * setTimeout // 宏任务
  */
-
 ```
-题目3: promise async await的执行顺序，await跟着的是一个异步函数的调用（async2中的return是关键，有和没有差别较大），并不会先把await后面的代码注册到微任务，而是执行完await后直接跳出 async1，执行其他代码。当遇到promise.then将其注册到微任务，其他代码执行完成后，回到async1中执行await后面的代码，将其注册到微任务队列，这时队列中有之前promise.then注册的任务。所以跟上面的区别是先执行 promise1，后执行async1 end
-```js
-console.log('script start')
+解析：await跟着的是一个变量，这种情况把await后面的代码注册为一个微任务，然后跳出async1，执行其他代码，当遇到promise会注册promise.then到微任务队列，此时队列中已有await后面的那个微任务，所以先执行async1 end，再执行promise1.
 
+`题目3: promise async await的执行顺序，await跟的异步调用`
+
+```js
 async function async1() {
-    console.log('async1 start')
-    await async2()
-    console.log('async1 end')
+    console.log('async1 start')  // 1
+    await async2() // await跟的有异步，要等异步都执行完
+    // async2有return并不会把await后面的代码注册到微任务
+    console.log('async1 end')    // 6
 }
 async function async2() {
-    console.log('async2 start')
+    console.log('async2 start')  // 2
     return Promise.resolve().then(() => {
-        console.log('async2 end')
+        console.log('async2 end') // 4
     })
 }
 async1()
-
-setTimeout(function () {
-    console.log('setTimeout')
-}, 0)
-
 new Promise(resolve => {
-    console.log('Promise')
+    console.log('Promise')       // 3
     resolve()
 }).then(function () {
-    console.log('promise1')
+    console.log('promise1')      // 5
 })
 
-console.log('script end')
-
 /** 题目3
- * script start
  * async1 start
  * async2 start
- * Promise
- * script end // 至此都是同步
+ * Promise   // 至此都是同步
  * async2 end // 微任务
  * promise1   // 微任务
  * async1 end // 跟上面的区别是后执行了这个代码
- * setTimeout // 宏任务
  */
 ```
-题目4: 将上题中async2中的return去掉就变成先执行async1 end，后执行promise1
-```js
-console.log('script start')
+解析：await跟着的是一个异步函数的调用（async2中的return是关键，有和没有差别较大），并不会先把await后面的代码注册到微任务，而是执行完await后直接跳出 async1，执行其他代码。当遇到promise.then将其注册到微任务，其他代码执行完成后，回到async1中执行await后面的代码，将其注册到微任务队列，这时队列中有之前promise.then注册的任务。所以跟上面的区别是先执行 promise1，后执行async1 end
 
+`题目4: 将上题中async2中的return去掉就变成先执行async1 end，后执行promise1`
+```js
 async function async1() {
-    console.log('async1 start')
-    await async2()
-    console.log('async1 end')
+    console.log('async1 start')  // 1
+    await async2() // await跟的有异步，要等异步都执行完
+    // async2没有return先把await后面的代码注册到微任务
+    console.log('async1 end')   // 5
 }
 async function async2() {
-    console.log('async2 start')
+    console.log('async2 start')  // 2
     Promise.resolve().then(() => {
-        console.log('async2 end')
+        console.log('async2 end') // 4
     })
 }
 async1()
-
-setTimeout(function () {
-    console.log('setTimeout')
-}, 0)
-
 new Promise(resolve => {
-    console.log('Promise')
+    console.log('Promise')      // 3
     resolve()
 }).then(function () {
-    console.log('promise1')
+    console.log('promise1')     // 6
 })
 
-console.log('script end')
-
 /** 题目4
- * script start
  * async1 start
  * async2 start
- * Promise
- * script end // 至此都是同步
+ * Promise  // 至此都是同步
  * async2 end // 微任务
  * async1 end // 与上述的区别之处
  * promise1   // 微任务
- * setTimeout // 宏任务
  */
 ```
 参考：https://blog.csdn.net/qq_39341415/article/details/124752454
