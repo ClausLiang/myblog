@@ -31,6 +31,15 @@ categories: 基础
 @include来使用 例如：.aaa{@include b-radius}
 6.选择器继承 @extend
 .a {color:red} .b{@extend .a;}
+
+## **`4. flex:1 是哪几个属性的缩写`**
+flex:1 是 flex: 1 1 auto 的缩写，是三个属性flex-grow flex-shrink flex-basic的缩写
+子元素共有6个属性 order flex-grow flex-shrink flex-basic flex align-item
+参考：阮一峰flex布局<https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html>
+
+## **`5. position属性有哪些值`**
+static relative absolute fixed sticky
+
 # JS
 ## **`1.js数据类型。`**
 
@@ -425,6 +434,20 @@ session是一种记录服务器和客户端会话状态的机制，使服务端�
 作为身份认证token安全性比session好，因为每一个请求都有签名还能防止监听以及csrf攻击。
 token慢但占服务器内存小，session快但是占服务器空间。
 
+## **`7.css怎么开启硬件加速`**
+`什么是硬件加速`
+将浏览器的渲染交给GPU处理，而不是浏览器的渲染器，这样可以使animation和transition更加流畅。
+`可以出发GPU硬件加速的css属性`
+transform opacity filter
+`怎么开启硬件加速`
+当浏览器检测到页面中的某个dom元素应用了某些css规则就会开启，最显著的特征是元素的3d变换。在一些情况下，我们并不需要对元素应用3d变换效果，这时我们可以用小技巧欺骗浏览器开启硬件加速，例如transform: translateZ(0)
+`硬件加速会导致的问题`
+1、可能会导致内存问题 2、会影响字体的抗锯齿效果
+
+## **`8.css文件的加载会阻塞页面的渲染吗`**
+css加载不会阻塞dom的解析，但是css加载会阻塞dom的渲染。
+css加载也会阻塞js的执行。浏览器有机制，css先执行，js后执行。
+
 # VUE
 ## **`1.组件之间传值`**
 1.父->子：通过属性的方式向子组件传值，子组件通过props接收。
@@ -580,6 +603,9 @@ history模式：
 数组：
   >修改数组的方法都在Array的原型上，我们想让数组也成为响应式数据，也要借助Object.defineProperty，所以我们要对修改数组的方法进行修改和加工，即创建一个拦截器arrayMethods，这里不能直接修改Array的原型是因为会造成全局污染。判断数据如果是数组的话，将其原型改变为arrayMethods。有些浏览器不支持__proto__，我们将拦截器挂载到数组的属性上。
   
+## `20.vuex单向数据流，和vue双向绑定的区别`
+vue中的双向绑定是指：由mvvm框架实现，是view层和model层之间的映射关系。具体就是v-model，是一个语法糖。
+单向数据流是：组件之间传递数据是单向数据流，父组件可以向子组件传递props，但是子组件不能直接修改props，子组件只能通过事件通知父组件进行数据修改。
 
 # 架构方面
 
