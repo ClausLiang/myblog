@@ -29,8 +29,8 @@ hexo init myblog
 ```bash
 hexo g # 生成静态文件
 hexo new abc # 生成文章，会在source/_posts目录下生成一个abc.md文件
-Hero new page about # 生成页面
-Hexo server # 启动本地服务
+hero new page about # 生成页面
+hexo server # 启动本地服务
 hexo clean # 清除缓存文件 (db.json) 和已生成的静态文件 (public)
 ```
 ## 5.了解front-matter
