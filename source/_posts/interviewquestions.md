@@ -448,6 +448,12 @@ transform opacity filter
 css加载不会阻塞dom的解析，但是css加载会阻塞dom的渲染。
 css加载也会阻塞js的执行。浏览器有机制，css先执行，js后执行。
 
+## **`9.浏览器缓存策略`**
+`强缓存`
+强缓存表示在缓存期间不需要再次请求。可以通过两种响应头实现：Expires 和 Cache-Control
+`协商缓存`
+如果缓存过期了，我们就可以使用协商缓存来解决问题。协商缓存需要请求，如果缓存有效会返回304。协商缓存需要客户端和服务端共同实现。协商缓存也有两种实现方式：Last-Modified/If-Modified-Since 和 ETag/If-None-Match
+
 # VUE
 ## **`1.组件之间传值`**
 1.父->子：通过属性的方式向子组件传值，子组件通过props接收。
@@ -588,9 +594,10 @@ this.$router.push({
 })
 3.query传参，name path都可以，页面刷新后依然能获取到参数
 
-## `17.vue router的原理`
-hash模式：
-history模式：
+## `17.路由的原理`
+前端路由实现起来其实很简单，本质就是监听URL的变化，然后匹配路由规则，显示相应的页面，而且无需刷新。目前单页面使用的路由就只有两种实现方式：
+hash模式
+history模式
 
 ## `18.vue的diff算法`
 在数据发生变化时，vue先是根据真实dom生成一个virtual dom，当virtual dom某个节点的数据改变后会生成一个新的vnode，然后vnode和oldVnode做对比，发现有不一样的地方就直接改在真实的dom上，然后使oldVnode的值改为vnode，来更新节点。
