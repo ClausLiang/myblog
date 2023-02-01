@@ -454,6 +454,14 @@ css加载也会阻塞js的执行。浏览器有机制，css先执行，js后执�
 `协商缓存`
 如果缓存过期了，我们就可以使用协商缓存来解决问题。协商缓存需要请求，如果缓存有效会返回304。协商缓存需要客户端和服务端共同实现。协商缓存也有两种实现方式：Last-Modified/If-Modified-Since 和 ETag/If-None-Match
 
+## **`10.简单请求和复杂请求的区别`**
+`简单请求`
+请求满足以下条件为简单请求，否则为复杂请求
+1.请求方式是get/post/head
+2.请求头包含字段可以有：Accept，Accept-Language，content-Language，Last-Event-ID，Content-Type，其中Content-Type的值只能是application/x-www-form-urlencoded，text/plain，multipart/form-data
+`简单请求和复杂请求的区别`
+复杂请求会多发一次请求，options，这个请求我们称为预请求，服务器也会做出“预响应”，预请求实际上是一种权限请求，只有预请求成功后，实际的请求才会执行，预请求也存在跨域问题。
+
 # VUE
 ## **`1.组件之间传值`**
 1.父->子：通过属性的方式向子组件传值，子组件通过props接收。
@@ -595,9 +603,18 @@ this.$router.push({
 3.query传参，name path都可以，页面刷新后依然能获取到参数
 
 ## `17.路由的原理`
-前端路由实现起来其实很简单，本质就是监听URL的变化，然后匹配路由规则，显示相应的页面，而且无需刷新。目前单页面使用的路由就只有两种实现方式：
-hash模式
-history模式
+前端路由本质就是监听URL的变化，然后匹配路由规则，显示相应的页面，而且无需刷新。目前单页面使用的路由就只有两种实现方式：
+`hash模式`
+由于hash的变化不会导致浏览器向服务器发送请求，而且hash的变化会触发hashChange事件，浏览器的前进后退也能对其进行控制
+```js
+window.location.hash //获取当前的hash值 
+window.addEventListener('hashchange',function(){ 
+//监听hashchange事件，用于改变url 
+}）
+```
+`history模式`
+History接口允许操作浏览器曾经在标签页或框架里访问的会话历史记录。
+
 
 ## `18.vue的diff算法`
 在数据发生变化时，vue先是根据真实dom生成一个virtual dom，当virtual dom某个节点的数据改变后会生成一个新的vnode，然后vnode和oldVnode做对比，发现有不一样的地方就直接改在真实的dom上，然后使oldVnode的值改为vnode，来更新节点。
@@ -640,7 +657,16 @@ vue中的双向绑定是指：由mvvm框架实现，是view层和model层之间�
 ## **`4.webpack配置优化`**
 总的来说webpack的性能优化主要做两件事：加速打包速度，加速代码运行速度。
 
-## `5.服务端渲染的优缺点`
+## **`5.webpack的loader和plugin的区别`**
+loader是文件加载器，能够加载资源文件，并对文件进行一些处理，如编译、压缩等，最终一起打包到指定的文件中。
+plugin赋予了webpack各种灵活的功能，如打包功能，资源管理，环境变量注入等，目的是解决loader无法实现的其他功能。
+loader运行在项目打包之前，plugin运行在整个项目的编译时期。
+在webpack运行的整个生命周期中会广播出许多事件，plugin会监听这些事件，在合适的时间通过webpack提供的api改变输出结果。
+对于loader而言，它实质上是一个转换器，将A文件编译为B文件，操作的是文件，比如将A文件编译成B文件，单纯的文件转换过程。
+
+参考：https://mp.weixin.qq.com/s/U5J6nCANyKx3olFTzRVr6g
+
+## `6.服务端渲染的优缺点`
 优点：
   >1.前端耗时少，因为后端拼接了html，浏览器只需要渲染出来就行。
   2.利于seo。
