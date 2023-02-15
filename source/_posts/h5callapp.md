@@ -3,7 +3,6 @@ title: h5调用原生app的方法
 date: 2020-10-13 17:49:35
 tags:
     - h5
-    - app
 categories: 基础
 ---
 

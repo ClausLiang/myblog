@@ -1,8 +1,7 @@
 ---
 title: 正则表达式入门
 date: 2022-02-09 11:25:43
-tags:
-    - 正则
+tags: 基础
 categories: 基础
 ---
 

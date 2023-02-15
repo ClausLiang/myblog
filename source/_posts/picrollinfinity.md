@@ -1,7 +1,7 @@
 ---
 title: 图片无限轮播
 date: 2021-11-15 01:12:21
-tags: pic
+tags: 图片
 categories: h5
 ---
 

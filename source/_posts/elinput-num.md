@@ -3,6 +3,7 @@ title: el-input输入框限制输入数字
 date: 2020-10-13 16:29:46
 tags:
     - element
+    - vue
 categories: 基础
 ---
 

@@ -1,8 +1,7 @@
 ---
 title: mac电脑用nvm管理node版本
 date: 2022-02-13 13:56:03
-tags:
-    - nvm
+tags: npm
 categories: 基础
 ---
 
