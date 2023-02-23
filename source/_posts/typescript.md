@@ -153,6 +153,27 @@ ts编译器的配置文件，ts编译器可以根据它的信息来对代码进�
 ```json
 {
     "include": ["./src/**/*"], //指定哪些ts需要被编译 **表示任意目录 *表示任意文件
-    "exclude": []
+    "exclude": [], // 不需要被编译的文件目录
+    "files": [],//不常用，指定要编译的文件列表
+    /**
+     * 编译器的选项
+     */
+    "compilerOptions": {
+        "target": "ES3", // 指定ts被编译为的es的版本
+        "module": "ES6", // 指定要使用的模块化的规范
+        // "lib":['dom'],// 指定项目中要用的库。一般不需要设置
+        "outDir": "./dist",// 指定编译后文件所在的目录
+        // "outFile": "",// 将代码合并为一个文件，所有全局作用域中的代码会合并到一个文件中
+        "allowJs": false, // 是否对js文件进行编译，默认false
+        "checkJs": false,// 检查js代码是否符合语法规范，默认false
+        "removeComments": false,//是否移除注释
+        "noEmit":false,// 不生成编译后的文件
+        "noEmitOnError": false,// 当有错误时不生成编译文件
+        "strict": false,// 所有严格检查的总开关
+        "alwaysStrict": false,// 设置编译后的文件是否使用严格模式。默认false
+        "noImplicitAny": true, // 不允许隐式any类型
+        "noImplicitThis": false, // 不允许不明确类型的this
+        "strictNullChecks": false, // 严格检查空值
+    }
 }
 ```
