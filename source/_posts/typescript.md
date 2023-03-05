@@ -177,3 +177,131 @@ ts编译器的配置文件，ts编译器可以根据它的信息来对代码进�
     }
 }
 ```
+
+# 面向对象
+## 抽象类 abstract
+```ts
+// 关键字abstract定义抽象类，抽象不能实现，只能被继承
+abstract class Animal{
+    name: string
+    constructor(name: string){
+        this.name = name
+    }
+    // abstract定义抽象方法，子类对抽象方法进行重写
+    abstract say():void
+    eat(){
+        console.log('eat')
+    }
+}
+```
+## 继承 extends super
+```ts
+class Dog extends Animal{
+    age: number
+    constructor(name:string, age: number){
+        // 子类的构造函数会重写父类的构造函数，所以必须先调用父类的构造函数
+        super(name)
+        this.age = age
+    }
+    say(){
+        console.log('汪汪汪')
+    }
+    eat(){
+        // 调用父类的方法
+        super.eat()
+    }
+}
+```
+## 接口 interface implement
+用来定义一个类结构，用来定义一个类中应该包含哪些熟悉和方法，不能有实际值，方法都是抽象方法。
+接口和抽象类的区别是抽象类中可以有非抽象的方法，而接口中都是抽象方法。
+同时接口也可以当成类型声明去使用
+```ts
+interface myinterface{
+    name: string,
+    age: number,
+    sayHellow():void
+}
+//当作类型声明的话 和 自定义类型type 类似
+const obj: myinterface{
+    name: 'aaa',
+    age: 18,
+    sayHellow(){
+        console.log('sayHellow')
+    }
+}
+
+// 定义类，可以使类去实现一个接口
+class myClass implements myinterface{
+    name: string
+    age: number
+    constructor(name: string, age:number){
+        this.name = name
+        this.age = age
+    }
+    sayHello(){
+        console.log('hellow')
+    }
+}
+```
+
+## 属性的封装 private
+public 属性默认是公共的
+private 私有属性 用getter setter，只能在当前类访问
+protected 受保护的，只能在当前类和子类中访问
+```ts
+class Person{
+    private _name: string
+    private _age: number
+
+    constructor(name: string, age: number){
+        this._name = name
+        this._age = age
+    }
+    // 可以暴露，也可以不暴露
+    get name(){
+        return this._name
+    }
+    set name(value: string){
+        this._name = value
+    }
+    // 暴露的设置属性的方法可以写自己的逻辑
+    set age(value: number){
+        if(value > 0) {
+            this._age = value
+        } else {
+            // 抛出错误
+        }
+    }
+}
+```
+## 定义类的简写
+```ts
+class Person{
+    constructor(name: string, age: number){}
+}
+let p = new Person('aa',18)
+```
+## 泛型
+在定义函数或者类时，如果遇到类型不明确就可以使用泛型
+```ts
+function fn<T>(a: T):T{
+    return a
+}
+
+fn(10) // 不指定泛型，ts可以自动对类型进行推断
+fn<string>('hello') // 指定泛型
+
+// 可以指定多个泛型
+function fn2<T, K>(a: T, b:K):T{
+    return a
+}
+
+// 缩小范围的泛型
+interface Inter{
+    length: nuumber
+}
+function fn3<T extends Inter>(a: T): number{
+    return a.length
+}
+```
