@@ -518,7 +518,7 @@ vue3相对于vue2
 1.monorepo代码管理模式，各核心模块独立，而vue2各模块相互依赖耦合度高，很多常规不用的模块也在核心包
 2.ts重构
 `语法方面`
-1.composition api。setup入口。setup是新增的生命周期函数，存在于beforeCreate和created之间。setup选项是一个接收props和content的函数。setup可以定义数据和方法，如果想在模版中使用，必须通过return返回，暴露给组件的其余部分（计算属性、方法、生命周期钩子等）及组件等模版。
+1.composition api。setup入口。setup是新增的生命周期函数，存在于beforeCreate之前。setup选项是一个接收props和content的函数。setup可以定义数据和方法，如果想在模版中使用，必须通过return返回，暴露给组件的其余部分（计算属性、方法、生命周期钩子等）及组件等模版。
 2.往vue实例上挂载属性 app.config.globalProperties.$axios = xxx
 3.template里可以有多个节点。
 
