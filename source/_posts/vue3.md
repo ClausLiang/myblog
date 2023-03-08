@@ -14,22 +14,23 @@ setup是新增的生命周期，早于beforeCreate，setup里没有this，是组
     import { reactive, toRefs } from 'vue'
     export default {
         setup(props,context){
-            const state = reactive({
-                data:[
-                    { title: '进行中', value: 1, type: 'blue' },
-                    { title: '已完成', value: 2, type: 'green' }
-                ]
+            const data = reactive({
+                message: 'hello'
             })
             const change = () => {
-                state.data[0].value = 2
+                data.message = 'world'
             }
             return {
-                ...toRefs(state),
+                ...toRefs(data),
                 change
             }
         }
     }
 </script>
+<template>
+    {{ message }}
+    <button type="primary" @click="change">change</button>
+</template>
 ```
 ### `<script setup>`
 在 setup() 函数中手动暴露大量的状态和方法非常繁琐。幸运的是，我们可以通过使用构建工具来简化该操作。当使用单文件组件（SFC）时，我们可以使用 `<script setup>` 来大幅度地简化代码。
