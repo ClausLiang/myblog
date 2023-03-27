@@ -8,15 +8,15 @@ categories: 进阶
 > 作为一个前端一开始想不用框架，自己开发搭建一个博客网站，后来发现hexo真香。
 
 # 一、了解学习hexo的使用方式
-## 1.安装hexo
+## <font color=green>1.安装hexo</font>
 ```bash
 npm install -g hexo-cli
 ```
-## 2.初始化项目
+## <font color=green>2.初始化项目</font>
 ```bash
 hexo init myblog
 ```
-## 3.选一个比较好看的主题安装
+## <font color=green>3.选一个比较好看的主题安装</font>
 查阅了很多文章，知乎上有篇文章写的比较好。总结下推荐3款：butterfly、shoka、kaze
 
 我选了比较流行的butterfly，根据butterfly的文档安装将其到项目里
@@ -25,7 +25,7 @@ hexo init myblog
 
 附：[hexo官网](https://hexo.io/zh-cn/) [butterfly官网](https://butterfly.js.org/)
 
-## 4.hexo常用基本命令
+## <font color=green>4.hexo常用基本命令</font>
 ```bash
 hexo g # 生成静态文件
 hexo new abc # 生成文章，会在source/_posts目录下生成一个abc.md文件
@@ -33,7 +33,7 @@ hero new page about # 生成页面
 hexo server # 启动本地服务
 hexo clean # 清除缓存文件 (db.json) 和已生成的静态文件 (public)
 ```
-## 5.了解front-matter
+## <font color=green>5.了解front-matter</font>
 文件最上方以’---'分隔的区域，用以指定单个文件的变量，常用参数有下列几个：
 ```md
 layout: # 布局 默认是post
@@ -45,9 +45,9 @@ tags：# 标签（不适用于分页）
 categories: #分类（不适用于分页）
 ```
 分类具有顺序和层次性，标签没有。简单处理就是一篇文章设置一个分类就好了，标签可以设置多个。当然也可以设置多级分类，详情参考hexo官方文档，里面说的比较明白。
-## 6.yaml
+## <font color=green>6.yaml</font>
 在项目中发现很多.yml后缀的文件，这些是yaml文件，科普：yet another markup language，不是一种标记语言，仍是一种标记语言。
-## 7.创建几个必要页面
+## <font color=green>7.创建几个必要页面</font>
 
 ### 创建标签页面
 在主题官网的文档里查到创建标签页面`hexo new page tags`，找到文件`source/tags/index.md`,添加type: “tags"
@@ -76,7 +76,7 @@ type: "tags"
 ```
 友情链接界面也可以由用户自己自定义，只需要在友情链接的md档设置就行，以普通的Markdown格式书写。
 
-## 8.修改主题的配置文件_config.butterfly.yml
+## <font color=green>8.修改主题的配置文件_config.butterfly.yml</font>
 修改主页顶部的菜单方便其正确展示
 ```yml
 menu:
@@ -111,8 +111,45 @@ cover:
     # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
 ```
 等等，很多配置可以根据自己喜好修改，不再赘述
-## 给博客引入评论系统
+## <font color=green>9.给博客引入评论系统</font>
 查看文档butterfly支持很多评论系统，有disqus，livere，gitalk，valine，waline，twikoo等等，我一开始准备选gitalk，因为其是基于github issues的插件，想着是可能比较稳定，结果测试半天发现在国内几乎没法使用，被墙的严重。后尝试发现`livere`是真的好用，只需在livere官网注册一个应用，拿到一个id，在hexo中配一下id即可。非常好用。
+
+## <font color=green>10.给博客加上搜索功能</font>
+在butterfly官网上有三个插件可供选择，我主要试了hexo-algoliasearch和hexo-generator-search，前一个是借助第三方的网站algolia，需要在algolia注册账号，并需要执行命令把自己网站的信息上传到algolia，每次搜索都需要请求algolia的数据，网络较慢，导致我的网址打开速度降低，影响用户体验。并且我不知道什么原因，没有试成功，搜索结果为空。
+hexo-generator-search插件是把文章的信息生成一个搜索库放在本地，所以搜索效率很高。
+该插件使用步骤如下：
+### 1.在博客目录下，运行以下命令安装hexo-generator-search插件：
+```bash
+npm install hexo-generator-search --save
+```
+
+### 2.配置插件：
+在Hexo博客的配置文件_config.yml中，添加以下配置：
+```yaml
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+```
+其中，path为生成的搜索文件名，field指定搜索的对象（可以是post或page），format指定搜索结果的格式，limit指定最多显示的搜索结果数量。
+
+在_config.butterfly.yml中，修改local_search的enable为true
+```
+local_search:
+  enable: true
+  preload: false
+  CDN:
+```
+
+### 3.生成搜索文件：
+在Hexo博客目录下，运行以下命令生成搜索文件：
+```bash
+hexo generate
+```
+
+完成以上步骤后，您的Hexo博客就可以使用站内搜索功能了。您可以在博客中输入关键字进行搜索，并查看搜索结果页面。
+需要注意的是插件官网的配置中有个template配置，无需配置该项。配置了反而无法正常搜索。
 
 # 二、将博客系统部署到服务器
 如果想不花一分钱，可以直接将博客项目部署到github page或者gitee page，优点就是免费，只此一个优点吊打所有。
