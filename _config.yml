@@ -103,18 +103,4 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
-algolia:
-  appId: "NMKPBU9IPZ"
-  apiKey: "ef5f195885f201428b9fd8a9832af4fa"
-  adminApiKey: "21f12225a3b0014eeb5a8b62cf788179"
-  chunkSize: 5000
-  indexName: "myblog"
-  fields:
-    - content:strip:truncate,0,500
-    - excerpt:strip
-    - gallery
-    - permalink
-    - photos
-    - slug
-    - tags
-    - title
+
