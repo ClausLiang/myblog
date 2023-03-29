@@ -208,3 +208,125 @@ watchEffect(async () => {
   data.value = await response.json()
 })
 ```
+### 回调的触发机制
+当你更改了响应式状态，它可能会同时触发 Vue 组件更新和侦听器回调。
+默认情况下，用户创建的侦听器回调，都会在 Vue 组件更新之前被调用。这意味着你在侦听器回调中访问的 DOM 将是被 Vue 更新之前的状态。
+如果想在侦听器回调中能访问被 Vue 更新之后的 DOM，你需要指明 flush: 'post' 选项
+```ts
+watch(source, callback, {
+  flush: 'post'
+})
+
+watchEffect(callback, {
+  flush: 'post'
+})
+```
+### 停止监听
+在 setup() 或 `<script setup>` 中用同步语句创建的侦听器，会自动绑定到宿主组件实例上，并且会在宿主组件卸载时自动停止。因此，在大多数情况下，你无需关心怎么停止一个侦听器。
+
+一个关键点是，侦听器必须用同步语句创建：如果用异步回调创建一个侦听器，那么它不会绑定到当前组件上，你必须手动停止它，以防内存泄漏。如下方这个例子：
+```ts
+<script setup>
+import { watchEffect } from 'vue'
+
+// 它会自动停止
+watchEffect(() => {})
+
+// ...这个则不会！
+setTimeout(() => {
+  watchEffect(() => {})
+}, 100)
+</script>
+```
+要手动停止一个侦听器，请调用 watch 或 watchEffect 返回的函数：
+```ts
+const unwatch = watchEffect(() => {})
+
+// ...当该侦听器不再需要时
+unwatch()
+```
+注意，需要异步创建侦听器的情况很少，请尽可能选择同步创建。如果需要等待一些异步数据，你可以使用条件式的侦听逻辑：
+```ts
+// 需要异步请求得到的数据
+const data = ref(null)
+
+watchEffect(() => {
+  if (data.value) {
+    // 数据加载后执行某些操作...
+  }
+})
+```
+## <font color=green>组件</font>
+### 使用`<script setup>`,导入的组件都在模板中直接可用
+```ts
+<script setup>
+import ButtonCounter from './ButtonCounter.vue'
+</script>
+
+<template>
+  <h1>Here is a child component!</h1>
+  <ButtonCounter />
+</template>
+```
+
+### 传递props用defineProps
+```ts
+<script setup>
+defineProps(['title'])
+</script>
+
+<template>
+  <h4>{{ title }}</h4>
+</template>
+```
+defineProps 是一个仅 `<script setup>` 中可用的编译宏命令，并不需要显式地导入。声明的 props 会自动暴露给模板。defineProps 会返回一个对象，其中包含了可以传递给组件的所有 props：
+```ts
+const props = defineProps(['title'])
+console.log(props.title)
+```
+
+如果你没有使用 `<script setup>`，props 必须以 props 选项的方式声明，props 对象会作为 setup() 函数的第一个参数被传入：
+```ts
+export default {
+  props: ['title'],
+  setup(props) {
+    console.log(props.title)
+  }
+}
+```
+
+### 派发事件用defineEmits
+```ts
+<script setup>
+const emit = defineEmits(['enlarge-text'])
+
+emit('enlarge-text')
+</script>
+```
+如果你没有在使用 `<script setup>`，你可以通过 emits 选项定义组件会抛出的事件。你可以从 setup() 函数的第二个参数，即 setup 上下文对象上访问到 emit 函数：
+```ts
+export default {
+  emits: ['enlarge-text'],
+  setup(props, ctx) {
+    ctx.emit('enlarge-text')
+  }
+}
+```
+
+### 插槽，用`<slot/>`作为占位符
+
+### 动态组件
+通过 Vue 的 `<component>` 元素和特殊的 `is` attribute 实现
+```html
+<component :is="tabs[currentTab]"></component>
+```
+在上面的例子中，被传给 :is 的值可以是以下几种：被注册的组件名、导入的组件对象。
+你也可以使用 is attribute 来创建一般的 HTML 元素。
+
+当使用 `<component :is="...">` 来在多个组件间作切换时，被切换掉的组件会被卸载。我们可以通过 `<KeepAlive>` 组件强制被切换掉的组件仍然保持“存活”的状态。
+
+### dom模板解析注意事项
+如果你想在 DOM 中直接书写 Vue 模板，Vue 则必须从 DOM 中获取模板字符串。由于浏览器的原生 HTML 解析行为限制，有一些需要注意的事项。如果你使用来自以下来源的字符串模板，就不需要顾虑这些限制了：
+1.单文件组件
+2.内联模板字符串 (例如 template: '...')
+3.`<script type="text/x-template">`
