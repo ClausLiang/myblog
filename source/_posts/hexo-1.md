@@ -19,11 +19,13 @@ hexo init myblog
 ## <font color=green>3.选一个比较好看的主题安装</font>
 查阅了很多文章，知乎上有篇文章写的比较好。总结下推荐3款：butterfly、shoka、kaze
 
-我选了比较流行的butterfly，根据butterfly的文档安装将其到项目里
+我选了比较流行的butterfly，根据butterfly的文档将其安装到项目里
 
 将butterfly的配置文件内容复制到_config.butterfly.yml中，_config.butterfly.yml的优先级高，这样可以避免butterfly升级后带来的不必要的麻烦。
 
-附：[hexo官网](https://hexo.io/zh-cn/) [butterfly官网](https://butterfly.js.org/)
+附：
+[hexo官网](https://hexo.io/zh-cn/)
+[butterfly官网](https://butterfly.js.org/)
 
 ## <font color=green>4.hexo常用基本命令</font>
 ```bash
