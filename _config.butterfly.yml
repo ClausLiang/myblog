@@ -544,8 +544,8 @@ canvas_ribbon:
 
 # Fluttering Ribbon (動態彩帶)
 canvas_fluttering_ribbon:
-  enable: true # 修改动态彩带 lyg
-  mobile: true 
+  enable: false # 修改动态彩带 lyg
+  mobile: false 
 
 # canvas_nest
 # https://github.com/hustcc/canvas-nest.js
@@ -573,8 +573,8 @@ fireworks:
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
 click_heart:
-  enable: true # 鼠标点击出现爱心的效果 lyg
-  mobile: true
+  enable: false # 鼠标点击出现爱心的效果 lyg
+  mobile: false
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
 ClickShowText:
@@ -766,7 +766,7 @@ medium_zoom: false
 
 # fancybox
 # http://fancyapps.com/fancybox/3/
-fancybox: true
+fancybox: false # 弹窗功能关闭 lyg 太慢了
 
 # Tag Plugins settings (標籤外掛)
 # --------------------------------------
@@ -878,7 +878,7 @@ CDN:
   # The CDN provider of third party scripts (第三方 js 的 cdn 配置)
   # option: local/jsdelivr/unpkg/cdnjs/custom
   # when set it to local, you need to install hexo-butterfly-extjs
-  third_party_provider: jsdelivr
+  third_party_provider: unpkg # 更换cdn源 lyg，jsdelivr太慢了
 
   # Add version number to CDN, true or false  
   version: false
