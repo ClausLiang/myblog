@@ -4,8 +4,9 @@ date: 2023-03-06 10:18:06
 tags: vue
 categories: vue
 ---
-> 本文前提 --- 特别熟悉vue2。对比并记录vue3有哪些新的语法，以便可以快速上手vue3
+> 本文前提 --- 特别熟悉vue2，有一定的基础。对比一下vue3有哪些新的语法，以便可以快速上手vue3
 
+# <font color=orange>基础</font>
 ## <font color=green>setup</font>
 setup是新增的生命周期，早于beforeCreate，setup里没有this，是组合式API的入口，只在组件初始化时执行一次。
 
@@ -330,3 +331,23 @@ export default {
 1.单文件组件
 2.内联模板字符串 (例如 template: '...')
 3.`<script type="text/x-template">`
+
+# <font color=orange>组件深入</font>
+## <font color=green>组件命名格式</font>
+### PascalCase 帕斯卡命名
+PascalCase是合法的 JavaScript 标识符。这使得在 JavaScript 中导入和注册组件都很容易，同时 IDE 也能提供较好的自动补全。
+`<PascalCase />` 在模板中更明显地表明了这是一个 Vue 组件，而不是原生 HTML 元素。同时也能够将 Vue 组件和自定义元素 (web components) 区分开来。
+在单文件组件和内联字符串模板中，我们都推荐这样做。但是，PascalCase 的标签名在 DOM 模板中是不可用的。
+
+### camelCase 驼峰命名
+
+### kebab-case 串式命名
+为了方便，Vue 支持将模板中使用 kebab-case 的标签解析为使用 PascalCase 注册的组件。这意味着一个以 MyComponent 为名注册的组件，在模板中可以通过 `<MyComponent>` 或 `<my-component>` 引用。这让我们能够使用同样的 JavaScript 组件注册代码来配合不同来源的模板。
+
+### snake_case 蛇形命名（这个不用于组件命名，只是列在这里）
+每个单词全小写或全大写，多单词使用下划线隔开
+
+### Hungarian 匈牙利命名法（这个不用于组件命名，只是列在这里）
+匈牙利命名法通过在变量名前面加上相应的小写字母的符号标识作为前缀，标识出变量的作用域，类型等。这些符号可以多个同时使用，顺序是先m_（成员变量），再指针，再简单数据类型，再其他。例如：m_lpszStr, 表示指向一个以0字符结尾的字符串的长指针成员变量。 
+
+## <font color=green>props</font>
