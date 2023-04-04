@@ -264,7 +264,7 @@ addtoany:
 comments: # 评论 lyg
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42/Artalk
-  use: livere
+  use: #livere 因为引了评论系统网址加载太慢了，先不要评论了。
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
