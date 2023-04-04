@@ -94,7 +94,7 @@ disable_top_img: false
 index_img: http://liangyonggang.com/img/bg2.jpg # 首页banner lyg
 
 # If the banner of page not setting, it will show the top_img
-default_top_img:
+default_top_img: http://liangyonggang.com/img/bg3.jpg
 
 # The banner image of archive page
 archive_img:
@@ -120,7 +120,7 @@ category_per_img:
 cover:
   # display the cover or not (是否顯示文章封面)
   index_enable: false # 关闭文章封面 lyg
-  aside_enable: false # 关闭侧边栏最新文章图标 lyg
+  aside_enable: true # 开启侧边栏最新文章图标 lyg
   archives_enable: true
   # the position of cover in home page (封面顯示的位置)
   # left/right/both
