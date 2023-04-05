@@ -4,7 +4,7 @@ date: 2022-08-31 15:11:55
 top_img: http://liangyonggang.com/img/bg1.jpg
 ---
 
-我是一个前端开发，一个IT男，程序猿。
+我是一个前端工程师，一个IT男，程序猿。
 
 “其实我不是想躺平，我也不想卷。”
 
@@ -13,4 +13,6 @@ top_img: http://liangyonggang.com/img/bg1.jpg
 踏踏实实做好自己的事，提升技术，经营好生活。
 
 希望某天，开发也能成为一个可以干到老的职业，而不是一碗青春饭。
+
+如果有幸被你访问我的网站，有建议或者交个朋友，请不吝赐教，给我发Email：yonggangliang@sina.cn
 

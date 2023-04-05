@@ -881,7 +881,7 @@ CDN:
   third_party_provider: unpkg # 更换cdn源 lyg，jsdelivr太慢了
 
   # Add version number to CDN, true or false  
-  version: false
+  version: true # 指定cdn的版本
 
   # Custom format
   # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
