@@ -38,7 +38,7 @@ categories: 进阶
             span.post-meta-label= date_title
             time(datetime=date_xml(page[date_type]) title=date_title + ' ' + full_date(page[date_type]))=date(page[date_type], config.date_format)
       
-    # 该处为我的修改，把分类和标签放在第二行。
+    //- 该处为我的修改，把分类和标签放在第二行。
     .meta-line2
       if (theme.post_meta.post.categories && page.categories.data.length > 0)
         span.post-meta-categories
