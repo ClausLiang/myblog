@@ -7,8 +7,8 @@ categories: 进阶
 ---
 修改了一些butterfly主题的源码
 # 修改posts页面不显示文章的分类的问题
-发现posts文章页面顶部不显示分类，故阅读了修改了butterfly的相关源码，还提了一个pr给作者，经沟通作者说他有写分类，按照设计稿，分类标签在页面的底部。闹了个乌龙。不过我把这个修改放到我的项目里了，个人认为分类放顶部合适。
-目录为 themes/butterfly/layout/includes/header/post-info.pug
+发现posts文章页面顶部不显示文章的标签（tags），故阅读了修改了butterfly的相关源码，还提了一个pr给作者，经沟通作者说他有写tags，但是按照设计稿，tags在页面的底部展示。闹了个乌龙。不过我把这个修改放到我的项目里了，个人认为tags放顶部合适。
+修改的文件目录为 themes/butterfly/layout/includes/header/post-info.pug
 ```Pug
 - let comments = theme.comments
 #post-info
