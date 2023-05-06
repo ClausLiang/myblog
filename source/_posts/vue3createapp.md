@@ -53,3 +53,22 @@ export default defineConfig({
 ```
 该插件的相关参考文章：[尤大推荐的神器unplugin-vue-components,解放双手!以后再也不用呆呆的手动引入...](https://juejin.cn/post/7012446423367024676)
 
+## 6.配置联调的代理本地跨域
+```ts
+// vite.config.ts
+export default defineConfig({
+  ...
+  server: {
+    host: true,
+    proxy: {
+      '/manager': {
+        target: 'https://dev.beeselect.net/',
+        ws: false,
+        changeOrigin: true,
+      },
+    },
+  },
+})
+```
+
+
