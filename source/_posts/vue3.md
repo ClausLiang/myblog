@@ -3,6 +3,7 @@ title: 快速熟悉vue3的语法
 date: 2023-03-06 10:18:06
 tags: vue
 categories: vue
+sticky: true
 ---
 > 本文前提 --- 特别熟悉vue2，有一定的基础。对比一下vue3有哪些新的语法，以便可以快速上手vue3
 
