@@ -25,21 +25,31 @@
             i.fa-fw.post-meta-icon(class=date_icon)
             span.post-meta-label= date_title
             time(datetime=date_xml(page[date_type]) title=date_title + ' ' + full_date(page[date_type]))=date(page[date_type], config.date_format)
+      
+    //- 该处为我的修改，把分类和标签放在第二行。
+    .meta-line2
       if (theme.post_meta.post.categories && page.categories.data.length > 0)
         span.post-meta-categories
-          if (theme.post_meta.post.date_type)
-            span.post-meta-separator |
 
           each item, index in page.categories.data
             i.fas.fa-inbox.fa-fw.post-meta-icon
             a(href=url_for(item.path)).post-meta-categories #[=item.name]
             if (index < page.categories.data.length - 1)
               i.fas.fa-angle-right.post-meta-separator
+      //- 这一段是加的展示标签的代码
+      if (theme.post_meta.page.tags && page.tags.data.length > 0)
+          span.post-meta-tags
+              span.post-meta-separator |
+              i.fas.fa-tag
+              each item, index in page.tags.data
+                a(href=url_for(item.path)).post-meta__tags #[=' '+item.name+' ']
+                if (index < page.tags.data.length - 1)
+                  span.post-meta-link #[='•']
 
     .meta-secondline
       - let postWordcount = theme.wordcount.enable && (theme.wordcount.post_wordcount || theme.wordcount.min2read)
       if (postWordcount)
-        span.post-meta-separator |
+        span
         span.post-meta-wordcount
           if theme.wordcount.post_wordcount
             i.far.fa-file-word.fa-fw.post-meta-icon

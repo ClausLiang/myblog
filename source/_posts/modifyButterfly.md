@@ -6,7 +6,7 @@ tags:
 categories: 进阶
 ---
 修改了一些butterfly主题的源码
-# 修改posts页面不显示文章的分类的问题
+# 1.修改posts页面不显示文章的分类的问题
 发现posts文章页面顶部不显示文章的标签（tags），故阅读了修改了butterfly的相关源码，还提了一个pr给作者，经沟通作者说他有写tags，但是按照设计稿，tags在页面的底部展示。闹了个乌龙。不过我把这个修改放到我的项目里了，个人认为tags放顶部合适。
 修改的文件目录为 themes/butterfly/layout/includes/header/post-info.pug
 ```Pug
@@ -48,7 +48,7 @@ categories: 进阶
             a(href=url_for(item.path)).post-meta-categories #[=item.name]
             if (index < page.categories.data.length - 1)
               i.fas.fa-angle-right.post-meta-separator
-
+      //- 这一段是加的展示标签的代码
       if (theme.post_meta.page.tags && page.tags.data.length > 0)
           span.post-meta-tags
               span.post-meta-separator |
@@ -168,7 +168,7 @@ categories: 进阶
                   i.fa-solid.fa-spinner.fa-spin
 ```
 
-# 修改顶部导航，左上角导航链接
+# 2.修改顶部导航，左上角导航链接
 右侧的导航都是在配置文件中配置的，左上角的导航，默认回到`/`，是在主题源码里写的。
 因为我的博客是挂在我的三级域名blog.liangyonggang.com下的，我想点击左上角的时候回到我的二级域名。故需要修改主题源码。
 源码路径是 themes/butterfly/layout/includes/header/nav.pug
@@ -178,3 +178,6 @@ nav#nav
     a(href=url_for('https://liangyonggang.com') title=config.title)
     ...
 ```
+
+# 3.修改了首页每篇文章的卡片的高度，使其紧凑
+全局搜索了recent-post-item样式名，找到homepage.styl文件，找到recent-post-item中高度height: 18em改为height: 12em
