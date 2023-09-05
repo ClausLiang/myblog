@@ -20,7 +20,7 @@ cd ~/.ssh
 ```
 生成公钥私钥
 ```
-ssh-keygen -t rsa -C "<github资料里的邮箱>"
+ssh-keygen -t rsa -C "公司电脑"
 ```
 -t 指定要创建的密钥类型为rsa
 -C 注释
@@ -36,5 +36,19 @@ title随便填，key的输入框中填写上一步生成的id_rsa.pub文件中�
 
 # 3.重新克隆仓库，复制ssh的链接
 此后拉取以及推送代码就不会出现网络问题而导致失败了。
+
+
+# 4.题外话：ssh免密登录远程服务器
+使用SSH命令将本地生成的公钥复制到远程服务器，替换username和server-ip-address为您的服务器用户名和IP地址：
+```
+ssh-copy-id username@server-ip-address
+```
+或者，如果没有ssh-copy-id命令，可以手动将公钥内容追加到远程服务器的~/.ssh/authorized_keys文件中。以下是手动复制的方法：
+```
+cat ~/.ssh/id_rsa.pub | ssh username@server-ip-address "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+```
+这将在远程服务器上创建一个~/.ssh目录（如果不存在），并将您的公钥添加到authorized_keys文件中，允许您通过密钥进行身份验证。
+
+现在，您应该能够通过SSH免密登录到远程服务器，而无需输入密码。
 
 
