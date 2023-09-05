@@ -19,6 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
       
       // 为标题添加序号
       var numbering = counter.slice(0, level + 1).join(".");
-      heading.innerHTML = numbering + ". " + heading.innerHTML;
+      heading.innerHTML = "<span style='color: green'>"+numbering + ".</span> " + heading.innerHTML;
   });
 });
