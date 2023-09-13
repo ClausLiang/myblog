@@ -3,7 +3,6 @@ title: js基础之数组
 date: 2019-05-16 23:24:35
 tags: 基础
 categories: 基础
-sticky: true
 ---
 
 ## 数组简介
