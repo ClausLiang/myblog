@@ -8,7 +8,7 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "delete": "ssh root@121.36.105.57 \"rm -rf /root/blog\"",
-    "fabu": "scp -r ./blog root@121.36.105.57:/root"
+    "fabu": "hexo clean && hexo generate && ssh root@121.36.105.57 \"rm -rf /root/blog\" && scp -r ./blog root@121.36.105.57:/root"
   },
   "hexo": {
     "version": "6.3.0"
