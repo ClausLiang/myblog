@@ -175,7 +175,7 @@ categories: 进阶
 ```Pug
 nav#nav
   span#blog-info
-    a(href=url_for('https://liangyonggang.com') title=config.title)
+    a(href=url_for('http://liangyonggang.com') title=config.title)
     ...
 ```
 

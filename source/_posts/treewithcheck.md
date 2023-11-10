@@ -7,7 +7,7 @@ categories: vue
 业务场景中，分配职责权限，职责权限是树的结构，需求是树的左侧为新勾选的职责，数的右侧为用户的角色带的职责。如图所示。
 树用的是`ant-design-vue`的a-tree，该组件默认是没有右侧的checkbox的，但是它提供的插槽可供开发人员自定义树中每个节点的展示形式。所以我们可以通过插槽的形式自定义树的节点。
 `该需求的难点是右侧checkbox的选中时，实现父级的全选与半选。`
-![图片](https://liangyonggang.com/imgasset/a-treewithcheckbox_2023-11-8.png)
+![图片](http://liangyonggang.com/imgasset/a-treewithcheckbox_2023-11-8.png)
 
 
 ```html

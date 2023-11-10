@@ -90,13 +90,13 @@ menu:
 修改头像avatar
 ```yml
 avatar:
-  img: https://liangyonggang.com/img/avatar.gif
+  img: http://liangyonggang.com/img/avatar.gif
   effect: false # true会一直转
 ```
 修改首页banner index_img
 ```yml
 # The banner image of home page
-index_img: https://liangyonggang.com/img/bg2.jpg # 首页banner
+index_img: http://liangyonggang.com/img/bg2.jpg # 首页banner
 ```
 修改首页文章卡片的封面相关
 ```yml
