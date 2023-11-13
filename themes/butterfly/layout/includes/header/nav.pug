@@ -1,6 +1,6 @@
 nav#nav
   span#blog-info
-    a(href=url_for('http://liangyonggang.com') title=config.title)
+    a(href=url_for('http://liangyonggang.com') title=config.title target='_self')
       if theme.nav.logo
         img.site-icon(src=url_for(theme.nav.logo))
       if theme.nav.display_title
