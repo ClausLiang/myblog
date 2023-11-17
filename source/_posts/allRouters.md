@@ -1,5 +1,5 @@
 ---
-title: ant-design-vue admin-pro项目是怎么做权限控制的
+title: ant-design-vue的admin-pro项目是怎么做权限控制的
 date: 2023-11-17 11:56:57
 tags: antd
 categories: vue
@@ -10,7 +10,7 @@ categories: vue
 
 我们的项目基于pro-vip做了一些改动，但是架子跟pro-vip是基本差不多的。
 
-在router.beforeEach中获取用户信息及权限信息，并将（路由）权限赋值到userStore里，下次判断userStore中有权限信息就不重新获取用户信息及权限信息了
+在router.beforeEach中获取用户信息及权限信息，并将（路由）权限存到userStore里，下次路由跳转判断userStore中有权限信息就不重新获取用户信息及权限信息了
 ```js
 router.beforeEach(async to => {
   //....
@@ -29,8 +29,10 @@ router.beforeEach(async to => {
   }
 });
 ```
-userStore.GENERATE_ROUTES()方法内，调用接口请求用户的菜单权限，拿到值后动态的创建路由，具体方法为：router.addRoute(route)，这个参数route是一个对象
+userStore.GENERATE_ROUTES()方法内，调用接口请求用户的菜单权限，拿到值后动态地添加路由，动态添加路由的具体方法为：router.addRoute(route)，添加之前router是包含一些如/404、/login等静态路由的路由对象。
+要添加的route对象结构如下：
 ```js
+// router结构
 {
   path: '/'
   redirect: '/home',
@@ -43,7 +45,7 @@ userStore.GENERATE_ROUTES()方法内，调用接口请求用户的菜单权限�
 }
 ```
 
-# 项目中加了顶部切换店铺（体系），不同店铺展示不同权限的菜单的功能
+# 项目中加了顶部切换体系，不同体系展示不同权限菜单的功能
 ![图片](https://liangyonggang.com/imgasset/allRouters-2023-11-17.png)
 
 按照需求，我们项目的实现方式如下：
@@ -73,6 +75,7 @@ userStore.GENERATE_ROUTES()方法内，调用接口请求用户的菜单权限�
 前端要做的事情有两点：
 `1.根据用户选择的体系id，过滤菜单`
 由于切换体系的功能是在顶部，是在框架上，而不是某个页面中，故这块dom及逻辑就放在了basic-layout.vue中。
+根据id切换过滤菜单的代码略
 
 `2.对该体系下没有权限的菜单进行拦截`
 ```js
@@ -110,6 +113,6 @@ if (userStore.allowRouters && userStore.allowRouters.length > 0) {
 }
 ```
 这块是需要重点理解的：`打开新页面并访问没权限的菜单时，router.beforeEach()执行两遍，第一遍并不会进入basic-layout页面，第二遍才会进入`
-根据上面的逻辑需要在basic-layout.vue，及router.beforeEach中，写两次。
+根据上面的业务场景及逻辑需要在basic-layout.vue，及router.beforeEach中，写两次。
 
 
