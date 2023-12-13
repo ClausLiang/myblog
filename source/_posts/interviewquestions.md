@@ -559,6 +559,24 @@ v-model使用modelValue，在一个组件上v-model会被展开为如下形式
 <custome :modelValue="search" @update:modelValue = "newValue => search = newValue"/>
 ```
 因此自定义组件要用props接收value或modelValue，处理完逻辑再通过派发事件input或者update:modelValue通知到父组件。
+详细描述：
+`<custome>` 组件内部需要做两件事：
+1.将内部原生 `<input>` 元素的 value attribute 绑定到 modelValue prop
+2.当原生的 input 事件触发时，触发一个携带了新值的 update:modelValue 自定义事件
+```html
+<!-- CustomInput.vue -->
+<script setup>
+defineProps(['modelValue'])
+defineEmits(['update:modelValue'])
+</script>
+
+<template>
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+```
 
 ## **`keep-alive怎么用，怎么销毁`**
 `<keep-alive>`包裹动态组件，会缓存不活动的组件实例。把要缓存的组件name放到includes属性里。如果要销毁，去掉includes里对应的组件。

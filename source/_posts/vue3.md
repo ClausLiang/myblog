@@ -335,6 +335,11 @@ export default {
 3.`<script type="text/x-template">`
 
 # <font color=orange>组件深入</font>
+## <font color=green>组件注册</font>
+### 全局注册
+### 局部注册
+1.全局注册，但并没有被使用的组件无法在生产打包时被自动移除 (也叫“tree-shaking”)。如果你全局注册了一个组件，即使它并没有被实际使用，它仍然会出现在打包后的 JS 文件中。
+2.全局注册在大型项目中使项目的依赖关系变得不那么明确。在父组件中使用子组件时，不太容易定位子组件的实现。和使用过多的全局变量一样，这可能会影响应用长期的可维护性。
 ## <font color=green>组件命名格式</font>
 ### PascalCase 帕斯卡命名
 PascalCase是合法的 JavaScript 标识符。这使得在 JavaScript 中导入和注册组件都很容易，同时 IDE 也能提供较好的自动补全。
@@ -353,3 +358,100 @@ PascalCase是合法的 JavaScript 标识符。这使得在 JavaScript 中导入�
 匈牙利命名法通过在变量名前面加上相应的小写字母的符号标识作为前缀，标识出变量的作用域，类型等。这些符号可以多个同时使用，顺序是先m_（成员变量），再指针，再简单数据类型，再其他。例如：m_lpszStr, 表示指向一个以0字符结尾的字符串的长指针成员变量。 
 
 ## <font color=green>props</font>
+### 仅写上 prop 但不传值，会隐式转换为 `true`
+```html
+<!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
+<BlogPost is-published />
+```
+### 使用一个对象绑定多个 prop
+```js
+const post = {
+  id: 1,
+  title: 'My Journey with Vue'
+}
+```
+```html
+<BlogPost v-bind="post" />
+```
+等价于
+```html
+<BlogPost :id="post.id" :title="post.title" />
+```
+### 单向数据流
+所有的 props 都遵循着单向绑定原则，props 因父组件的更新而变化，自然地将新的状态向下流往子组件，而不会逆向传递。这避免了子组件意外修改父组件的状态的情况，不然应用的数据流将很容易变得混乱而难以理解。
+每次父组件更新后，所有的子组件中的 props 都会被更新到最新值，这意味着你不应该在子组件中去更改一个 prop。若你这么做了，Vue 会在控制台上向你抛出警告。
+
+`导致你想要更改一个 prop 的需求通常来源于以下两种场景：`
+1.prop 被用于传入初始值；而子组件想在之后将其作为一个局部数据属性。在这种情况下，最好是新定义一个局部数据属性，从 props 上获取初始值即可：
+```js
+const props = defineProps(['initialCounter'])
+
+// 计数器只是将 props.initialCounter 作为初始值
+// 像下面这样做就使 prop 和后续更新无关了
+const counter = ref(props.initialCounter)
+```
+2.需要对传入的 prop 值做进一步的转换。在这种情况中，最好是基于该 prop 值定义一个计算属性：
+```js
+const props = defineProps(['size'])
+
+// 该 prop 变更时计算属性也会自动更新
+const normalizedSize = computed(() => props.size.trim().toLowerCase())
+```
+## <font color=green>事件</font>
+在组件的模板表达式中，可以直接使用 $emit 方法触发自定义事件 (例如：在 v-on 的处理函数中)：
+```html
+<!-- MyComponent -->
+<button @click="$emit('someEvent')">click me</button>
+```
+父组件可以通过 v-on (缩写为 @) 来监听事件：
+```html
+<MyComponent @some-event="callback" />
+```
+## <font color=green>组件v-model</font>
+当使用在一个组件上时，v-model 会被展开为如下的形式：
+```html
+<CustomInput
+  :model-value="searchText"
+  @update:model-value="newValue => searchText = newValue"
+/>
+```
+要让这个例子实际工作起来，`<CustomInput>` 组件内部需要做两件事：
+1.将内部原生 `<input>` 元素的 value attribute 绑定到 modelValue prop
+2.当原生的 input 事件触发时，触发一个携带了新值的 update:modelValue 自定义事件
+```html
+<!-- CustomInput.vue -->
+<script setup>
+defineProps(['modelValue'])
+defineEmits(['update:modelValue'])
+</script>
+
+<template>
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+```
+
+### v-model的参数
+默认情况下，v-model 在组件上都是使用 modelValue 作为 prop，并以 update:modelValue 作为对应的事件。我们可以通过给 v-model 指定一个参数来更改这些名字：
+```html
+<MyComponent v-model:title="bookTitle" />
+```
+在这个例子中，子组件应声明一个 title prop，并通过触发 update:title 事件更新父组件值：
+```html
+<!-- MyComponent.vue -->
+<script setup>
+defineProps(['title'])
+defineEmits(['update:title'])
+</script>
+
+<template>
+  <input
+    type="text"
+    :value="title"
+    @input="$emit('update:title', $event.target.value)"
+  />
+</template>
+```
+
