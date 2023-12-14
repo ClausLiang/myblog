@@ -334,6 +334,23 @@ export default {
 2.内联模板字符串 (例如 template: '...')
 3.`<script type="text/x-template">`
 
+## 表单输入绑定（v-model）
+这个是vue的特色，react没有的。
+在前端处理表单时，我们常常需要将表单输入框的内容同步给 JavaScript 中相应的变量。手动连接值绑定和更改事件监听器可能会很麻烦：
+```html
+<input
+  :value="text"
+  @input="event => text = event.target.value">
+```
+v-model 指令帮我们简化了这一步骤：
+```html
+<input v-model="text">
+```
+v-model可以支持不同类型的输入，支持`input` `select` `textarea`这三种原生标签。它会根据所使用的元素自动使用对应的 DOM 属性和事件组合：
+1.文本类型的 `<input>` 和 `<textarea>` 元素会绑定 value property 并侦听 input 事件；
+2.`<input type="checkbox">` 和 `<input type="radio">` 会绑定 checked property 并侦听 change 事件；
+3.`<select>` 会绑定 value property 并侦听 change 事件。
+
 # <font color=orange>组件深入</font>
 ## <font color=green>组件注册</font>
 ### 全局注册
@@ -454,4 +471,37 @@ defineEmits(['update:title'])
   />
 </template>
 ```
+## <font color=green>透传attributes</font>
+“透传 attribute”指的是传递给一个组件，却没有被该组件声明为 props 或 emits 的 attribute 或者 v-on 事件监听器。当一个组件以单个元素为根作渲染时，透传的 attribute 会自动被添加到根元素上。
 
+我们想要所有像 class 和 v-on 监听器这样的透传 attribute 都应用在内部的 `<button>` 上而不是外层的 `<div>` 上。我们可以通过设定 inheritAttrs: false 和使用 v-bind="$attrs" 来实现：
+```html
+<div class="btn-wrapper">
+  <button class="btn" v-bind="$attrs">click me</button>
+</div>
+```
+```js
+<script setup>
+// 3.3开始
+defineOptions({
+  inheritAttrs: false
+})
+</script>
+```
+### 在 JavaScript 中访问透传 Attributes
+```js
+<script setup>
+import { useAttrs } from 'vue'
+
+const attrs = useAttrs()
+</script>
+```
+如果没有使用 `<script setup>`，attrs 会作为 setup() 上下文对象的一个属性暴露：
+```js
+export default {
+  setup(props, ctx) {
+    // 透传 attribute 被暴露为 ctx.attrs
+    console.log(ctx.attrs)
+  }
+}
+```
