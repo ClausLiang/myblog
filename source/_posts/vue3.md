@@ -8,8 +8,8 @@ sticky: true
 <script type="text/javascript" src="/custom.js"></script>
 > 本文前提 --- 特别熟悉vue2，有一定的基础。对比一下vue3有哪些新的语法，以便可以快速上手vue3
 
-# <font color=orange>基础</font>
-## <font color=green>setup</font>
+# <font color=red>基础</font>
+## <font color=orange>setup</font>
 setup是新增的生命周期，早于beforeCreate，setup里没有this，是组合式API的入口，只在组件初始化时执行一次。
 
 ```ts
@@ -43,10 +43,10 @@ setup是新增的生命周期，早于beforeCreate，setup里没有this，是组
     const state = reactive({ count: 0 })
 </script>
 ```
-## <font color=green>组合式API（composition API）</font>
+## <font color=orange>组合式API（composition API）</font>
 不同于vue2，vue3的组合式API（composition API）都用import {xxx} from 'vue'这种形式引入。vue3也支持选项式API（options API）。实际上，选项式API是在组合式API的基础上实现的。
 
-## <font color=green>响应式</font>
+## <font color=orange>响应式</font>
 
 ### reactive
 处理对象（非基本类型）
@@ -86,7 +86,7 @@ setup是新增的生命周期，早于beforeCreate，setup里没有this，是组
 let age = toRef(data,'age')，获取单个reactive处理过的数据，不太常用
 
 
-## <font color=green>计算属性</font>
+## <font color=orange>计算属性</font>
 ```ts
 <script setup lang="ts">
     import { computed } from 'vue'
@@ -123,7 +123,7 @@ const now = computed(() => Date.now())
 ```
 相比之下，方法调用总是会在重渲染发生时再次执行函数。
 
-## <font color=green>生命周期钩子</font>
+## <font color=orange>生命周期钩子</font>
 ```ts
 <script setup>
 import { onMounted } from 'vue'
@@ -144,7 +144,7 @@ onMounted(() => {
 |beforeDestroyed|onBeforeUnmount|
 |destroyed|onUnmounted|
 
-## <font color=green>watch</font>
+## <font color=orange>watch</font>
 { immediate: true } 立即执行
 ```ts
 <script setup>
@@ -259,7 +259,7 @@ watchEffect(() => {
   }
 })
 ```
-## <font color=green>组件</font>
+## <font color=orange>组件</font>
 ### 使用`<script setup>`,导入的组件都在模板中直接可用
 ```ts
 <script setup>
@@ -334,7 +334,7 @@ export default {
 2.内联模板字符串 (例如 template: '...')
 3.`<script type="text/x-template">`
 
-## 表单输入绑定（v-model）
+## <font color=orange>表单输入绑定（v-model）</font>
 这个是vue的特色，react没有的。
 在前端处理表单时，我们常常需要将表单输入框的内容同步给 JavaScript 中相应的变量。手动连接值绑定和更改事件监听器可能会很麻烦：
 ```html
@@ -351,13 +351,13 @@ v-model可以支持不同类型的输入，支持`input` `select` `textarea`这�
 2.`<input type="checkbox">` 和 `<input type="radio">` 会绑定 checked property 并侦听 change 事件；
 3.`<select>` 会绑定 value property 并侦听 change 事件。
 
-# <font color=orange>组件深入</font>
-## <font color=green>组件注册</font>
+# <font color=red>组件深入</font>
+## <font color=orange>组件注册</font>
 ### 全局注册
 ### 局部注册
 1.全局注册，但并没有被使用的组件无法在生产打包时被自动移除 (也叫“tree-shaking”)。如果你全局注册了一个组件，即使它并没有被实际使用，它仍然会出现在打包后的 JS 文件中。
 2.全局注册在大型项目中使项目的依赖关系变得不那么明确。在父组件中使用子组件时，不太容易定位子组件的实现。和使用过多的全局变量一样，这可能会影响应用长期的可维护性。
-## <font color=green>组件命名格式</font>
+## <font color=orange>组件命名格式</font>
 ### PascalCase 帕斯卡命名
 PascalCase是合法的 JavaScript 标识符。这使得在 JavaScript 中导入和注册组件都很容易，同时 IDE 也能提供较好的自动补全。
 `<PascalCase />` 在模板中更明显地表明了这是一个 Vue 组件，而不是原生 HTML 元素。同时也能够将 Vue 组件和自定义元素 (web components) 区分开来。
@@ -374,7 +374,7 @@ PascalCase是合法的 JavaScript 标识符。这使得在 JavaScript 中导入�
 ### Hungarian 匈牙利命名法（这个不用于组件命名，只是列在这里）
 匈牙利命名法通过在变量名前面加上相应的小写字母的符号标识作为前缀，标识出变量的作用域，类型等。这些符号可以多个同时使用，顺序是先m_（成员变量），再指针，再简单数据类型，再其他。例如：m_lpszStr, 表示指向一个以0字符结尾的字符串的长指针成员变量。 
 
-## <font color=green>props</font>
+## <font color=orange>props</font>
 ### 仅写上 prop 但不传值，会隐式转换为 `true`
 ```html
 <!-- 仅写上 prop 但不传值，会隐式转换为 `true` -->
@@ -414,7 +414,7 @@ const props = defineProps(['size'])
 // 该 prop 变更时计算属性也会自动更新
 const normalizedSize = computed(() => props.size.trim().toLowerCase())
 ```
-## <font color=green>事件</font>
+## <font color=orange>事件</font>
 在组件的模板表达式中，可以直接使用 $emit 方法触发自定义事件 (例如：在 v-on 的处理函数中)：
 ```html
 <!-- MyComponent -->
@@ -424,7 +424,7 @@ const normalizedSize = computed(() => props.size.trim().toLowerCase())
 ```html
 <MyComponent @some-event="callback" />
 ```
-## <font color=green>组件v-model</font>
+## <font color=orange>组件v-model</font>
 当使用在一个组件上时，v-model 会被展开为如下的形式：
 ```html
 <CustomInput
@@ -471,7 +471,7 @@ defineEmits(['update:title'])
   />
 </template>
 ```
-## <font color=green>透传attributes</font>
+## <font color=orange>透传attributes</font>
 “透传 attribute”指的是传递给一个组件，却没有被该组件声明为 props 或 emits 的 attribute 或者 v-on 事件监听器。当一个组件以单个元素为根作渲染时，透传的 attribute 会自动被添加到根元素上。
 
 我们想要所有像 class 和 v-on 监听器这样的透传 attribute 都应用在内部的 `<button>` 上而不是外层的 `<div>` 上。我们可以通过设定 inheritAttrs: false 和使用 v-bind="$attrs" 来实现：
@@ -505,3 +505,123 @@ export default {
   }
 }
 ```
+## <font color=orange>插槽</font>
+### 默认插槽
+```html
+<button type="submit">
+  <slot>
+    Submit <!-- 默认内容 -->
+  </slot>
+</button>
+```
+如果不提供内容，如`<SubmitButton />`就会渲染默认内容`<button type="submit">Submit</button>`，
+如果提供了插槽内容`<SubmitButton>Save</SubmitButton>`，渲染时就会显示提供的内容`<button type="submit">Save</button>`
+### 具名插槽
+有时在一个组件中包含多个插槽出口是很有用的。举例来说，在一个 `<BaseLayout>` 组件中，有如下模板：对于这种场景，`<slot>` 元素可以有一个特殊的 attribute name，用来给各个插槽分配唯一的 ID，以确定每一处要渲染的内容：
+```html
+<div class="container">
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+```
+要为具名插槽传入内容，我们需要使用一个含 v-slot 指令的 `<template>` 元素，并将目标插槽的名字传给该指令：v-slot 有对应的简写 `#`
+```html
+<BaseLayout>
+  <template #header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <template #default>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </template>
+
+  <template #footer>
+    <p>Here's some contact info</p>
+  </template>
+</BaseLayout>
+```
+当一个组件同时接收默认插槽和具名插槽时，所有位于顶级的非 `<template>` 节点都被隐式地视为默认插槽的内容。所以上面也可以写成：
+```html
+<BaseLayout>
+  <template #header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <!-- 隐式的默认插槽 -->
+  <p>A paragraph for the main content.</p>
+  <p>And another one.</p>
+
+  <template #footer>
+    <p>Here's some contact info</p>
+  </template>
+</BaseLayout>
+```
+### 作用域插槽
+`插槽的内容无法访问到子组件的状态。`
+然而在某些场景下插槽的内容可能想要同时使用父组件域内和子组件域内的数据。要做到这一点，我们需要一种方法来`让子组件在渲染时将一部分数据提供给插槽`。
+
+分两种情况
+#### 默认作用域插槽
+可以像对组件传递 props 那样，向一个插槽的出口上传递 attributes：
+```html
+<!-- <MyComponent> 的模板 -->
+<div>
+  <slot :text="greetingMessage" :count="1"></slot>
+</div>
+```
+通过子组件标签上的 v-slot 指令，直接接收到了一个插槽 props 对象：
+```html
+<MyComponent v-slot="slotProps">
+  {{ slotProps.text }} {{ slotProps.count }}
+</MyComponent>
+```
+#### 具名作用域插槽
+向具名插槽中传入 props：
+```html
+<slot name="header" message="hello"></slot>
+```
+具名作用域插槽的工作方式也是类似的，插槽 props 可以作为 v-slot 指令的值被访问到：v-slot:name="slotProps"。当使用缩写时是这样：
+```html
+<MyComponent>
+  <template #header="headerProps">
+    {{ headerProps }}
+  </template>
+
+  <template #default="defaultProps">
+    {{ defaultProps }}
+  </template>
+
+  <template #footer="footerProps">
+    {{ footerProps }}
+  </template>
+</MyComponent>
+```
+`注意：`
+如果同时使用了具名插槽与默认插槽，则需要为默认插槽使用显式的 `<template>` 标签。尝试直接为组件添加 v-slot 指令将导致编译错误。这是为了避免因默认插槽的 props 的作用域而困惑。
+为默认插槽使用显式的 `<template>` 标签有助于更清晰地指出 message 属性在其他插槽中不可用：
+```html
+<template>
+  <MyComponent>
+    <!-- 使用显式的默认插槽 -->
+    <template #default="{ message }">
+      <p>{{ message }}</p>
+    </template>
+
+    <template #footer>
+      <p>Here's some contact info</p>
+    </template>
+  </MyComponent>
+</template>
+```
+# <font color=red>逻辑复用</font>
+## <font color=orange>组合式函数</font>
+## <font color=orange>自定义指令</font>
+## <font color=orange>插件</font>
