@@ -624,4 +624,99 @@ export default {
 # <font color=red>逻辑复用</font>
 ## <font color=orange>组合式函数</font>
 ## <font color=orange>自定义指令</font>
+一个自定义指令由一个`包含`类似组件`生命周期钩子`的`对象`来定义。钩子函数会接收到指令所绑定元素作为其参数。
+```html
+<script setup>
+// 在模板中启用 v-focus
+const vFocus = {
+  mounted: (el) => el.focus()
+}
+</script>
+
+<template>
+  <input v-focus />
+</template>
+```
+在没有使用 `<script setup>` 的情况下，自定义指令需要通过 directives 选项注册：
+```js
+export default {
+  setup() {
+    /*...*/
+  },
+  directives: {
+    // 在模板中启用 v-focus
+    focus: {
+      /* ... */
+    }
+  }
+}
+```
+将一个自定义指令全局注册到应用层级也是一种常见的做法：
+```js
+const app = createApp({})
+
+// 使 v-focus 在所有组件中都可用
+app.directive('focus', {
+  /* ... */
+})
+```
+### 指令钩子
+一个指令的定义对象可以提供几种钩子函数 (都是可选的)：
+```js
+const myDirective = {
+  // 在绑定元素的 attribute 前
+  // 或事件监听器应用前调用
+  created(el, binding, vnode, prevVnode) {
+    // 下面会介绍各个参数的细节
+  },
+  // 在元素被插入到 DOM 前调用
+  beforeMount(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都挂载完成后调用
+  mounted(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件更新前调用
+  beforeUpdate(el, binding, vnode, prevVnode) {},
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都更新后调用
+  updated(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载前调用
+  beforeUnmount(el, binding, vnode, prevVnode) {},
+  // 绑定元素的父组件卸载后调用
+  unmounted(el, binding, vnode, prevVnode) {}
+}
+```
+### 简化形式
+对于自定义指令来说，一个很常见的情况是仅仅需要在 mounted 和 updated 上实现相同的行为，除此之外并不需要其他钩子。这种情况下我们可以直接用一个函数来定义指令，如下所示：
+```js
+app.directive('color', (el, binding) => {
+  // 这会在 `mounted` 和 `updated` 时都调用
+  el.style.color = binding.value
+})
+```
+### 对象字面量
+如果你的指令需要多个值，你可以向它传递一个 JavaScript 对象字面量。别忘了，指令也可以接收任何合法的 JavaScript 表达式。
+```html
+<div v-demo="{ color: 'white', text: 'hello!' }"></div>
+```
+```js
+app.directive('demo', (el, binding) => {
+  console.log(binding.value.color) // => "white"
+  console.log(binding.value.text) // => "hello!"
+})
+```
 ## <font color=orange>插件</font>
+### 定义
+一个插件可以是一个拥有 install() 方法的对象，也可以直接是一个安装函数本身。安装函数会接收到安装它的应用实例和传递给 app.use() 的额外选项作为参数：
+```js
+const myPlugin = {
+  install(app, options) {
+    // 配置此应用
+  }
+}
+```
+### 使用
+```js
+app.use(myPlugin, {
+  /* 可选的选项 */
+})
+```
