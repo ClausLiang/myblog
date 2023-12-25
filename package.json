@@ -11,7 +11,7 @@
     "fabu": "hexo clean && hexo generate && ssh root@121.36.105.57 \"rm -rf /root/blog\" && scp -r ./blog root@121.36.105.57:/root"
   },
   "hexo": {
-    "version": "6.3.0"
+    "version": "7.0.0"
   },
   "dependencies": {
     "hexo": "^7.0.0",
