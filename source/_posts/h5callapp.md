@@ -3,7 +3,7 @@ title: h5调用原生app的方法
 date: 2020-10-13 17:49:35
 tags:
     - h5
-categories: 基础
+categories: h5
 ---
 
 分安卓和IOS，安卓可以直接调用，iso需要通过桥来调用

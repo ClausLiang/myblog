@@ -2,7 +2,7 @@
 title: 了解拖拽的原理
 date: 2024-01-04 09:14:23
 tags: h5
-categories: 基础
+categories: h5
 ---
 <script type="text/javascript" src="/custom.js"></script>
 

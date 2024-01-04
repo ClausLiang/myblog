@@ -3,7 +3,7 @@ title: 高频面试题总结
 date: 2019-01-01 00:00:01
 tags:
     - 面试
-categories: 基础
+categories: 进阶
 ---
 <script type="text/javascript" src="/custom.js"></script>
 

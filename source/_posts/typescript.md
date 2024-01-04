@@ -2,7 +2,7 @@
 title: typescript的学习记录
 date: 2023-02-16 00:04:59
 tags: typescript
-categories: 基础
+categories: 进阶
 ---
 # ts的准备工作
 
