@@ -180,8 +180,54 @@ Column({ space: 20 }) {
 由于鸿蒙的组件是并列的，所以排布只会依次排列，或从上到下从左到右，或其他方式，层叠布局提供了一种方式，允许组件可以叠在一起。这跟web的布局很不一样，web天然可以层叠，因为web的标签可以随意嵌套，div里可以套div。
 ## Flex
 ## List 列表
-## Grid
+## Grid GridItem
+```ts
+Grid(){
 
+}.rowsTemplate('1fr 1fr 1fr')
+.columnsTemplate('1fr 2fr 1fr')
+```
+### 设置子组件的所占行列数
+```ts
+GridItem() {
+  Text(key)
+    ...
+}
+.columnStart(1)
+.columnEnd(2)
+```
+```ts
+GridItem() {
+  Text(key)
+    ...
+}
+.rowStart(5)
+.rowEnd(6)
+```
+### 设置主轴方向及网格数量
+```ts
+Grid() {
+  ...
+}
+.maxCount(3)
+.layoutDirection(GridDirection.Row)
+```
+### 设置行列间距
+```ts
+Grid() {
+  ...
+}
+.columnsGap(10)
+.rowsGap(15)
+```
+### 构建可滚动的网格布局
+如果设置的是columnsTemplate，Grid的滚动方向为垂直方向；如果设置的是rowsTemplate，Grid的滚动方向为水平方向（横向）。
+横向可滚动网格布局，只要设置rowsTemplate属性的值且不设置columnsTemplate属性
+```ts
+Grid() {}
+.rowsTemplate('1fr 1fr') // 只设置rowsTemplate属性，当内容超出Grid区域时，可水平滚动。
+.rowsGap(15)
+```
 # <font color=orange>项目情况</font>
 ## 页面的分层思想
 通常web前端的面向对象的思想比较薄弱。所以刚开始阅读项目，不太理解同事杰哥搭建的鸿蒙项目架子，杰说app的页面要分层，每个新建的页面都是继承自封装的一个基础页面。基础页面中有一些基础能力，这样就不必在每个页面中都写。
