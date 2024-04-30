@@ -228,6 +228,36 @@ Grid() {}
 .rowsTemplate('1fr 1fr') // 只设置rowsTemplate属性，当内容超出Grid区域时，可水平滚动。
 .rowsGap(15)
 ```
+## RelativeContainer
+为采用相对布局的容器，支持容器内部的子元素设置相对位置关系。子元素支持指定兄弟元素作为锚点，也支持指定父容器作为锚点，基于锚点做相对位置布局。
+```ts
+RelativeContainer() {
+  Row()
+    .width(100)
+    .height(100)
+    // 添加其他属性
+    .alignRules({
+      top: { anchor: '__container__', align: VerticalAlign.Top },
+      left: { anchor: '__container__', align: HorizontalAlign.Start }
+    })
+    .id("row1")
+
+  Row()
+    .width(100)
+    .height(100)
+    ...
+    .alignRules({
+      top: { anchor: '__container__', align: VerticalAlign.Top },
+      right: { anchor: '__container__', align: HorizontalAlign.End }
+    })
+    .id("row2")
+}
+...
+```
+- RelativeContainer中不声明id属性，会不显示view
+- RelativeContainer中两个子view不能相互依赖，显示位置
+- RelativeContainer中子view如果设置了依赖（alignRules），必须设置宽和高，否则不显示
+
 # <font color=orange>项目情况</font>
 ## 页面的分层思想
 通常web前端的面向对象的思想比较薄弱。所以刚开始阅读项目，不太理解同事杰哥搭建的鸿蒙项目架子，杰说app的页面要分层，每个新建的页面都是继承自封装的一个基础页面。基础页面中有一些基础能力，这样就不必在每个页面中都写。
