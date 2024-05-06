@@ -179,7 +179,27 @@ Column({ space: 20 }) {
 ## Stack 层叠布局
 由于鸿蒙的组件是并列的，所以排布只会依次排列，或从上到下从左到右，或其他方式，层叠布局提供了一种方式，允许组件可以叠在一起。这跟web的布局很不一样，web天然可以层叠，因为web的标签可以随意嵌套，div里可以套div。
 ## Flex
+### 自适应拉伸
++ `flexBasis` 设置子组件在父容器主轴方向上的基准尺寸
+  - 未设置width以及flexBasis值为100，宽度为100vp
+  - flexBasis值为100，覆盖width的设置值，宽度为100vp
++ `flexGrow` 设置父容器的剩余空间分配给此属性所在组件的比例。用于“瓜分”父组件的剩余空间。
+  - .flexGrow(2) .flexGrow(3) 第一个元素以及第二个元素以2:3分配剩下的100vp
++ `flexShrink` 当父容器空间不足时，子组件的压缩比例。
+  - .flexShrink(3) .flexShrink(2) 第一个比第二个压缩的更狠
 ## List 列表
+### 添加分割线
+```ts
+List() {
+  ...
+}
+.divider({
+  strokeWidth: 1,
+  startMargin: 60,
+  endMargin: 10,
+  color: '#ffe9f0f0'
+})
+```
 ## Grid GridItem
 ```ts
 Grid(){
