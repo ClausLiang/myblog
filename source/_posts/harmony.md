@@ -34,7 +34,23 @@ arkts是在ts上拓展了`声明式UI`、`状态管理`等相应能力的ts超�
 @Link装饰的变量和父组件构建双向同步关系的状态变量，父组件会接受来自@Link装饰的变量的修改的同步，父组件的更新也会同步给@Link装饰的变量。
 `@Prop`
 @Prop装饰的变量可以和父组件建立单向同步关系，@Prop装饰的变量是可变的，但修改不会同步回父组件。
+`@watch`
+用于监听状态变量的变化，当状态变量变化时，@watch的回调方法将被调用。
+限制条件：
++ 建议避免无限循环。不要在@watch的回调方法里修改当前装饰的状态变量。
++ 不建议在@watch函数中调用async await。因为@watch设计的用途是为了快速的计算，异步行为可能会导致重新渲染速度的性能问题。
 
+```ts
+@component
+struct TotalView{
+  @Prop @watch('onCountUpdated') count: number;
+  @State total: number = 0;
+  // @watch回调
+  onCountUpdated(propName: string):void{
+    this.total += this.count;
+  }
+}
+```
 
 
 ### struct关键字
@@ -277,7 +293,76 @@ RelativeContainer() {
 - RelativeContainer中不声明id属性，会不显示view
 - RelativeContainer中两个子view不能相互依赖，显示位置
 - RelativeContainer中子view如果设置了依赖（alignRules），必须设置宽和高，否则不显示
+# <font color=orange>弹窗</font>
+## promptAction弹窗（该弹窗是promptAction的方法弹的，下面的是基于arkTs的声明式开发规范弹的）
+```ts
+import promptAction from '@ohos.promptAction'
+promptAction.showToast({
+  message: 'ni hao'
+})
+```
+```ts
+promptAction.shwoDialog({
+  title: '提示',
+  message: 'Message Info',
+  buttons: [
+    {
+      text: 'button1',
+      color: '#000000'
+    },
+    {
+      text: 'btn2',
+      color: '#000000'
+    }
+  ]
+}).then(data => {
+  console.info('click button: '+ data.index)
+})
+```
+## AlertDialog 警告弹窗
+```ts
+AlertDialog.show({
+  title: '提示',
+  message: '是否删除该条数据？',
+  primaryButton: {
+    value: '取消',
+    action: () => {
 
+    }
+  },
+  secondaryButton: {
+    value: '删除',
+    fontColor: '#d94838',
+    action: () => {
+
+    }
+  },
+  cancel: () => { // 点击遮罩层关闭dialog时回调
+
+  }
+})
+```
+可以使用AlertDialog，构建只包含一个操作按钮的确认弹窗，使用confirm响应操作按钮回调。如下：
+```ts
+AlertDialog.show({
+  title: '提示',
+  message: '提示信息',
+  confirm: {
+    value: '我知道了',
+    action: () => {
+
+    }
+  },
+  cancel: () => { // 点击遮罩层关闭dialog时回调
+
+  }
+})
+```
+## TextPickerDialog 文本滑动选择弹窗
+## DatePickerDialog 日期选择弹窗
+## TimePickerDialog 时间选择弹窗
+## 自定义弹窗
+自定义弹窗的界面通过装饰器@CustomDialog定义的组件来实现，然后结合CustomDialogController来控制自定义弹窗的显示和隐藏。
 # <font color=orange>项目情况</font>
 ## 页面的分层思想
 通常web前端的面向对象的思想比较薄弱。所以刚开始阅读项目，不太理解同事杰哥搭建的鸿蒙项目架子，杰说app的页面要分层，每个新建的页面都是继承自封装的一个基础页面。基础页面中有一些基础能力，这样就不必在每个页面中都写。
