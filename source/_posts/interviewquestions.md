@@ -214,7 +214,9 @@ a = a - b
 ```
 
 ## **`async await是什么？它有什么作用？`**
-async await是es7的新增，async用于声明一个函数，await用于等待一个异步方法执行完成。async函数返回的是一个promise对象，可以用.then方法添加回调函数，在函数的执行中，一旦遇到await就先返回，等到这个异步执行完成后，它再执行函数体内后面的语句。
+async await是es7的新增特性。async用于声明一个函数，await用于等待一个异步方法执行完成。
+async函数返回的是一个promise对象，可以用.then方法添加回调函数。
+await关键字只能使用在被async声明的函数内，用于修饰一个Promise对象，使得该Promise对象处理的异步任务在当前协程上按顺序同步执行。
 
 ## `this的指向有哪些情况`
 1.this出现在全局函数中，永远指向window

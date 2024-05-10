@@ -154,7 +154,7 @@ struct Second {
 多实例模式
 指定实例模式
 
-# <font color=orange>常用UI组件</font>
+# <font color=orange>常用UI组件（基础组件）</font>
 > 鸿蒙app的页面，跟web的标签页面可以说完全不同，它的页面由arkUI提供的鸿蒙原生组件组成。
 ## Image
 ```ts
@@ -164,13 +164,13 @@ resources文件夹下的图片都可以通过$r资源接口读取到并转换到
 ```ts
 Image($r('app.media.icon')).width(80)
 ```
-80等效80vp，vp：virtual pixels，虚拟像素也是一种可灵活使用和缩放的单位，它与屏幕像素的关系是 1vp 约等于 160dpi 屏幕密度设备上的 1px。在不同密度的设备之间，HarmonyOS 会针对性的转换设备间对应的实际像素值。
+80等效80vp，vp见下文单位
 ## Text Span
 ```ts
 Text(string).fontSize(24)
 ```
 Span只能作为Text组件的子组件显示文本内容
-24等效24fp，fp：font-size pixels，字体像素单位，其大小规范默认情况下与vp相同，但如果开发者在设置中修改了字体显示大小，就会在vp的基础上乘以scale系数。即默认情况下 1 fp = 1vp，如果设置了字体显示大小，则会根据实际情况自动设置 1fp = 1vp * scale。
+24等效24fp，fp见下文单位
 ## TextInput TextArea
 ```ts
 TextInput().type(InputType.Normal).maxLength(30)
@@ -180,6 +180,22 @@ TextInput().type(InputType.Password)
 ```ts
 Button('ok',{type: ButtonType.Normal})
 ```
+## Blank空白填充组件
+仅当父组件为Row/Column/Flex时生效。
+
+# <font color=orange>绘制组件</font>
+## Line
+直线绘制组件
+```ts
+Line().startPoint([0,0]).endPoint([100,0]).stroke('#D1D1D1').height(0.5)
+```
+# <font color=orange>单位</font>
+## vp
+vp：virtual pixels，虚拟像素是一种可灵活使用和缩放的单位，它与屏幕像素的关系是 1vp 约等于 160dpi 屏幕密度设备上的 1px。在不同密度的设备之间，HarmonyOS 会针对性的转换设备间对应的实际像素值。
+蓝湖设计稿查看时调整为360dp
+
+## fp
+fp：font-size pixels，字体像素单位，其大小规范默认情况下与vp相同，但如果开发者在设置中修改了字体显示大小，就会在vp的基础上乘以scale系数。即默认情况下 1 fp = 1vp，如果设置了字体显示大小，则会根据实际情况自动设置 1fp = 1vp * scale。
 # <font color=orange>布局容器</font>
 > web的页面是从上到下由块级元素依次组成。
 要抛弃web思想，鸿蒙页面的布局，由布局容器包住页面组件构成。
@@ -374,6 +390,18 @@ Environment的所有属性都是不可变的（即应用不可写入），所有
 
 # <font color=orange>数据持久化</font>
 ## 用户首选项Preferences
+首选项持久化功能的相关接口大部分为异步接口，异步接口均有callback和Promise两种返回形式。
+```ts
+import dataPreferences from '@ohos.data.preferences';
+// 获取preference对象实例
+preference = await dataPreferences.getPreferences(context, 'preference1');
+// 存储
+await preference.put('key', 'value');
+// 必须持久化，才会真正存进去
+await preference.flush();
+// 读取
+await preference.get('key', 'defaultValue');
+```
 ## 键值型数据库KV-Store
 ## 关系型数据库RelationalStore
 
