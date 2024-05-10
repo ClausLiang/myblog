@@ -383,6 +383,18 @@ AlertDialog.show({
 # <font color=orange>状态管理</font>
 ## LocalStorage页面级UI状态存储
 ## AppStorage应用全局的UI状态存储
+### 存取
+AppStorage.SetOrCreate('simpleProp', 121);
+let value: number = AppStorage.Get('PropA'); // 47
+### @StorageProp
+当appstorage中的某个属性值被修改，可以将值传递过来，配合@watch监听可以修改其他值
+```ts
+@StorageProp(CACHE_USER_INFO) @Watch('onLoginChange') userInfo:string = ''
+
+onLoginChange() {
+  this.nickName = JSON.parse(this.userInfo).nickName
+}
+```
 ## PersistentStorage持久化存储UI状态
 LocalStorage和AppStorage都是运行时的内存，但是在应用退出再次启动后，依然能保存选定的结果，是应用开发中十分常见的现象，这就需要用到PersistentStorage。
 ## Environment设备环境查询
