@@ -32,6 +32,7 @@ arkts是在ts上拓展了`声明式UI`、`状态管理`等相应能力的ts超�
 装饰的变量值发生改变时会触发自定义组件的UI界面自动刷新
 `@Link`
 @Link装饰的变量和父组件构建双向同步关系的状态变量，父组件会接受来自@Link装饰的变量的修改的同步，父组件的更新也会同步给@Link装饰的变量。
+父组件传入子组件时，不能用this.aa，而要用$aa
 `@Prop`
 @Prop装饰的变量可以和父组件建立单向同步关系，@Prop装饰的变量是可变的，但修改不会同步回父组件。
 `@watch`
@@ -51,6 +52,13 @@ struct TotalView{
   }
 }
 ```
+`@StorageProp`
+当appstorage中的某个属性值被修改，可以将值传递过来。
+
+
+------ 其他 ------
+`@CustomDialog`
+自定义弹窗
 
 
 ### struct关键字
@@ -384,8 +392,12 @@ AlertDialog.show({
 ## LocalStorage页面级UI状态存储
 ## AppStorage应用全局的UI状态存储
 ### 存取
+SetOrCreate
+Get
+```ts
 AppStorage.SetOrCreate('simpleProp', 121);
 let value: number = AppStorage.Get('PropA'); // 47
+```
 ### @StorageProp
 当appstorage中的某个属性值被修改，可以将值传递过来，配合@watch监听可以修改其他值
 ```ts
