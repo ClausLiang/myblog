@@ -197,6 +197,18 @@ Button('ok',{type: ButtonType.Normal})
 ```ts
 Line().startPoint([0,0]).endPoint([100,0]).stroke('#D1D1D1').height(0.5)
 ```
+
+# <font color=orange>组件通用属性</font>
+## 尺寸设置
++ width height margin等类同web中的属性
++ layoutWeight(1) 父容器尺寸确定时，设置了layoutWeight属性的子元素与兄弟元素占主轴尺寸按照权重进行分配，忽略元素本身尺寸设置，表示自适应占满剩余空间。仅在Row/Column/Flex布局中生效。
++ constraintSize({maxWidth: 100, minwidth: 100, maxHeight: 100, minHeight: 100})设置约束尺寸，组件布局时，进行尺寸范围限制。constraintSize的优先级高于Width和Height。若设置的minWidth大于maxWidth，则minWidth生效，minHeight与maxHeight同理。
+
+## 位置设置
++ position({x:x, y:y})
++ offset({x:x, y:y})
+
+
 # <font color=orange>单位</font>
 ## vp
 vp：virtual pixels，虚拟像素是一种可灵活使用和缩放的单位，它与屏幕像素的关系是 1vp 约等于 160dpi 屏幕密度设备上的 1px。在不同密度的设备之间，HarmonyOS 会针对性的转换设备间对应的实际像素值。
@@ -387,6 +399,32 @@ AlertDialog.show({
 ## TimePickerDialog 时间选择弹窗
 ## 自定义弹窗
 自定义弹窗的界面通过装饰器@CustomDialog定义的组件来实现，然后结合CustomDialogController来控制自定义弹窗的显示和隐藏。
+```ts
+let dialog = new CustomDialogController({
+  builder: menu2(),
+  offset: {dx: dx, dy: dy}, // 弹窗位置偏移
+  customStyle: true, // 是否自定义弹窗样式，必须的
+})
+dialog.open()
+
+// 定义弹窗结构
+@CustomDialog
+struct menu2{
+  dialogController: CustomDialogController // 必须要的
+  build(){
+    Column(){
+      Row(){
+        Image($r('app.media.icon_menu_edit')).width(14).height(14).margin({left: 14})
+        Text('编辑').margin({left: 5})
+      }.height(37)
+      Row(){
+        Image($r('app.media.icon_menu_delete')).width(14).height(14).margin({left: 14})
+        Text('删除').margin({left: 5})
+      }.height(37)
+    }.backgroundColor('#fff').borderRadius(5).width(115).alignItems(HorizontalAlign.Start)
+  }
+}
+```
 
 # <font color=orange>状态管理</font>
 ## LocalStorage页面级UI状态存储
