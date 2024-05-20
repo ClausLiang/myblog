@@ -53,6 +53,18 @@ struct TotalView{
   }
 }
 ```
+
+`@Observed` `@ObjectLink`
+上述修饰器，仅能观察到第一层的变化，但是在实际应用开发中，应用会根据开发需要，封装自己的数据模型。对于多层嵌套的情况，比如二维数组，或者数组项class，或者class的属性是class，他们的第二层的属性变化是无法观察到的。这就引出了@Observed/@ObjectLink装饰器。
+注意：
++ 单独使用@Observed是没有任何作用的，需要搭配@ObjectLink或者@Prop使用。
+
+场景：
++ 嵌套对象
++ 对象数组
++ 二维数组
+
+
 `@StorageProp`
 当appstorage中的某个属性值被修改，可以将值传递过来。
 
