@@ -82,12 +82,41 @@ struct TotalView{
 目前了解到内置组件分为三类
 1.布局组件：Row() Column()等
 2.基础UI组件，如Text() Button()等
-3.逻辑组件，如ForEach()
+3.逻辑组件
+1. ForEach()
 ```ts
-ForEach(arry,(item,index)=>{
-
-},(item,index)=>item.id)
+ForEach(
+  arr: Array,
+  itemGenerator: (item: any, index: number) => void,
+  keyGenerator?: (item: any, index: number) => string
+)
 ```
+说明: 
+在ForEach循环渲染过程中，系统会为每个数组元素生成一个唯一且持久的键值，用于标识对应的组件。当这个键值变化时，ArkUI框架将视为该数组元素已被替换或修改，并会基于新的键值创建一个新的组件。
+ForEach提供了一个名为keyGenerator的参数，这是一个函数，开发者可以通过它自定义键值的生成规则。如果缺省，默认是`(item,index)=>{return index +'_'+JSON.stringify(item)`
+在项目中遇到一个问题是keyGenerator定义为`(item,index)=>item.id`，导致一直不刷新
+
+2. LazyForEach()
+LazyForEach从提供的数据源中按需迭代数据，并在每次迭代过程中创建相应的组件。当在滚动容器中使用了LazyForEach，框架会根据滚动容器可视区域按需创建组件，当组件滑出可视区域外时，框架会进行组件销毁回收以降低内存占用。
+```ts
+LazyForEach(
+    dataSource: IDataSource,             // 需要进行数据迭代的数据源
+    itemGenerator: (item: any, index: number) => void,  // 子组件生成函数
+    keyGenerator?: (item: any, index: number) => string // 键值生成函数
+): void
+```
+注意：该函数的数据源必须实现IDataSource接口，IDataSource接口定义了数据迭代过程中的一些回调函数。
+```ts
+interface IDataSource {
+    totalCount(): number; // 获得数据总数
+    getData(index: number): Object; // 获取索引值对应的数据
+    registerDataChangeListener(listener: DataChangeListener): void; // 注册数据改变的监听器
+    unregisterDataChangeListener(listener: DataChangeListener): void; // 注销数据改变的监听器
+}
+```
+使用限制：
++ LazyForEach必须在容器组件内使用，仅有List、Grid、Swiper以及WaterFlow组件支持数据懒加载（可配置cachedCount属性，即只加载可视部分以及其前后少量数据用于缓冲），其他组件仍然是一次性加载所有的数据。
+
 
 ### 属性方法 .width() .onClick()
 鸿蒙是面向对象的语法，所有的样式或者事件，都是通过调用方法实现。
@@ -253,6 +282,7 @@ Column({ space: 20 }) {
 + `flexShrink` 当父容器空间不足时，子组件的压缩比例。
   - .flexShrink(3) .flexShrink(2) 第一个比第二个压缩的更狠
 ## List 列表
+超出屏幕自动提供滚动功能。
 ### 添加分割线
 ```ts
 List() {
