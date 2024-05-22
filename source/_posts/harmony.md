@@ -268,8 +268,8 @@ Column({ space: 20 }) {
   ...
 }
 ```
-.justifyContent()主轴方向的排列
-.alignItems()交叉轴方向的排列
+.justifyContent()主轴方向的排列，主轴方向的参数是FlexAlign.Start/FlexAlign.Center/FlexAlign.End
+.alignItems()交叉轴方向的排列，参数根据Row Column不同，Row:VerticalAlign.xx(top,bottom,center)，Column:HorizontalAlign.xx(start,end,center)
 ## Stack 层叠布局
 由于鸿蒙的组件是并列的，所以排布只会依次排列，或从上到下从左到右，或其他方式，层叠布局提供了一种方式，允许组件可以叠在一起。这跟web的布局很不一样，web天然可以层叠，因为web的标签可以随意嵌套，div里可以套div。
 ## Flex
@@ -372,6 +372,85 @@ RelativeContainer() {
 - RelativeContainer中不声明id属性，会不显示view
 - RelativeContainer中两个子view不能相互依赖，显示位置
 - RelativeContainer中子view如果设置了依赖（alignRules），必须设置宽和高，否则不显示
+
+## Tabs
+```ts
+Tabs({barPosition: BarPosition.End}){
+  TabContent(){
+    Home()
+  }.tabBar('首页')
+  TabContent(){
+    Mine()
+  }.tabBar('我的')
+}
+.scrollable(false)
+```
+注意：
++ TabContent组件不支持设置通用宽度属性，其宽度默认撑满Tabs父组件。
++ TabContent组件不支持设置通用高度属性，其高度由Tabs父组件高度与TabBar组件高度决定。
+
+### 底部导航、顶部导航
+barPosition: BarPosition.End 底部导航
+barPosition: BarPosition.Start  顶部导航
+侧边导航：
+```ts
+Tabs({barPosition: BarPosition.Start}){
+  TabContent(){
+    Home()
+  }.tabBar('首页')
+  TabContent(){
+    Mine()
+  }.tabBar('我的')
+}
+.vertical(true) // 侧边导航
+```
+### 滚动导航栏
+```ts
+Tabs({barPosition: BarPosition.Start}){
+  
+}
+.barMode(BarMode.Scrollable)
+```
+### 自定义导航栏
+```ts
+struct Index {
+  @State currentIndex: number = 0
+  tabsController: TabsController = new TabsController()
+  build() {
+    Tabs({barPosition: BarPosition.End, controller: this.tabsController}){
+      TabContent(){
+        Home()
+      }.tabBar(this.TabBuilder(0,$r('app.media.icon_home_checked'), $r('app.media.icon_home'), '首页'))
+      TabContent(){
+        Mine()
+      }.tabBar(this.TabBuilder(1,$r('app.media.icon_mine_checked'), $r('app.media.icon_mine'), '我的'))
+    }
+    .scrollable(false)
+    .onChange((index) => {
+      // 当scrollable是true时，左右滑动不联动底下的tab，需要手动赋值
+      this.currentIndex = index
+    })
+  }
+
+  @Builder
+  TabBuilder(targetIndex: number, selectedImage: Resource, normalImage: Resource, title: string){
+    Column(){
+      Image(this.currentIndex == targetIndex? selectedImage: normalImage).size({width: 19, height: 19})
+        .objectFit(ImageFit.Contain)
+      Text(title).margin({top: 3}).fontSize(10).fontColor(this.currentIndex == targetIndex?'#1698CE' : '#6B6B6B')
+    }.width('100%')
+    .height(46)
+    .justifyContent(FlexAlign.Center)
+    .onClick(()=>{
+      // 点击手动切换tabContent
+      this.currentIndex = targetIndex
+      this.tabsController.changeIndex(this.currentIndex)
+    })
+  }
+}
+```
+
+
 # <font color=orange>弹窗</font>
 ## promptAction弹窗（该弹窗是promptAction的方法弹的，下面的是基于arkTs的声明式开发规范弹的）
 ```ts
