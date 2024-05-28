@@ -250,6 +250,27 @@ Line().startPoint([0,0]).endPoint([100,0]).stroke('#D1D1D1').height(0.5)
 + position({x:x, y:y})
 + offset({x:x, y:y})
 
+## 颜色渐变
+### 线性渐变
+```ts
+.linearGradient({
+  angle?: number | string, // 渐变角度，默认0，即从左到右。
+  direction?: GradientDirection, // 渐变方向，设置angle后不生效。
+  colors: Array<[ResourceColor, number]>, // 渐变颜色数组，number表示指定颜色所处的位置，取值范围为[0,1.0]，0表示需要设置渐变色的容器的开始处，1.0表示容器的结尾处。
+  repeating?: boolean // 是否重复 默认false
+})
+```
+示例：
+```ts
+Row(){}.height(10).width('100%')
+.linearGradient({ 
+  angle: 90,
+  repeating: false,
+  colors: [[0x1677FF, 0], [0xFFFFFF, 1]]
+})
+```
+
+
 
 # <font color=orange>单位</font>
 ## vp
