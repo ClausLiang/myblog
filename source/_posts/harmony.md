@@ -316,6 +316,17 @@ List() {
   color: '#ffe9f0f0'
 })
 ```
+### 事件
+列表滑动时触发。触发该事件的条件：列表初始化时会触发一次，List`显示区域内`第一个子组件的索引值或后一个子组件的索引值有变化时会触发。
+滚动时，就能拿到显示区域内的开始和结束的节点的索引。
+```ts
+.onScrollIndex((start,end)=>{
+  // 判断list是不是滚动到了顶部
+  this.isTop = start === 0
+  // 判断list是不是滚动到了底部
+  this.isBottom = end === this.viewModel.totalCount() - 1
+})
+```
 ## Grid GridItem
 ```ts
 Grid(){
