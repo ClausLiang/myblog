@@ -221,6 +221,12 @@ Text(string).fontSize(24)
 ```
 Span只能作为Text组件的子组件显示文本内容
 24等效24fp，fp见下文单位
+
+### 超长处理
+```ts
+.textOverflow({ overflow: TextOverflow.Ellipsis })
+.maxLines(1)
+```
 ## TextInput TextArea
 ```ts
 TextInput().type(InputType.Normal).maxLength(30)
@@ -558,6 +564,7 @@ let dialog = new CustomDialogController({
   builder: menu2(),
   offset: {dx: dx, dy: dy}, // 弹窗位置偏移
   customStyle: true, // 是否自定义弹窗样式，必须的
+  autoCancel: true, // 是否允许点击遮罩层退出，默认true
 })
 dialog.open()
 
