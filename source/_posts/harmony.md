@@ -68,6 +68,19 @@ struct TotalView{
 `@StorageProp`
 当appstorage中的某个属性值被修改，可以将值传递过来。
 
+`@Provide` `@Consume`
+与后代组件双向同步，摆脱参数传递机制的束缚，实现跨层级传递。
+@Provide和@Consume可以通过相同的变量名或者相同的变量别名绑定，变量类型必须相同。
+```ts
+// 通过相同的变量名绑定
+@Provide a: number = 0;
+@Consume a: number;
+
+// 通过相同的变量别名绑定
+@Provide('a') b: number = 0;
+@Consume('a') c: number;
+```
+
 
 ------ 其他 ------
 `@CustomDialog`
@@ -563,12 +576,12 @@ AlertDialog.show({
 let dialog = new CustomDialogController({
   builder: menu2(),
   offset: {dx: dx, dy: dy}, // 弹窗位置偏移
-  customStyle: true, // 是否自定义弹窗样式，必须的
+  customStyle: true, // 是否自定义弹窗样式，默认false
   autoCancel: true, // 是否允许点击遮罩层退出，默认true
 })
 dialog.open()
 
-// 定义弹窗结构
+// 定义弹窗结构 注意要写在struct外面，因为它自己就是个struct
 @CustomDialog
 struct menu2{
   dialogController: CustomDialogController // 必须要的
