@@ -1,5 +1,5 @@
 ---
-title: arkts入门 鸿蒙入门
+title: arkts入门 鸿蒙入门（鸿蒙一）
 date: 2024-04-22 09:00:00
 tags: harmony
 categories: harmony
@@ -600,50 +600,7 @@ struct menu2{
 }
 ```
 
-# <font color=orange>状态管理</font>
-## LocalStorage页面级UI状态存储
-## AppStorage应用全局的UI状态存储
-### 存取
-SetOrCreate
-Get
-```ts
-AppStorage.SetOrCreate('simpleProp', 121);
-let value: number = AppStorage.Get('PropA'); // 47
-```
-### @StorageProp
-当appstorage中的某个属性值被修改，可以将值传递过来，配合@watch监听可以修改其他值
-```ts
-@StorageProp(CACHE_USER_INFO) @Watch('onLoginChange') userInfo:string = ''
-
-onLoginChange() {
-  this.nickName = JSON.parse(this.userInfo).nickName
-}
-```
-## PersistentStorage持久化存储UI状态
-LocalStorage和AppStorage都是运行时的内存，但是在应用退出再次启动后，依然能保存选定的结果，是应用开发中十分常见的现象，这就需要用到PersistentStorage。
-## Environment设备环境查询
-Environment的所有属性都是不可变的（即应用不可写入），所有的属性都是简单类型。
-
-# <font color=orange>数据持久化</font>
-## 用户首选项Preferences
-首选项持久化功能的相关接口大部分为异步接口，异步接口均有callback和Promise两种返回形式。
-```ts
-import dataPreferences from '@ohos.data.preferences';
-// 获取preference对象实例
-preference = await dataPreferences.getPreferences(context, 'preference1');
-// 存储
-await preference.put('key', 'value');
-// 必须持久化，才会真正存进去
-await preference.flush();
-// 读取
-await preference.get('key', 'defaultValue');
-```
-## 键值型数据库KV-Store
-## 关系型数据库RelationalStore
-
-
-
 # <font color=orange>项目情况</font>
 ## 页面的分层思想
-通常web前端的面向对象的思想比较薄弱。所以刚开始阅读项目，不太理解同事杰哥搭建的鸿蒙项目架子，杰说app的页面要分层，每个新建的页面都是继承自封装的一个基础页面。基础页面中有一些基础能力，这样就不必在每个页面中都写。
-而web页面不存在分层的思想，每个页面都是独立的，公共的能力可以封装公共组件，在每个页面中引入即可。页面之间相互独立，不存在都继承自一个基础页面。比较扁平。
+app的页面要分层，每个新建的页面都是继承自封装的一个基础页面。基础页面中有一些基础能力，这样就不必在每个页面中都写。
+而通常web页面不存在分层的思想，每个页面都是独立的，公共的能力可以封装公共组件，在每个页面中引入即可。页面之间相互独立，不存在都继承自一个基础页面。比较扁平。
