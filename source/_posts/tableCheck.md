@@ -8,7 +8,7 @@ categories: vue
 搜索出来的数据勾选或取消勾选，当重新搜索或重置搜索时，勾选不会受影响。
 
 这就需要做一些特殊操作，不能直接把selectedRowKeys赋值给`选中的keys`，具体应该怎么处理，请看下文。
-![图片](https://liangyonggang.com/imgasset/tableCheck-23-11-16.png)
+![图片](/images/tableCheck-23-11-16.png)
 
 ```html
 <a-table

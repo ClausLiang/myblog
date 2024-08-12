@@ -34,7 +34,7 @@ HTML 的 drag & drop 使用了“DOM Event”和从“Mouse Event”继承而来
 |drop|	ondrop|	当拖动元素在可释放目标元素上释放时	|放置|
 
 各个事件的时机可以用下面这个图简单表示：
-![img](http://liangyonggang.com/imgasset/drag-2024-1-4.png)
+![img](/images/drag-2024-1-4.png)
 # DataTransfer
 在上述的事件类型中，不难发现，放置元素和拖动元素分别绑定了自己的事件，可如何将拖拽元素和放置元素建立联系以及传递数据？
 这就涉及到 DataTransfer 对象：

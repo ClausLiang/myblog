@@ -28,7 +28,7 @@ service jenkins stop # 停止
 ```
 启动以后报个错：Job for jenkins.service failed because a timeout was exceeded.
 浏览器访问Jenkins提示如下
-![jenkinerror](http://liangyonggang.com/img/jenkins_error_2022-8-25.png)
+![jenkinerror](/images/jenkins_error_2022-8-25.png)
 
 ### 因为访问官网的源太慢。我们需要换一个源，不使用官网的源
 查找文件 find / -name *.UpdateCenter.xml，结果是 /var/lib/jenkins/hudson.model.UpdateCenter.xml
