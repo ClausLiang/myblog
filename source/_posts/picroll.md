@@ -6,7 +6,7 @@ categories: h5
 ---
 
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/676822c95618444a863e06f46780897d~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/pic-roll-2021-11-16.png)
 适用于内容超出展示范围，出现滚动条，但是不拖动滚动条而是拖内容让其移动的场景。利用了dom的scrollTo方法
 ## dom
 ```html

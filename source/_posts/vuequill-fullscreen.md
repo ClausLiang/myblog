@@ -7,7 +7,7 @@ categories: vue
 ---
 
 
-![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6031c46c74c34efa9347bd679002a101~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/vue-quill-2021-12-13.png)
 # 用自定义指令给vue-quill-editor添加一个全屏的功能
 ## 思路：
 ### 1.点击全屏按钮修改quill-editor的样式，使其全屏

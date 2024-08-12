@@ -7,7 +7,7 @@ categories: h5
 
 # 用在官网中的多张图片无限滚动播放的效果
 
-![BrowserPreview_tmp.gif](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54196bb14ee24ffabeeda6f6928fb211~tplv-k3u1fbpfcp-watermark.image?)
+![BrowserPreview_tmp.gif](/images/pic-roll-infinity-2021-11-15.gif)
 ## dom结构
 要注意的是wrapper代表的展示部分，宽度1200px（根据设计来），inner是多张图片的实际宽度，图片要多来一份，因为图片是往左一直移动的。当第6张图片也移动出屏幕时后面要接上第一张图片，才能有无限循环的效果。
 ```html

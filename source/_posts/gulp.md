@@ -31,7 +31,7 @@ npm install --save-dev gulp
 ### 创建gulpfile.js
 ### 项目结构
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7987178f34474862905b6dd3b4a0c200~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/gulp-2022-2-22.png)
 
 ## 编写gulpfile
 gulp4.0语法和之前的有些不同。

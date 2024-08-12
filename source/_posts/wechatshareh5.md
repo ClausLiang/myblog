@@ -6,9 +6,9 @@ categories: h5
 ---
 
 以下两图一个是默认的分享样式，一个是自定义的分享样式
-![morende.jpg](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b246c2e64294ea98d3727ea43e1fe38~tplv-k3u1fbpfcp-watermark.image)
+![morende.jpg](/images/wechatshare-2021-7-6.png)
 
-![zidingyide.jpg](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7273e7f7865341c18b9c7f82ce03b444~tplv-k3u1fbpfcp-watermark.image)
+![zidingyide.jpg](/images/wechatshare2-2021-7-6.png)
 >**在微信环境中分享一个H5，分享出来的卡片默认是没有文案和图标的。若想添加文案和图标需要借助微信的js-sdk**
 ## 1.公众号的设置
 首先得有一个公众号，这个是前提。微信内分享的这个H5页面可以和公众号没有关系，但是自定义图标的这个功能相当于借助了公众号的能力。

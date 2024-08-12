@@ -6,7 +6,7 @@ categories: h5
 ---
 
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d5c667c77b29469ab320513a75172a05~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/turn-table-2021-11-16.png)
 
 点击按钮调接口，当返回奖品index时，使转盘转出相应的角度。动效是利用了transition过渡动画。
 当奖品是固定的时候，就少了绘制奖品转盘的步骤。否则得绘制奖品转盘。

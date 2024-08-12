@@ -34,7 +34,7 @@ touch ~/.zshrc
 ```
 *小插曲：发现自己的终端打开还是默认用的bash，但是终端中有个提示让升级到zsh。好吧，执行一下命令升级，完了再次打开终端就是这个样子的了。*
 
-![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0138a6097ba44d58913ed56de26e771f~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/nvm-2022-2-13.png)
 
 拷贝上面export...的代码到.zshrc中，然后执行一下 `source ~/.zshrc` （这个source命令是让代码生效。）
 

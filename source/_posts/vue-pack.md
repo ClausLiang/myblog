@@ -34,9 +34,10 @@ module.exports = {
 npm run build --report
 ```
 
-![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/674f6c2118ff41d589b213427477b46a~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/vue-pack-2022-4-24.png)
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf15e7ab1cdf452aa1246ef8343dca25~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/vue-pack2-2022-4-24.png)
+
 从图中可以看到打出的每个js体积有多大，每个js都是由什么依赖组成的，搞清楚是什么占体积后就可以对症下药了。好家伙，一个chunk-vendors.js 1.45M，其中element-plus 占六七百k，chunk-vendors过大就会导致首屏加载很慢。我准备先把element-plus引入方式改为cdn引入的形式来优化一下。
 ## 2.cdn 引入 element-plus
 ```js

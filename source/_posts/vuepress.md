@@ -47,11 +47,12 @@ module.exports = {
 ```
 ### TypeError: Object(...) is not a function
 
-![初步判断是vue版本的问题报的错.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f9b8ef2400fd4a2fa01b4f84e1b5e1f3~tplv-k3u1fbpfcp-watermark.image?)
+![初步判断是vue版本的问题报的错.png](/images/vuepress1-2022-1-4.png)
+
 这个错一开始很懵，不知道是怎么回事。后来发现是vue版本的问题，就是vuepress的稳定版1.x引用的vue是2.x版本，我引入了一个vue3搭建的组件库，就导致了这个报错。vue2和vue3不互相兼容。
 ### cannot find moduule 'core-js/library/fn/object/assign'
 
-![element和vuepress的core-js版本不一致导致的报错.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/57815bf384214bf09050784a7bc9b0b5~tplv-k3u1fbpfcp-watermark.image?)
+![element和vuepress的core-js版本不一致导致的报错.png](/images/vuepress2-2022-1-4.png)
 在vuepress的项目中使用element方法：创建enhanceApp.js
 ```js
 import ElementUI from 'element-ui';
@@ -87,6 +88,6 @@ module.exports = {
 ```
 部署目录是docs/.vuepress/dist
 
-![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f3122e389964844b83651bbe846c877~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/vuepress3-2022-1-4.png)
 ### 3.效果展示
 [https://clausliang.gitee.io/claus-ui-docs/](https://clausliang.gitee.io/claus-ui-docs/)

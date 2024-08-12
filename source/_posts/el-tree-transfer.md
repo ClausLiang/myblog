@@ -8,7 +8,7 @@ categories: vue
 ---
 
 
-![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/037655e50a224a6ab8d0d3506b14b0fd~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/transfer-2022-02-18.png)
 项目中有个需求是树形穿梭框，element的穿梭框又不支持，所以得想办法。看到一个大佬改造el-transfer的方案，受到很多启发。记录一下自己改造的过程。
 ### 1.拷贝el-transfer的源码放到项目中
 >我用的element的版本是2.15.7（不同版本的源码可能不一样），vue的版本是2.6.11。
@@ -59,7 +59,7 @@ export default {
 
 ```
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c30d93c34776462c856a0e1f7a5e4702~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](/images/transfer2-2022-02-18.png)
 ### 2.准备改造el-transfer的源码
 阅读代码发现index.vue的dom由三部分组成，左边的panel、中间的操作按钮，右边的panel。
 
