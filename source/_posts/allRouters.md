@@ -46,7 +46,7 @@ userStore.GENERATE_ROUTES()方法内，调用接口请求用户的菜单权限�
 ```
 
 # 项目中加了顶部切换体系，不同体系展示不同权限菜单的功能
-![图片](https://liangyonggang.com/imgasset/allRouters-2023-11-17.png)
+![图片](/images/allRouters-2023-11-17.png)
 
 按照需求，我们项目的实现方式如下：
 
