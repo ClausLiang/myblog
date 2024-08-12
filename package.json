@@ -11,7 +11,7 @@
     "fabu": "hexo clean && hexo generate && ssh root@121.36.105.57 \"rm -rf /root/blog\" && scp -r ./blog root@121.36.105.57:/root"
   },
   "hexo": {
-    "version": "7.0.0"
+    "version": "7.3.0"
   },
   "dependencies": {
     "hexo": "^7.1.1",
@@ -21,9 +21,9 @@
     "hexo-generator-search": "^2.4.3",
     "hexo-generator-tag": "^2.0.0",
     "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^6.3.0",
+    "hexo-renderer-marked": "^6.2.0",
     "hexo-renderer-pug": "^3.0.0",
-    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-wordcount": "^6.0.1"
