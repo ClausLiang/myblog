@@ -1,7 +1,7 @@
 ---
 title: 关于我
 date: 2022-08-31 15:11:55
-top_img: http://liangyonggang.com/img/bg1.jpg
+top_img: /img/bg1.jpg
 ---
 
 我是一个前端工程师，一个IT男，程序猿。
