@@ -4,7 +4,7 @@ date: 2024-08-08 10:09:42
 tags: harmony
 categories: harmony
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # <font color=orange>状态管理</font>
 `LocalStorage`

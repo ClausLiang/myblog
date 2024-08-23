@@ -4,7 +4,7 @@ date: 2019-05-21 00:37:10
 tags: 基础
 categories: 基础
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 在es6中，promise终于成为了原生对象，可以直接使用。<br>
 promise是异步编程的一种解决方案。解决了异步回调多层嵌套的问题。<br>

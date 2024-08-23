@@ -4,7 +4,7 @@ date: 2023-02-16 00:04:59
 tags: typescript
 categories: 进阶
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # ts的准备工作
 

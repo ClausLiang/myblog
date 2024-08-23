@@ -4,7 +4,8 @@ date: 2024-08-08 13:52:42
 tags: harmony
 categories: harmony
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
+
 
 # <font color=orange>Ability Kit 简介</font>
 Ability Kit（程序框架服务）提供了应用程序开发和运行的`应用模型`，是系统为开发者提供的应用程序所需能力的抽象提炼，它提供了应用程序必备的组件和运行机制。
@@ -38,3 +39,5 @@ Ability Kit（程序框架服务）提供了应用程序开发和运行的`应�
 在该模型中，由于提供了AbilityStage、WindowStage等类作为应用组件和Window窗口的“舞台”，因此称这种应用模型为Stage模型。
 
 # <font color=orange>Stage模型开发</font>
+![图片](/images/stage-24-8-23.png)
+

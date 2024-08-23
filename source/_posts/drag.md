@@ -4,7 +4,7 @@ date: 2024-01-04 09:14:23
 tags: h5
 categories: h5
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # 拖拽的实现核心有4点
 ## 给需要拖拽的元素加上`draggable=true`属性

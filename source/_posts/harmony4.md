@@ -4,7 +4,7 @@ date: 2024-08-08 15:06:54
 tags: harmony
 categories: harmony
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # `HAP(Harmony Ability Package)`
 一个HAP文件包含应用的所有内容，其文件后缀名为.hap。HAP包是由代码、资源、三方库及应用配置文件等打包生成的模块包。其主要分为两种类型：entry和feature。

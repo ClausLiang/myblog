@@ -5,7 +5,7 @@ tags:
     - 面试
 categories: 进阶
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # HTML CSS
 ## `css垂直居中`

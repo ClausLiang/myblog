@@ -5,7 +5,7 @@ tags: vue
 categories: vue
 sticky: true
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 > 本文前提 --- 特别熟悉vue2，有一定的基础。对比一下vue3有哪些新的语法，以便可以快速上手vue3
 
 # <font color=red>基础</font>

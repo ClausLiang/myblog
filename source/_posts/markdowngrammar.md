@@ -4,7 +4,7 @@ date: 2024-01-04 14:22:15
 tags: markdown
 categories: 基础
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # 标题(一级标题对应h1)
 后面得有个空格

@@ -6,7 +6,7 @@ tags:
     - vue
 categories: 进阶
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 # 为什么要创建组件库
 1.大量重复或相似的业务代码重复code浪费了时间人力，如果把这些业务代码封装成组件则可以解决如上问题。

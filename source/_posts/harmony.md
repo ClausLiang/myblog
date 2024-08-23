@@ -4,7 +4,7 @@ date: 2024-04-22 09:00:00
 tags: harmony
 categories: harmony
 ---
-<script type="text/javascript" src="/custom.js"></script>
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
 > 写在前面：本人是一个web工程师，现在开始学习鸿蒙，所以可能会带有一些web的惯性思维，和从安卓开发转到鸿蒙的开发思维习惯会有差异。这是在沟通中发现的。安卓能转鸿蒙，web也能转鸿蒙，各有各的优势。本笔记会持续更新...
 # <font color=orange>认识arkTS</font>
