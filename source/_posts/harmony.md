@@ -288,6 +288,10 @@ Row(){}.height(10).width('100%')
   colors: [[0x1677FF, 0], [0xFFFFFF, 1]]
 })
 ```
+## 边框
+```ts
+.border({width: {left: 1}, color: '#1677FF'}) // 只设置左边框
+```
 
 
 

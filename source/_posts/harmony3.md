@@ -38,7 +38,7 @@ Ability Kit（程序框架服务）提供了应用程序开发和运行的`应�
 从API 9开始新增的模型，是目前主推且会长期演进的模型。
 在该模型中，由于提供了AbilityStage、WindowStage等类作为应用组件和Window窗口的“舞台”，因此称这种应用模型为Stage模型。
 
-# <font color=orange>Stage模型开发</font>
+# <font color=orange>Stage模型开发概述</font>
 ![图片](/images/stage-24-8-23.png)
 
 ## AbilityStage
@@ -55,4 +55,57 @@ ExtensionAbility组件是一种面向特定场景的应用组件。开发者并�
 
 ## Context
 在Stage模型上，Context及其派生类向开发者提供在运行期可以调用的各种资源和能力。UIAbility组件和各种ExtensionAbility组件的派生类都有各自不同的Context类，他们都继承自基类Context，但是各自又根据所属组件，提供不同的能力。
+
+# <font color=orange>Stage模型应用组件</font>
+## 应用/组件级配置
+### 应用包名配置
+AppScope目录下的app.json5里的bundleName字段
+### 图标和标签
+AppScope目录下的app.json5里的icon和label字段
+### 版本声明
+AppScope目录下的app.json5里的versionCode和versionName字段
+
+## UIAbility组件
+
+### 概念
+UIAbility组件是Stage模型的核心组件，它包含UI，因此属于UI类组件。UIAbility组件通过WindowStage类来管理窗口，WindowStage类中包含一个主窗口，该窗口为ArkUI提供了绘制区域。UIAbility组件的派生类通过Context类提供的能力，实现与UI的交互。
+
+### UIAbility的生命周期
+`Create`
+`WindowStageCreate`
+`Foreground`
+`Background`
+`WindowStageDestroy`
+`Destroy`
+
+### UIAbility的启动模式
+单实例模式(singleton)
+多实例模式(multiton)
+指定实例模式(specified)
+
+### UIAbility组件基本用法
+指定UIAbility的启动页面
+获取UIAbility组件的上下文信息
+
+### UIAbility组件与UI的数据同步
+1.使用EventHub进行数据通信
+2.使用AppStorage/LocalStorage进行数据同步
+
+### 启动应用内的UIAbility组件
+UIAbility是系统调度的最小单元。在设备内的功能模块之间跳转时，会涉及到启动特定的UIAbility，包括应用内的其他UIAbility、或者其他应用的UIAbility（例如启动三方支付UIAbility）。
+
+## ExtensionAbility组件
+ExtensionAbility组件是基于特定场景（例如服务卡片、输入法等）提供的应用组件，以便满足更多的使用场景。
+
+
+## AbilityStage组件容器
+
+## 应用上下文Context
+
+## 信息传递载体Want
+
+# <font color=orange>应用间跳转</font>
+# <font color=orange>进程模型</font>
+# <font color=orange>线程模型</font>
+
 
