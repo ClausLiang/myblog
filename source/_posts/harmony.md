@@ -422,7 +422,7 @@ RelativeContainer() {
 ```
 - RelativeContainer中不声明id属性，会不显示view
 - RelativeContainer中两个子view不能相互依赖，显示位置
-- RelativeContainer中子view如果设置了依赖（alignRules），必须设置宽和高，否则不显示
+- ~~RelativeContainer中子view如果设置了依赖（alignRules），必须设置宽和高，否则不显示~~ 最新语法已无此要求
 
 ## Tabs
 ```ts
