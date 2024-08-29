@@ -160,62 +160,6 @@ onBackPress(){
 ### 生命周期顺序
 aboutToAppear -> build -> onPageShow -> onBackPress -> onPageHide -> aboutToDisappear
 
-# <font color=orange>应用程序框架</font>
-## 应用程序入口 UIAbility
-> 参考：https://developer.huawei.com/consumer/cn/training/course/slightMooc/C101667310940295021
-
-### 概述
-
-创建一个工程，例如命名为MyApplication。
-
-1.在src/main/ets/entryability目录下，初始会生成一个UIAbility文件EntryAbility.ts。可以在EntryAbility.ts文件中根据业务需要实现UIAbility的生命周期回调内容。
-
-2.在src/main/ets/pages目录下，会生成一个Index页面。这也是基于UIAbility实现的应用的入口页面。可以在Index页面中根据业务需要实现入口页面的功能。
-
-3.在src/main/ets/pages目录下，右键New->Page，新建一个Second页面，用于实现页面间的跳转和数据传递。
-### UIAbility内页面跳转和数据传递
-#### 页面跳转和参数接收
-```ts
-import router from '@ohos.router';
-```
-API9及以上，router.pushUrl()方法新增了mode参数，可以将mode参数配置为router.RouterMode.Single单实例模式和router.RouterMode.Standard多实例模式。
-mode默认是standard
-在单实例模式下：如果目标页面的url在页面栈中已经存在同url页面，离栈顶最近同url页面会被移动到栈顶，移动后的页面为新建页，原来的页面仍然存在栈中，页面栈的元素数量不变；如果目标页面的url在页面栈中不存在同url页面，按多实例模式跳转，页面栈的元素数量会加1。
-```ts
-router.pushUrl({
-  url: 'pages/Second',
-  params: {
-    src: 'Index页面传来的数据',
-  }
-}, router.RouterMode.Single)
-```
-
-`接收参数`
-通过调用router.getParams()方法获取Index页面传递过来的自定义参数
-```ts
-import router from '@ohos.router';
-
-@Entry
-@Component
-struct Second {
-  @State src: string = (router.getParams() as Record<string, string>)['src'];
-  // 页面刷新展示
-  // ...
-}
-```
-#### 页面返回和参数接收
-### UIAbility的生命周期
-`Create`
-`WindowStageCreate`
-`Foreground`
-`Background`
-`WindowStageDestroy`
-`Destroy`
-
-### UIAbility的启动模式
-单实例模式
-多实例模式
-指定实例模式
 
 # <font color=orange>常用UI组件（基础组件）</font>
 > 鸿蒙app的页面，跟web的标签页面可以说完全不同，它的页面由arkUI提供的鸿蒙原生组件组成。
