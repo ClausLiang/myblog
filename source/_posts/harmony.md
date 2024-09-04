@@ -526,6 +526,7 @@ let dialog = new CustomDialogController({
   offset: {dx: dx, dy: dy}, // 弹窗位置偏移
   customStyle: true, // 是否自定义弹窗样式，默认false
   autoCancel: true, // 是否允许点击遮罩层退出，默认true
+  alignment: DialogAlignment.Bottom, // DialogAlignment.CenterEnd //弹窗在竖直方向的对齐方式
 })
 dialog.open()
 
