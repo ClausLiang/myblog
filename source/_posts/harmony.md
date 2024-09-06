@@ -459,7 +459,7 @@ promptAction.showToast({
 })
 ```
 ```ts
-promptAction.shwoDialog({
+promptAction.showDialog({
   title: '提示',
   message: 'Message Info',
   buttons: [
