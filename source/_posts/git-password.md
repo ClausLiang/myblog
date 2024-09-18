@@ -3,7 +3,7 @@ title: git每次拉代码都需要输密码?
 date: 2020-06-22 17:30:02
 tags:
     - git
-categories: 基础
+categories: git
 ---
 ## sourcetree每次拉代码都需要输密码？
 在.git目录有个config文件，在路径前配置下用户名和密码

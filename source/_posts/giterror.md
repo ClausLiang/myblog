@@ -2,7 +2,7 @@
 title: git推代码报错了
 date: 2023-04-11 17:32:14
 tags: git
-categories: 基础
+categories: git
 ---
 别人往我的分支上合并了代码，我在不清楚的情况下直接提交，并推送，git报错，也无法拉取代码了。错误信息如下
 ```
