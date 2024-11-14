@@ -170,7 +170,7 @@ categories: 进阶
 
 # 2.修改顶部导航，左上角导航链接
 右侧的导航都是在配置文件中配置的，左上角的导航，默认回到`/`，是在主题源码里写的。
-因为我的博客是挂在我的三级域名blog.liangyonggang.com下的，我想点击左上角的时候回到我的二级域名。故需要修改主题源码。
+如果想修改，需找到相关代码。
 源码路径是 themes/butterfly/layout/includes/header/nav.pug
 ```Pug
 nav#nav

@@ -164,5 +164,5 @@ hexo generate
 
 至此一个简单的博客网站就搭建好了，大功告成，当然还有很多可以优化的地方后面慢慢研究。
 
-[我的博客网站](http://blog.liangyonggang.com)
+[我的博客网站](http://liangyonggang.com/myblog)
 
