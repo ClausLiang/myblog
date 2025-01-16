@@ -1,9 +1,7 @@
 ---
 title: 用vuepress搭建一个文档项目的踩坑记录
 date: 2022-01-04 14:25:39
-tags:
-    - vuepress
-    - vue
+tags: vue
 categories: 进阶
 ---
 

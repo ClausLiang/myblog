@@ -1,8 +1,7 @@
 ---
 title: github推送代码由于网络原因经常失败的解决办法
 date: 2023-08-31 11:41:22
-tags:
-    - git
+tags: git
 categories: git
 ---
 > github是全球最大的代码托管平台，但是由于墙的原因，在国内访问经常会有问题，虽然国内也有平替比如gitee，但是说实话比github还是差点意思。

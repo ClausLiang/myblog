@@ -1,9 +1,7 @@
 ---
 title: vue项目打包优化---首屏优化
 date: 2022-04-24 16:48:21
-tags:
-    - vue
-    - webpack
+tags: webpack
 categories: 进阶
 ---
 > 目标：打出的包体积更小！

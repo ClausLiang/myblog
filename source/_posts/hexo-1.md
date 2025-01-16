@@ -1,8 +1,7 @@
 ---
 title: hexo入门--用hexo搭建一个自己的博客网站真香
 date: 2022-08-31 21:54:57
-tags:
-    - hexo
+tags: hexo
 categories: 进阶
 ---
 > 作为一个前端一开始想不用框架，自己开发搭建一个博客网站，后来发现hexo真香。

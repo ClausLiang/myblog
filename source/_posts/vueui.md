@@ -1,9 +1,7 @@
 ---
 title: 创建一个vue的UI组件库
 date: 2021-11-23 17:35:00
-tags:
-    - ui库
-    - vue
+tags: vue
 categories: 进阶
 ---
 <script type="text/javascript" src="/myblog/custom.js"></script>

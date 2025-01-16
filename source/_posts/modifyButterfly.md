@@ -1,8 +1,7 @@
 ---
 title: 修改Butterfly主题的一些源码，定制样式
 date: 2023-04-18 17:06:42
-tags:
-    - hexo
+tags: hexo
 categories: 进阶
 ---
 修改了一些butterfly主题的源码

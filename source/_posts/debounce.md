@@ -1,8 +1,7 @@
 ---
 title: js消抖（debounce）与节流（throttle）
 date: 2020-07-15 20:59:13
-tags:
-    - 消抖节流
+tags: 消抖节流
 categories: 基础
 ---
 

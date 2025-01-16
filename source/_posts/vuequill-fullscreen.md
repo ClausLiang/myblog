@@ -1,8 +1,7 @@
 ---
 title: vue-quill-editor添加一个全屏功能
 date: 2021-12-13 17:02:43
-tags:
-    - vue
+tags: vue
 categories: vue
 ---
 

@@ -1,8 +1,7 @@
 ---
 title: vscode配置解读
 date: 2023-01-29 23:08:53
-tags:
-    - vscode
+tags: vscode
 categories: 基础
 ---
 ```json

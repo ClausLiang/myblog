@@ -1,8 +1,7 @@
 ---
 title: qiankun通信方式及子应用引用百度地图的修改
 date: 2022-01-04 17:05:44
-tags: 
-    - 微前端
+tags: 微前端
 categories: 进阶
 ---
 

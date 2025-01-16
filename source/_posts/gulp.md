@@ -1,8 +1,7 @@
 ---
 title: 用gulp4.0搭建一个项目
 date: 2022-02-22 16:58:36
-tags:
-    - gulp
+tags: gulp
 categories: 进阶
 ---
 
