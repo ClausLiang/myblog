@@ -5,6 +5,7 @@ tags:
 ---
 a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 art冠词
 # a
+## 1-64
 |序号|单词|含义|词性|例句|
 |:-:|:-:|:-:|:-:|:-:|
 1|a|一个|art
@@ -60,3 +61,37 @@ a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 
 51|achieve|vt实现 vi实现|vt vi|
 52|acid|n酸 adj酸的尖刻的|n adj|
 53|acknowledge|承认 告知 答谢|vt|
+54|acquaint|使认识 使了解 使熟悉|vt|
+55|acquaintance|认识 了解 熟人|n|
+56|acquire|获得 学到(知识) 养成(习惯)|v|
+57|acquisition|获取 获得|n|
+58|acre|英亩 田地 地产|n
+59|acrobat|特技演员，杂技演员|n
+60|across|穿过|prep adv
+61|act|v表演 举动 n行为 法令|v n|
+62|action|行动 动作 作用|n|
+63|activate|启动 激活 驱动|vt|
+64|active|活跃的 敏捷的 积极的|adj|
+
+## 65-128
+|序号|单词|含义|词性|例句|
+|:-:|:-:|:-:|:-:|:-:|
+65|activity|活动 活力 能动性|n
+66|actor|男演员 行动者|n
+67|actress|女演员|n
+68|actual|实际的 现实的 目前的|adj
+69|acute|剧烈的 敏锐的 严重的|adj|
+70|adapt|vt使适应 改编 vi适应|vt vi|
+71|add|vt添加 vi增加|vt vi|
+72|addict|v使沉溺 使上瘾 n沉溺于不良嗜好的人|v n
+73|addition|加 加法 附加部分|n|
+74|additional|附加的 额外的|adj|
+75|address|n地址 v向...致辞 在信封上写名字|n|
+76|adequate|适当的 胜任的 充足的|adj|
+77|adhere|粘着 坚持 遵守 追随|vi|
+78|adjacent|邻接的 毗连的|adj|
+79|adjective|形容词 形容词的|n adj
+80|adjoin|临近 靠近 贴近|v
+81|adjust|调节 调整|vt vi
+
+
