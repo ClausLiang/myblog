@@ -3,7 +3,7 @@ title: postgraduate words
 date: 2025-05-19 09:24:12
 tags:
 ---
-a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 art冠词
+a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 art冠词 conj连词
 # a
 ## 1-64 第1/43页
 |序号|单词|含义|词性|例句|
@@ -144,6 +144,70 @@ a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 
 ## 129-192 第2/43页
 |序号|单词|含义|词性|例句|
 |:-:|:-:|:-:|:-:|:-:|
+129|agreeable|符合的 一致的 欣然同意的|a
+130|agreement|同意 协议 协定|n
+131|agriculture|农业|n
+132|ahead|在前面 提前|adv
+133|aid|n救助 救护 vi援助|n vi
+134|aim|n目标 瞄准 vi目的在于 vt把...瞄准|n vi vt
+135|air|n空气 天空 vt使...通风 晾干|n vt
+136|air-conditioning|空调|n
+137|aircraft|飞机 飞行器|n
+138|airline|n航线 a航线的|n a
+139|airport|n机场|n
+140|aisle|过道|n
+141|alarm|n警告 vt惊吓|n vt
+142|album|相册 唱片|n
+143|alcohol|n酒精|n
+144|alert|a机警的 vt使...警觉|a vt
+145|alien|n外星人 外国人 a外国的|n a|
+146|alike|a相似的 相像的 adv一样地|a adv
+147|alive|a活着的 活跃的|a|
+148|all|a全部的 adv全部地|a adv
+149|allege|断言 宣称 指控|v
+150|alleviate|减轻 缓和 缓解|v
+151|alliance|同盟 联盟 联姻|n
+152|allocate|分配 分派 拨给|v
+153|allow|允许 给予|vt
+154|allowance|补贴 津贴 折扣 允许|n
+155|alloy|n合金 vt将...铸成合金|n vt
+156|ally|n同盟者 同盟国 vt使结盟|n vt
+157|almost|几乎 差不多|adv
+158|alone|a单独的 adv单独地|a adv
+159|along|adv向前 一同 prep沿着|adv prep
+160|alongside|adv在旁边 prep与...一起 在...旁边|adv prep
+161|aloud|大声地|adv
+162|alphabet|字母表 初步 入门|n
+163|already|adv已经|adv
+164|also|adv也|adv
+165|alter|vt修改 vi改变|vt vi
+166|alternate|a交替的 v交替 轮流|a v
+167|alternative|a二选一的 可供替代的 n二选一 取舍|a n
+168|although|尽管|conj
+169|altitude|高度 海拔|n
+170|altogether|完全 总共 全部地|adv
+171|aluminum|n铝|n
+172|always|adv总是|adv
+173|amateur|n业余的 a业余的|n a
+174|amaze|vt使惊讶 vi惊奇|vt vi
+175|ambassador|n大使|n
+176|ambiguous|adj模糊的 模棱两可的|adj
+177|ambition|n野心 雄心|n
+178|ambitious|adj有雄心的|adj
+179|ambulance|n救护车|n
+180|amend|vt修改|vt
+181|amiable|和蔼可亲的|a
+182|amid|prep在…中间|prep
+183|among|prep在…中|prep
+184|amount|n数量 v共计|n v
+185|ample|充分的 富裕的|a
+186|amplifier|n放大器|n
+187|amplify|v放大 详述|v
+188|amuse|vt使发笑 使消遣|vt
+189|analogue|类似物 相似体|n
+190|analogy|类似 类比|n
+191|analyse|vt分析|vt
+192|analysis|n分析|n
 
 ## 193-256
 |序号|单词|含义|词性|例句|
