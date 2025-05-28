@@ -1,9 +1,9 @@
 ---
-title: postgraduate words
+title: postgraduate words 5500
 date: 2025-05-19 09:24:12
 tags:
 ---
-a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 art冠词 conj连词
+a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 art冠词 conj连词 pron代词
 # a
 ## 1-64 第1/43页
 |序号|单词|含义|词性|例句|
@@ -212,6 +212,28 @@ a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 
 ## 193-256
 |序号|单词|含义|词性|例句|
 |:-:|:-:|:-:|:-:|:-:|
+193|analytic|分析的|a
+194|ancestor|n祖先|n
+195|anchor|n锚点 危难时可靠的人或物 v用锚泊船|n
+196|ancient|a古代的|a
+197|and|和|conj
+198|anecdote|n轶事|n
+199|angel|n天使|n
+200|anger|n愤怒 vt激怒 vi发怒|n vt vi
+201|angle|n角 角度 v钓鱼|n v
+202|angry|a愤怒的|a
+203|anguish|极度痛苦，烦恼|n
+204|animal|n动物 a动物的|n a
+205|ankle|n踝|n
+206|anniversary|n周年|n
+207|announce|vt宣告 广播|vt
+208|annoy|vt使生气 打扰 vi招人讨厌|vt vi
+209|annual|a每年的 一年生的 n年刊 一年生植物|a n
+210|anonymous|a匿名的|a
+211|another|a另一个的 pron另一个|a pron
+212|answer|v回答 n答案|v n
+213|ant|n蚂蚁|n
+214|antenna|n天线|n
 
 ## 257-320 第3/43页
 |序号|单词|含义|词性|例句|
