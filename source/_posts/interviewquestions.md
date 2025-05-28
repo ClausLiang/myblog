@@ -10,7 +10,7 @@ categories: 进阶
 ## `css垂直居中`
 1. vertical-align: middle; display: inline-block(前提)
 2. position: absolute; top: 50%; transform: translateY(-50%)
-3. display: flex; 子元素： align-self: center; (align-self可以覆盖父容器align-item的属性)
+3. 父元素：display: flex; 子元素： align-self: center; (align-self可以覆盖父容器align-item的属性)
 
 ## **`响应式布局的实现方式和原理`**
 `响应式布局`就是让网站同时适配不同的手机和分辨率
@@ -33,9 +33,34 @@ categories: 进阶
 .a {color:red} .b{@extend .a;}
 
 ## **`flex:1 是哪几个属性的缩写`**
-flex:1 是 flex: 1 1 auto 的缩写，是三个属性flex-grow flex-shrink flex-basic的缩写
-子元素共有6个属性 order flex-grow flex-shrink flex-basic flex align-item
+flex布局：
+`父容器有6个属性`
+flex-direction
+flex-wrap
+flex-flow 上述两属性的简写
+justify-content 主轴对齐方式
+align-items 副轴对齐方式
+align-content 多根轴线的对齐方式
+`子元素共有6个属性`
+order （排序）数字越小越靠前 默认0
+flex-grow （放大比例）默认0，即如果存在剩余空间也不放大，设置1，有空间就放大
+flex-shrink （缩小比例）默认1，即如果剩余空间不足，大家一起等比缩小，如果设置0，则空间不够也不缩小
+flex-basic（项目占主轴空间）默认auto，如果设置了值，权重高于width/height，会覆盖width/height属性
+flex （上述3个属性的缩写） 默认 0 1 auto，快捷值 auto(1 1 auto)等分放大缩小 none(0 0 auto)不放大不缩小
+align-self（设置与其他项目不同的对齐方式）
+
+**`重点来了`**
+`flex: 1` 等效 flex: 1 1 0% 强行按比例分配空间，忽略内容宽度
+`flex: auto` 等效 flex: 1 1 auto，先根据内容确定基础大小，再分配剩余空间
+举例：
+假设两个元素，内容宽度分别为 100px 和 200px，父容器总宽度为 600px
+flex: 1 两元素各分配300px
+flex: auto 两元素分别分配 250px 350px（分配剩余空间）
+
+
 参考：阮一峰flex布局<https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html>
+
+
 
 ## **`position属性有哪些值`**
 static relative absolute fixed sticky
@@ -197,9 +222,10 @@ bind和其他两个方法的作用也是一致的，只是该方法会返回一�
   对象扩展符 ...
 6.箭头函数。三个特点：不需要关键字function 省略return关键字 继承上下文的this关键字
 7.class
-8.promise proxy
-9.模块化
-10.运算符
+8.promise
+9.`proxy`
+10.模块化
+11.运算符
 扩展运算符...
 可选链?.
 
@@ -477,8 +503,8 @@ transform opacity filter
 
 # VUE
 ## **`组件之间传值`**
-1.父->子：通过属性的方式向子组件传值，子组件通过props接收。
-2.子->父：子组件通过$emit派发事件，父组件通过绑在子组件上的事件来接收数据。
+1.父->子：通过属性的方式向子组件传值，子组件通过props接收。vue3是defineProps，vue2是props。
+2.子->父：子组件通过$emit派发事件，父组件通过绑在子组件上的事件来接收数据。vue3可以通过defineEmits()宏来声明要触发的事件。
 3.非父子通过eventBus来传值：new一个vue实例，在要传值的文件中导入这个实例（也可以main.js全局引入）,bus.$emit派发事件,bus.$on接收。
 4.provide/inject
 `5.vuex：`
@@ -489,10 +515,13 @@ actions: 可以进行异步操作，通过store.dispatch提交action
 modules: 模块化vuex
 
 页面通过this.$store.dispatch提交action(页面通过mapAction提交异步提交事件到action)，action异步请求数据，拿到数据后通过commit提交到mutation，mutation会修改state的值。最后通过getter把对应的数据跑出去，在页面的计算属性中，通过mapGetter来动态获取state的值。
+`6.pinia`
+pinia与vuex的不同：mutation已经被弃用，pinia是扁平结构，更简单。
 
 ## **`生命周期`**
-beforeCreat/created beforeMount/mounted beforeUpdate/undated beforeDestroy/destroy
-beforeUnmount/unmount(vue3)
+vue2四对：beforeCreat/created beforeMount/mounted beforeUpdate/undated beforeDestroy/destroy
+beforeUnmount/unmount(vue3不再是destroy)
+vue新增了setup()生命周期，早于beforeCreate，setup里没有this
 
 `beforeCreate` vue创建前，实例初始化之后，this指向创建的实例，data method均不能访问
 `created` vue创建后，data method初始化导入之后，未挂载dom
@@ -663,7 +692,11 @@ History接口允许操作浏览器曾经在标签页或框架里访问的会话�
 vue中的双向绑定是指：由mvvm框架实现，是view层和model层之间的映射关系。具体就是v-model，是一个语法糖。
 单向数据流是：组件之间传递数据是单向数据流，父组件可以向子组件传递props，但是子组件不能直接修改props，子组件只能通过事件通知父组件进行数据修改。
 
-# 架构方面
+# 项目及架构方面
+
+## **`权限是怎么做的`**
+页面权限：router.beforeEach（路由守卫）里通过router.addRoute动态添加路由实现
+按钮权限：通过权限控制按钮的显示隐藏
 
 ## **`性能优化做过哪些`**
 前端性能优化可以从这几个方面入手：加载优化、执行优化、渲染优化、脚本优化、代码优化
