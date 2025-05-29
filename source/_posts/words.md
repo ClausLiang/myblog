@@ -234,6 +234,48 @@ a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 
 212|answer|v回答 n答案|v n
 213|ant|n蚂蚁|n
 214|antenna|n天线|n
+215|anticipate|预料 期望 抢先|vt
+216|antique|a古式的 n古董|a n
+217|anxiety|挂念 焦虑|n
+218|anxious|焦虑的 担心的|a
+219|any|什么 任何的|a
+220|anybody|pron任意的人|pron
+221|anyhow|无论如何|adv
+222|anyone|pron任意的人|pron
+223|anything|pron任何东西 无论什么东西|pron
+224|anyway|无论如何 不管怎么说|adv
+225|anywhere|任意的地方 无论哪里|adv
+226|apart|adv分离 a分离的|adv a
+227|apartment|n公寓 房间|n
+228|apologise|道歉|v
+229|apology|道歉|n
+230|appal|使惊骇 使恐怖|v
+231|apparatus|器械 机构 组织|n
+232|apparent|表面上的 显然的|a
+233|appeal|vi呼吁 恳请 n呼吁|vi n
+234|appear|出现|vi
+235|appearance|出现|n
+236|appendix|附录 阑尾 盲肠|n
+237|appetite|胃口 食欲 性欲 爱好|n|She went for a long walk to work up an appetite 她为了增加食欲散了很长时间的步
+238|applaud|鼓掌欢迎 赞同|v
+239|applause|鼓掌|n
+240|apple|n苹果|n
+241|appliance|电器 装置 应用|n
+242|applicable|可应用的 适合的|a
+243|application|应用 申请|n
+244|apply|vt应用 实施 vi申请 请求|vt vi
+245|appoint|命令 指定 委派 约定|vt
+246|appointment|约会 任命 委派|n
+247|appraisal|评价 鉴定 评估|n
+248|appreciate|欣赏 赏识 感谢|vt
+249|approach|v接近 靠近 n接近 入门|v n
+250|appropriate|a适合的 vt拨给 挪用|a vt
+251|approval|批准 赞成 同意|n
+252|approve|批准 赞成 同意|vt
+253|approximate|vi接近 a接近的|vi a
+254|April|四月|n
+255|apt|a适合的|a
+256|arbitrary|任意的 主管的 武断的|a|
 
 ## 257-320 第3/43页
 |序号|单词|含义|词性|例句|
