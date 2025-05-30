@@ -280,6 +280,26 @@ a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 
 ## 257-320 第3/43页
 |序号|单词|含义|词性|例句|
 |:-:|:-:|:-:|:-:|:-:|
+257|arch|n拱门 v拱起|n v
+258|architect|建筑师|n
+259|architecture|建筑 建筑学|n
+260|area|区域|n
+261|argue|争论 争辩|vt vi
+262|argument|争论 争辩|n
+263|arise|出现 产生|vt
+264|arithmetic|算术 四则运算|n
+265|arm|n手臂 武器 v武装|n v
+266|army|军队|n
+267|around|adv在...周围 prep在...四周|adv prep
+268|arouse|唤醒 唤起|vt
+269|arrange|安排 布置|v
+270|array|n大量 排列 v列阵 排列|n v
+271|arrest|n逮捕 v逮捕 扣留|n v
+272|arrival|到达|n
+273|arrive|到达|vi
+274|arrogant|傲慢的 自大的|a
+275|arrow|箭|n
+276|art|艺术|n
 
 # b
 ## 321-384
