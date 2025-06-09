@@ -300,6 +300,50 @@ a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 
 274|arrogant|傲慢的 自大的|a
 275|arrow|箭|n
 276|art|艺术|n
+277|artery|动脉 干线|n
+278|article|文章|n
+279|articulate|a善于表达的 有关节相连的 v清楚地讲话|a v
+280|artificial|人工的|a
+281|artist|艺术家|n
+282|artistic|艺术的|a
+283|as|adv同样的 conj当...时，正如 prep像，作为|adv conj prep
+284|ascend|vi升高 vt攀登 登上|vi vt
+285|ascertain|确定 查明|vt
+286|ash|灰|n
+287|ashamed|羞耻的 惭愧的 害臊的|a
+288|ashore|上岸 在岸上|adv
+289|aside|adv在旁边 n旁白|adv n
+290|ask|问|vt
+291|asleep|睡着的|a
+292|aspect|样子 外貌|n
+293|aspire|渴望 追求|vi
+294|assassinate|暗杀|vt
+295|assault|v攻击 侵犯 n攻击|v n
+296|assemble|集合 聚集|vt vi
+297|assembly|集合 会议 装配|n
+298|assert|断言 坚持 主张|vt
+299|assess|评估 征税|vt
+300|asset|资产|n
+301|assign|分配 指定 选定|vt
+302|assignment|分派 任务|n
+303|assimilate|吸收 消化 使同化|vt vi
+304|assist|协助 帮助|vt vi
+305|assistance|协作 援助|n
+306|assistant|n助手 a帮助的 辅助的|n a
+307|associate|vt联想 联合 n伙伴 a联合的|vt n a
+308|association|联盟 社团|n
+309|assume|假定 设想|vt
+310|assumption|假设 预想|n
+311|assurance|保证 担保 确信 信心|n
+312|assure|使确信|vt
+313|astonish|使惊讶 使吃惊|vt
+314|astronaut|宇航员|n
+315|astronomy|天文学|n
+316|at|在...方面|prep
+317|athlete|运动员|n
+318|atmosphere|大气层 空气|n
+319|atom|原子 微粒|n
+320|attach|附加 联系 绑定|vt
 
 # b
 ## 321-384
