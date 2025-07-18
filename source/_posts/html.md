@@ -252,3 +252,35 @@ document.addEventListener('visibilitychange',function(){
 })
 ```
 
+# 动画
+## 过渡动画 transition
+```css
+div{
+  width:100px;
+  height:100px;
+  background:blue;
+  transition:width 2s;
+}
+div:hover{
+  width:300px;
+}
+```
+
+## animation动画
+```css
+// 定义
+@keyframes mymove{
+  0%   {top:0px;}
+  25%  {top:200px;}
+  50%  {top:100px;}
+  75%  {top:200px;}
+  100% {top:0px;}
+}
+// 调用
+.move{
+  animation: mymove 5s infinite
+}
+```
+## svg
+## canvas
+
