@@ -77,15 +77,6 @@ a img span strong em b i input textarea select button
 # 盒模型
 width height padding border margin
 
-# 图片精灵技术 css sprites技术
-将多张背景图放在一张大背景上，通过background-position来找到目标图片的坐标
-优点：减少http请求数，减少图片加载时间
-
-# 隐藏
-1. overflow: hidden
-父元素设置overflow: hidden，子元素超出父元素范围时，子元素会自动隐藏。
-2. display: none; 整体隐藏不占位
-3. visibility: hidden; 整体隐藏，占位
 
 # 定位 position
 1. static: 默认值，元素正常显示，非定位元素，默认值。
@@ -101,10 +92,163 @@ width height padding border margin
 3. right: 浮动元素向右浮动，元素正常显示，但位置会被其他元素所覆盖。
 4. inherit: 继承父元素浮动属性。
 
-# 透明
+## 清除浮动
+```css
+.clearFloat:before,.clearFloat:after{ 
+  content:""; 
+  display:table; 
+  clear:both; 
+  height:0; 
+} 
+```
+# 一些特别的css
+## 隐藏
+1. overflow: hidden
+父元素设置overflow: hidden，子元素超出父元素范围时，子元素会自动隐藏。
+2. display: none; 整体隐藏不占位
+3. visibility: hidden; 整体隐藏，占位
+
+## 透明
 1. opacity: 0.5; 设置元素的透明度，取值范围0-1
 2. background-color: rgba(0,0,0,0.5); 透明度背景色。
 
-# 滤镜
+## 滤镜
 1. filter: blur(1px); 模糊
+
+## 图片精灵技术 css sprites技术
+将多张背景图放在一张大背景上，通过background-position来找到目标图片的坐标
+优点：减少http请求数，减少图片加载时间
+
+## 盒子阴影
+```css
+box-shadow: 2px 2px 6px 2px #333 [inset];
+            //x偏移 y偏移 模糊半径 扩展半径 颜色 投影方式(inset内阴影 默认外阴影)
+box-shadow: 3px 3px 5px #000, -2px -2px 4px rgba(255,255,255,0.5);
+            //多个阴影
+
+```
+## 文字阴影
+```css
+text-shadow: 2px 2px 2px #333;
+             //x偏移 y偏移 模糊半径 颜色
+```
+
+## 背景色渐变
+线性渐变
+```css
+background: linear-gradient(to right, red, yellow, blue);
+            //线性渐变   方向（to right == 90deg）多个颜色值
+```
+径向渐变
+```css
+background: radial-gradient(100px 100px,red, yellow, blue);
+            //径向渐变   圆心坐标  多个颜色值
+```
+
+
+## css控制文字，超过部分显示省略号
+单行文本
+```css
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+```
+
+多行文本（适用于WebKit浏览器及移动端） 
+```css
+overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+```
+
+## 富文本框
+1.contenteditable='true' 把div等变成可编辑的区域
+2.getSelection().toString() 获取选中的文本
+3.三个参数的指令
+将选中的文本变红。 第二个参数永远是false
+document.execCommand('ForeColor',false,"#eeeeee"); 
+document.execCommand("insertImage",false,src); 插入图片 
+document.execCommand("FontSize",false,3); 
+document.execCommand('FontName',false,"微软雅黑"); 
+4.两个参数的指令 
+document.execCommand('bold'); 加粗
+document.queryCommandState('bold'); 检测是否加粗 
+italic 倾斜 
+underline 下划线 
+justifyCenter 居中 
+justifyRight 居右 
+
+## 更改placeholder颜色
+```css
+::-webkit-input-placeholder { /* WebKit browsers */ 
+color:#fff; 
+} 
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+color:#fff; 
+} 
+::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+color:#fff; 
+opacity: 1; 
+} 
+:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+color:#fff; 
+} 
+```
+
+## 媒体查询
+```css
+/*iphone5*/
+@media (max-width: 374px){
+  html{font-size: 10px}
+} 
+/*iphone6*/
+@media (min-width: 375px) and (max-width: 766px){
+  html{font-size: 12px}
+} 
+/*ipad*/
+@media (min-width: 767px){
+  html{font-size: 16px}
+} 
+```
+
+## 1像素细线
+```css
+:after{ 
+  content:''; 
+  width:100%; 
+  border-top:1px solid #E7E7E7; 
+  transform: scaleY(0.5); 
+  position: absolute; 
+  bottom: 0; 
+} 
+```
+
+## 增大点击热区
+```css
+.btn:before{
+  content: ''; 
+  position: absolute; 
+  top: -10px; 
+  bottom: -10px; 
+  left: -10px; 
+  right: -10px; 
+} 
+```
+
+# 一些特别的js
+## 关闭浏览器的当前页面
+open(location,’_self’).close()
+
+## js监听用户是否在浏览页面
+```js
+window.onblur = function () {
+  console.log("失去焦点”);
+} 
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='hidden’){// visible
+    console.log("选项卡切换”)
+  }
+})
+```
 
