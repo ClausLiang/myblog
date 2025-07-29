@@ -144,7 +144,7 @@ myFavoriteNum = 'seven'
 myFavoriteNum = 7
 ```
 
-### `类型断言`
+### 类型断言
 可以告诉解析器变量的实际类型。以下为两种写法：
 ```ts
 <string>abc

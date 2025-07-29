@@ -8,10 +8,10 @@ categories: 基础
 
 在es6中，promise终于成为了原生对象，可以直接使用。<br>
 promise是异步编程的一种解决方案。解决了异步回调多层嵌套的问题。<br>
-# <font color=red>promise状态的理解</font>
+# promise 状态的理解
 用new Promise实例化的promise对象有三个状态：resolved(fulfilled) rejected pending
 
-# <font color=red>promise的简单用法</font>
+# promise的简单用法
 
 ```js
 // 封装一个方法run_a，当Math.random()取的值小于0.5时执行resolve，否则执行reject
@@ -54,7 +54,7 @@ run_a().then(function (data) {
     console.log('失败：', e)
 })
 ```
-# <font color=red>promise的一些方法</font>
+# promise的一些方法
 
 ## axios是promise的实现版本，axios执行后返回一个promise对象
 
