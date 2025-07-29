@@ -7,7 +7,7 @@ categories: harmony
 <script type="text/javascript" src="/myblog/custom.js"></script>
 
 
-# <font color=orange>Ability Kit 简介</font>
+# Ability Kit 简介
 Ability Kit（程序框架服务）提供了应用程序开发和运行的`应用模型`，是系统为开发者提供的应用程序所需能力的抽象提炼，它提供了应用程序必备的组件和运行机制。
 
 ## 使用场景
@@ -21,7 +21,7 @@ Ability Kit（程序框架服务）提供了应用程序开发和运行的`应�
 应用的跨设备流转：通过应用的跨端迁移和多端协同，获得更好的使用体验。比如，在平板上播放的视频，迁移到智慧屏继续播放。
 
 
-# <font color=orange>应用模型</font>
+# 应用模型
 应用模型是系统为开发者提供的应用程序所需能力的抽象提炼，它提供了应用程序必备的组件和运行机制。有了应用模型，开发者可以基于一套统一的模型进行应用开发，使应用开发更简单、高效。
 
 ## 应用模型的构成要素
@@ -38,7 +38,7 @@ Ability Kit（程序框架服务）提供了应用程序开发和运行的`应�
 从API 9开始新增的模型，是目前主推且会长期演进的模型。
 在该模型中，由于提供了AbilityStage、WindowStage等类作为应用组件和Window窗口的“舞台”，因此称这种应用模型为Stage模型。
 
-# <font color=orange>Stage模型开发概述</font>
+# Stage模型开发概述
 ![图片](/images/stage-24-8-23.png)
 
 ## AbilityStage
@@ -56,7 +56,7 @@ ExtensionAbility组件是一种面向特定场景的应用组件。开发者并�
 ## Context
 在Stage模型上，Context及其派生类向开发者提供在运行期可以调用的各种资源和能力。UIAbility组件和各种ExtensionAbility组件的派生类都有各自不同的Context类，他们都继承自基类Context，但是各自又根据所属组件，提供不同的能力。
 
-# <font color=orange>Stage模型应用组件</font>
+# Stage模型应用组件
 ## 应用/组件级配置
 ### 应用包名配置
 AppScope目录下的app.json5里的bundleName字段
@@ -104,8 +104,8 @@ ExtensionAbility组件是基于特定场景（例如服务卡片、输入法等�
 
 ## 信息传递载体Want
 
-# <font color=orange>应用间跳转</font>
-# <font color=orange>进程模型</font>
-# <font color=orange>线程模型</font>
+# 应用间跳转
+# 进程模型
+# 线程模型
 
 

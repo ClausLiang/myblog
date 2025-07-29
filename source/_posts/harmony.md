@@ -7,7 +7,7 @@ categories: harmony
 <script type="text/javascript" src="/myblog/custom.js"></script>
 
 > 写在前面：本人是一个web工程师，现在开始学习鸿蒙，所以可能会带有一些web的惯性思维，和从安卓开发转到鸿蒙的开发思维习惯会有差异。这是在沟通中发现的。安卓能转鸿蒙，web也能转鸿蒙，各有各的优势。本笔记会持续更新...
-# <font color=orange>认识arkTS</font>
+# 认识arkTS
 arkts是在ts上拓展了`声明式UI`、`状态管理`等相应能力的ts超集
 
 ## 基本语法
@@ -161,7 +161,7 @@ onBackPress(){
 aboutToAppear -> build -> onPageShow -> onBackPress -> onPageHide -> aboutToDisappear
 
 
-# <font color=orange>常用UI组件（基础组件）</font>
+# 常用UI组件（基础组件）
 > 鸿蒙app的页面，跟web的标签页面可以说完全不同，它的页面由arkUI提供的鸿蒙原生组件组成。
 ## Image
 ```ts
@@ -196,14 +196,14 @@ Button('ok',{type: ButtonType.Normal})
 ## Blank空白填充组件
 仅当父组件为Row/Column/Flex时生效。
 
-# <font color=orange>绘制组件</font>
+# 绘制组件
 ## Line
 直线绘制组件
 ```ts
 Line().startPoint([0,0]).endPoint([100,0]).stroke('#D1D1D1').height(0.5)
 ```
 
-# <font color=orange>组件通用属性</font>
+# 组件通用属性
 ## 尺寸设置
 + width height margin等类同web中的属性
 + layoutWeight(1) 父容器尺寸确定时，设置了layoutWeight属性的子元素与兄弟元素占主轴尺寸按照权重进行分配，忽略元素本身尺寸设置，表示自适应占满剩余空间。仅在Row/Column/Flex布局中生效。
@@ -239,14 +239,14 @@ Row(){}.height(10).width('100%')
 
 
 
-# <font color=orange>单位</font>
+# 单位
 ## vp
 vp：virtual pixels，虚拟像素是一种可灵活使用和缩放的单位，它与屏幕像素的关系是 1vp 约等于 160dpi 屏幕密度设备上的 1px。在不同密度的设备之间，HarmonyOS 会针对性的转换设备间对应的实际像素值。
 蓝湖设计稿查看时调整为360dp
 
 ## fp
 fp：font-size pixels，字体像素单位，其大小规范默认情况下与vp相同，但如果开发者在设置中修改了字体显示大小，就会在vp的基础上乘以scale系数。即默认情况下 1 fp = 1vp，如果设置了字体显示大小，则会根据实际情况自动设置 1fp = 1vp * scale。
-# <font color=orange>布局容器</font>
+# 布局容器
 > web的页面是从上到下由块级元素依次组成。
 要抛弃web思想，鸿蒙页面的布局，由布局容器包住页面组件构成。
 ## 线性容器 Row Column
@@ -450,7 +450,7 @@ struct Index {
 ```
 
 
-# <font color=orange>弹窗</font>
+# 弹窗
 ## promptAction弹窗（该弹窗是promptAction的方法弹的，下面的是基于arkTs的声明式开发规范弹的）
 ```ts
 import promptAction from '@ohos.promptAction'
@@ -549,7 +549,7 @@ struct menu2{
 }
 ```
 
-# <font color=orange>项目情况</font>
+# 项目情况
 ## 页面的分层思想
 app的页面要分层，每个新建的页面都是继承自封装的一个基础页面。基础页面中有一些基础能力，这样就不必在每个页面中都写。
 而通常web页面不存在分层的思想，每个页面都是独立的，公共的能力可以封装公共组件，在每个页面中引入即可。页面之间相互独立，不存在都继承自一个基础页面。比较扁平。

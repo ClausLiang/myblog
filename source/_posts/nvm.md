@@ -4,10 +4,11 @@ date: 2022-02-13 13:56:03
 tags: npm
 categories: 基础
 ---
+<script type="text/javascript" src="/myblog/custom.js"></script>
 
-# <font color=green>一、使用nvm管理node版本</font>
+# 使用nvm管理node版本
 
-## 1)安装
+## 安装
 要学会看文档，这个时候就体现到英文的重要性了。打开github把文档仔细读一读。
 ```bash
 sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -39,7 +40,7 @@ touch ~/.zshrc
 拷贝上面export...的代码到.zshrc中，然后执行一下 `source ~/.zshrc` （这个source命令是让代码生效。）
 
 此后打开终端就可以直接使用nvm了。
-## 2)使用nvm
+## 使用nvm
 ```bash
 nvm -v #查看nvm的版本
 nvm current #查看当前的node版本 与 node -v 效果一样
@@ -52,13 +53,13 @@ rm -rf ~/.nvm # 卸载nvm
 
 我发现安装了nvm以后node的版本都安装在了.nvm文件夹下面的version文件夹中，但是之前安装的node是在.node-gyp文件夹中，这些就没用了吗，暂时搞不懂，留作以后研究吧。
 
-# <font color=green>二、使用n也可以管理node版本</font>
-## 1）安装
+# 使用n也可以管理node版本
+## 安装
 ```bash
 npm install n -g
 ```
 n就是node的一个模块，它依赖node的，得先装一个node，然后才能安装n
-## 2）使用
+## 使用
 ```bash
 sude n stable # 安装最新的稳定版node
 sudo n lastest # 安装最版
@@ -69,7 +70,7 @@ n ls # 查看安装了哪些版本
 n # 切换版本
 ```
 
-# <font color=green>三、nvm和n的区别</font>
+# nvm和n的区别
 `安装简易度`
 nvm 安装起来显然是要麻烦不少；n 这种安装方式更符合 node 的惯性思维。见仁见智吧。
 `系统支持`

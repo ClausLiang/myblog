@@ -6,7 +6,7 @@ categories: harmony
 ---
 <script type="text/javascript" src="/myblog/custom.js"></script>
 
-# <font color=orange>状态管理</font>
+# 状态管理
 `LocalStorage`
 `AppStorage`
 `PersistentStorage`
@@ -68,7 +68,7 @@ AppStorage.get<number>('aProp'); // returns 47
 Environment的所有属性都是不可变的（即应用不可写入），所有的属性都是简单类型。
 不常用
 
-# <font color=orange>数据持久化</font>
+# 数据持久化
 `用户首选项Preferences`
 `键值型数据库KV-Store`
 `关系型数据库RelationalStore`
