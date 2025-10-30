@@ -6,7 +6,7 @@ categories: vue
 ---
 <script type="text/javascript" src="/myblog/custom.js"></script>
 
-![图片](/images/variableTextarea-2-25-10-30.png)
+![图片](/images/variableTextarea2025-10-30.png)
 
 项目中这样一个需求：配置一个消息的模板，可输入文字，可插入变量。
 
