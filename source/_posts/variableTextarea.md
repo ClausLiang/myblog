@@ -69,10 +69,14 @@ const emit = defineEmits(['change', 'focus', 'blur']);
 
 // 响应式数据
 const editableDiv = ref(null); // 可编辑的div元素引用
-const internalValue = ref(''); // 内部存储的文本值
+const internalValue = ref(props.modelValue); // 内部存储的文本值
 const isFocused = ref(false); // 是否聚焦状态
 const countInputValue = ref(''); // 计算纯文本长度
 
+onMounted(() => {
+  // 初始化时设置可编辑div的innerHTML
+  updateDivContent();
+});
 // 监听外部值变化
 watch(
   () => props.modelValue,
@@ -327,10 +331,10 @@ defineExpose({
 <template>
   <div class="demo-container">
     <h3>带变量的文本框示例</h3>
-    
+
     <div class="form-item">
       <label>消息模板：</label>
-      <VariableTextarea 
+      <VariableTextarea
         v-model:modelValue="messageTemplate"
         :available-variables="variables"
         @change="handleChange"
@@ -338,12 +342,12 @@ defineExpose({
         @blur="handleBlur"
       />
     </div>
-    
+
     <div class="preview">
       <h4>预览效果：</h4>
       <div class="preview-content">{{ parsedMessage }}</div>
     </div>
-    
+
     <div class="current-value">
       <h4>当前值（纯文本）：</h4>
       <pre>{{ messageTemplate }}</pre>
@@ -351,44 +355,45 @@ defineExpose({
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
-import VariableTextarea from './VariableTextarea.vue'
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import VariableTextarea from './components/VariableTextarea.vue';
 
 // 响应式数据
-const messageTemplate = ref('亲爱的{{username}}，您的订单{{orderId}}已于{{date}}发货。')
+const messageTemplate = ref('亲爱的{用户名}，您的订单{订单号}已于{日期}发货。');
 
 // 可用变量列表
 const variables = ref([
-  { name: 'username', label: '用户名' },
-  { name: 'orderId', label: '订单号' },
-  { name: 'date', label: '日期' },
-  { name: 'amount', label: '金额' },
-  { name: 'address', label: '地址' }
-])
+  { name: '{用户名}', label: '用户名' },
+  { name: '{订单号}', label: '订单号' },
+  { name: '{日期}', label: '日期' },
+  { name: '{金额}', label: '金额' },
+  { name: '{地址}', label: '地址' }
+]);
 
 // 解析消息模板（模拟真实数据）
 const parsedMessage = computed(() => {
   return messageTemplate.value
-    .replace('{{username}}', '张三')
-    .replace('{{orderId}}', 'ORD2023123456')
-    .replace('{{date}}', '2023-12-20')
-    .replace('{{amount}}', '¥258.00')
-    .replace('{{address}}', '北京市朝阳区')
-})
+    .replace('{用户名}', '张三')
+    .replace('{订单号}', 'ORD2023123456')
+    .replace('{日期}', '2023-12-20')
+    .replace('{金额}', '¥258.00')
+    .replace('{地址}', '北京市朝阳区');
+});
 
 // 事件处理
-const handleChange = (value) => {
-  console.log('内容变化:', value)
-}
+const handleChange = value => {
+  console.log('内容变化:', value);
+  messageTemplate.value = value;
+};
 
-const handleFocus = (event) => {
-  console.log('获得焦点', event)
-}
+const handleFocus = event => {
+  console.log('获得焦点', event);
+};
 
-const handleBlur = (event) => {
-  console.log('失去焦点', event)
-}
+const handleBlur = event => {
+  console.log('失去焦点', event);
+};
 </script>
 
 <style scoped>
@@ -408,7 +413,8 @@ const handleBlur = (event) => {
   font-weight: 500;
 }
 
-.preview, .current-value {
+.preview,
+.current-value {
   margin-top: 20px;
   padding: 15px;
   border: 1px solid #f0f0f0;
@@ -430,6 +436,7 @@ pre {
   overflow-x: auto;
 }
 </style>
+
 ```
 
 # 功能特点
