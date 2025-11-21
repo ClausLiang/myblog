@@ -1,6 +1,7 @@
 ---
 title: 快速熟悉vue3的语法
 date: 2023-03-06 10:18:06
+updated: 2025-07-29
 tags: vue
 categories: vue
 sticky: true

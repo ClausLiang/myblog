@@ -1,6 +1,7 @@
 ---
 title: hexo入门--用hexo搭建一个自己的博客网站真香
 date: 2022-08-31 21:54:57
+updated: 2025-07-29
 tags: hexo
 categories: 进阶
 ---

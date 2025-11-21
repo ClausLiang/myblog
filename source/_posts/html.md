@@ -1,6 +1,7 @@
 ---
-title: html基础入门
+title: html基础入门（整理笔记）
 date: 2025-07-15 16:54:44
+updated: 2025-07-29
 tags: h5
 categories: 基础
 ---

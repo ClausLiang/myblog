@@ -1,6 +1,7 @@
 ---
 title: 图片拖住滚动(vue指令实现)
 date: 2021-11-16 17:30:44
+updated: 2021-11-16
 tags: 图片
 categories: h5
 ---

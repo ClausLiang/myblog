@@ -1,6 +1,7 @@
 ---
 title: Ability Kit（鸿蒙三）
 date: 2024-08-08 13:52:42
+updated: 2025-07-29
 tags: harmony
 categories: harmony
 ---

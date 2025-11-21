@@ -1,6 +1,7 @@
 ---
 title: vue项目打包优化---首屏优化
 date: 2022-04-24 16:48:21
+updated: 2022-04-24
 tags: webpack
 categories: 进阶
 ---

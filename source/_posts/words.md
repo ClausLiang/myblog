@@ -1,6 +1,7 @@
 ---
 title: postgraduate words 5500
 date: 2025-05-19 09:24:12
+updated: 2025-06-09
 tags:
 ---
 a adj形容器 ad adv副词 n名词 prep介词 vt及物动词 vi不及物动词 art冠词 conj连词 pron代词

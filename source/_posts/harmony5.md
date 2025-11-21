@@ -1,6 +1,7 @@
 ---
 title: hsp和har的转换（鸿蒙五）
 date: 2024-11-06 19:30:06
+updated: 2024-11-07
 tags: harmony
 categories: harmony
 ---

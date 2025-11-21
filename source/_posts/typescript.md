@@ -1,6 +1,7 @@
 ---
 title: typescript的学习记录
 date: 2023-02-16 00:04:59
+updated: 2025-07-29
 tags: typescript
 categories: 进阶
 ---

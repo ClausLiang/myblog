@@ -1,6 +1,7 @@
 ---
 title: promise的简单用法
 date: 2019-05-21 00:37:10
+updated: 2025-07-29
 tags: 基础
 categories: 基础
 ---

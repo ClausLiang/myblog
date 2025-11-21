@@ -1,6 +1,7 @@
 ---
 title: 鸿蒙app的数据管理（鸿蒙二）
 date: 2024-08-08 10:09:42
+updated: 2025-07-29
 tags: harmony
 categories: harmony
 ---

@@ -1,6 +1,7 @@
 ---
 title: gitignore修改了但不生效
 date: 2023-09-18 14:07:49
+updated: 2023-09-18
 tags: git
 categories: git
 ---

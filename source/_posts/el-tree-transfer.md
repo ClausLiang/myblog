@@ -1,6 +1,7 @@
 ---
 title: 结合el-tree和el-transfer做一个树形穿梭框
 date: 2022-02-18 23:25:17
+updated: 2022-02-18
 tags: element
 categories: vue
 ---

@@ -1,6 +1,7 @@
 ---
 title: github推送代码由于网络原因经常失败的解决办法
 date: 2023-08-31 11:41:22
+updated: 2023-09-05
 tags: git
 categories: git
 ---

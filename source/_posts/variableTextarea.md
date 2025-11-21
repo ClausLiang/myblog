@@ -1,6 +1,7 @@
 ---
 title: variableTextarea可插入变量的文本框
 date: 2025-10-30 09:22:12
+updated: 2025-10-30
 tags: vue
 categories: vue
 ---

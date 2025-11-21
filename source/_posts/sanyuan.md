@@ -1,6 +1,7 @@
 ---
 title: 我劝你不要乱写三元表达式
 date: 2024-09-24 11:32:00
+updated: 2024-09-25
 tags: 基础
 categories: 基础
 ---

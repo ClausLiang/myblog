@@ -1,6 +1,7 @@
 ---
 title: ant-design-vue的admin-pro项目是怎么做权限控制的
 date: 2023-11-17 11:56:57
+updated: 2023-11-17
 tags: antd
 categories: vue
 ---

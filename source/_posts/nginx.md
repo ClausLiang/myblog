@@ -1,6 +1,7 @@
 ---
 title: linux下安装nginx
 date: 2022-08-18
+updated: 2022-08-18
 tags: linux
 categories: 前端得懂的运维技能
 ---

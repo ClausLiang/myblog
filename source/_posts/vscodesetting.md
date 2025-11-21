@@ -1,6 +1,7 @@
 ---
 title: vscode配置解读
 date: 2023-01-29 23:08:53
+updated: 2023-01-29
 tags: vscode
 categories: 基础
 ---

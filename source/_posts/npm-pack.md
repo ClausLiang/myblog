@@ -1,6 +1,7 @@
 ---
 title: npm发布一个自己的包
 date: 2021-08-03 14:08:07
+updated: 2021-08-03
 tags: npm
 categories: 进阶
 ---

@@ -1,6 +1,7 @@
 ---
 title: 创建一个vue的UI组件库
 date: 2021-11-23 17:35:00
+updated: 2023-09-05
 tags: vue
 categories: 进阶
 ---

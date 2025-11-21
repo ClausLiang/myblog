@@ -1,6 +1,7 @@
 ---
 title: 用vue3 vite搭建一个项目
 date: 2023-04-12 16:59:37
+updated: 2023-05-06
 tags: vue
 categories: vue
 ---

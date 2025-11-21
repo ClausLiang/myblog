@@ -1,6 +1,7 @@
 ---
 title: 鸿蒙app编译构建的配置文件解析（鸿蒙六）
 date: 2024-12-04 15:30:40
+updated: 2024-12-04
 tags: harmony
 categories: harmony
 ---

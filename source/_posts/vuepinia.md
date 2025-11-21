@@ -1,6 +1,7 @@
 ---
 title: vue pinia store持久化实现方法
 date: 2025-05-28 09:25:06
+updated: 2025-05-28
 tags: vue
 categories: vue
 ---

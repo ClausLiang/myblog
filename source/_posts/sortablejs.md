@@ -1,6 +1,7 @@
 ---
 title: sortablejs实现拖拽功能
 date: 2025-10-29 16:47:26
+updated: 2025-10-29
 tags: vue
 categories: vue
 ---
