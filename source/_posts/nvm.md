@@ -1,7 +1,7 @@
 ---
 title: nvm或者n管理node版本
 date: 2022-02-13 13:56:03
-date: 2023-03-08
+updated: 2023-03-08
 tags: npm
 categories: 基础
 ---
