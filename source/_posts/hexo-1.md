@@ -1,7 +1,7 @@
 ---
 title: hexo入门--用hexo搭建一个自己的博客网站真香
 date: 2022-08-31 21:54:57
-updated: 2025-07-29
+updated: 2025-12-25
 tags: hexo
 categories: 进阶
 ---
@@ -167,4 +167,9 @@ hexo generate
 至此一个简单的博客网站就搭建好了，大功告成，当然还有很多可以优化的地方后面慢慢研究。
 
 [我的博客网站](http://liangyonggang.com/myblog)
+
+# 将博客系统部署到github pages
+由于我的服务器早就到期没再续费了，所以后将博客部署到了github pages。
+hexo官方文档中有部署到github pages的教程，这里不再赘述。
+[在github pages上部署hexo](https://hexo.io/zh-cn/docs/github-pages)
 
