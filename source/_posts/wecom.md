@@ -24,9 +24,10 @@ categories: h5
 将刚刚修改的应用上线：
 ![img](/images/qiwei6-2026-1-12.png)
 
-# 开发应用
-参考文档：https://developer.work.weixin.qq.com/document/path/96914（服务商代开发-客户端API-JSSDK）
-## 安装
+# 调用jssdk提供的接口
+参考文档（服务商代开发-客户端API-JSSDK）：https://developer.work.weixin.qq.com/document/path/96914
+sdk的版本是2.3.3
+## 安装jssdk
 ```bash
 npm install @wecom/jssdk
 ```
@@ -36,8 +37,10 @@ import * as ww from '@wecom/jssdk'
 // 企业身份注册
 ww.register({
   corpId: 'ww7ca4776b2a70000',       // 必填，当前用户企业所属企业ID
+  agentId: 1000247,                  // 必填，当前应用的AgentID
   jsApiList: ['getExternalContact'], // 必填，需要使用的JSAPI列表
-  getConfigSignature                 // 必填，根据url生成企业签名的回调函数
+  getConfigSignature,                // 必填，根据url生成企业签名的回调函数
+  getAgentConfigSignature            // 必填，根据url生成应用签名的回调函数
 })
 
 async function getConfigSignature(url) {
@@ -46,19 +49,38 @@ async function getConfigSignature(url) {
   // 调用后端接口，请求以下三个值
   return { timestamp, nonceStr, signature }
 }
+async function getAgentConfigSignature(url) {
+  // 根据 url 生成应用签名，生成方法同上，但需要使用应用的 jsapi_ticket
+  return { timestamp, nonceStr, signature }
+}
 ```
+注册了应用签名的回调函数就不会执行企业签名的回调函数了，因为应用身份的注册就是在企业身份注册的基础上新增的企业身份。
 注意：
 1. 在调用 JSAPI 前，需要先通过 ww.register 注册当前页面的身份信息
 2. corpId可以通过应用配置的地址参数传入
 ```js
 ww.register({
   corpId: route.query.corpId as string, // 必填，当前用户企业所属企业ID
-  jsApiList: ['getExternalContact'], // 必填，需要使用的JSAPI列表
-  getConfigSignature, // 必填，根据url生成企业签名的回调函数
+  ...
 })
 ```
 3. 参数中的回调函数调用时机由 JSSDK 自行控制，开发者无需关心具体调用顺序
 4. 用于生成签名的 jsapi_ticket 属于敏感信息，请在服务端完成签名操作
+
+## 调用接口
+```js
+// 获取当前客户id
+ww.getCurExternalContact()
+```
+
+# Oauth授权
+这个文档在服务端API里，并不在客户端API https://developer.work.weixin.qq.com/document/path/96440
+企业微信提供了OAuth的授权登录方式，可以让从企业微信终端打开的网页获取成员（企业微信账号的信息）的身份信息，从而免去登录的环节。
+## oauth2链接
+```
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=变量&redirect_uri=变量&response_type=code&scope=snsapi_base&state=变量&agentid=变量#wechat_redirect
+```
+授权完会跳转回redirect_uri，返回code参数，利用code调用后端接口，后端去调用企微接口获取用户信息。
 
 # 使用应用
 在企业微信后台中从`服务商后台`切到`企业管理后台`
