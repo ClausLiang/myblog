@@ -11,7 +11,7 @@ categories: h5
 服务商后台地址：https://open.work.weixin.qq.com/wwopen/developers/home
 企业管理后台：https://work.weixin.qq.com/wework_admin/frame
 
-# 创建应用
+# 创建应用（前期准备）
 ## 登录服务商后台地址，以服务商的身份创建一个`代开发应用模板`
 ![img](/images/qiwei1-2026-1-12.png)
 ## 创建好应用模版后，企业用户授权，就会在模板中生成一个`代开发应用`
@@ -24,7 +24,7 @@ categories: h5
 将刚刚修改的应用上线：
 ![img](/images/qiwei6-2026-1-12.png)
 
-# 调用jssdk提供的接口
+# 前端如何调用企微jssdk提供的接口
 参考文档（服务商代开发-客户端API-JSSDK）：https://developer.work.weixin.qq.com/document/path/96914
 sdk的版本是2.3.3
 ## 安装jssdk
@@ -73,7 +73,7 @@ ww.register({
 ww.getCurExternalContact()
 ```
 
-# Oauth授权
+# 如何获取企微员工信息（Oauth授权）
 这个文档在服务端API里，并不在客户端API https://developer.work.weixin.qq.com/document/path/96440
 企业微信提供了OAuth的授权登录方式，可以让从企业微信终端打开的网页获取成员（企业微信账号的信息）的身份信息，从而免去登录的环节。
 ## oauth2链接
@@ -82,7 +82,7 @@ https://open.weixin.qq.com/connect/oauth2/authorize?appid=变量&redirect_uri=�
 ```
 授权完会跳转回redirect_uri，返回code参数，利用code调用后端接口，后端去调用企微接口获取用户信息。
 
-# 使用应用
+# 使用应用（后期运营方案）
 在企业微信后台中从`服务商后台`切到`企业管理后台`
 企业管理后台是每个企业管理自己内部员工及应用等的后台，注册了企业微信就有这个
 服务商后台是可以为其他企业开发应用的服务商，需要再次注册。
