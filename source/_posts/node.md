@@ -1,7 +1,7 @@
 ---
 title: node基础知识
-date: 2025-08-08 17:12:11
-updated: 2025-08-11
+date: 2019-01-04 17:12:11
+updated: 2019-01-04
 tags:
   - node
   - npm
