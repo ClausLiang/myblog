@@ -1,13 +1,42 @@
 ---
 title: nvm或者n管理node版本
 date: 2022-02-13 13:56:03
-updated: 2023-03-08
+updated: 2026-04-07
 tags: npm
 categories: 基础
 ---
 <script type="text/javascript" src="/myblog/custom.js"></script>
 
 # 使用nvm管理node版本
+
+新换了电脑，安装node，在node官网发现官方推荐的安装方式就是nvm
+![img](/images/nodedownload-26-4-7.png)
+## 按照官网给的命令依次执行即可
+## 将nvm命令加入到shell配置文件中
+如果不把nvm命令加入到shell配置文件中，下次在终端执行nvm命令或者npm命令就会执行不了。
+上图中的第二个命令`\. "$HOME/.nvm/nvm.sh"`的意思是在当前shell会话中加载nvm的脚本文件。
+所以需要把这个加载命令添加到shell配置中，让其在新终端启动时自动执行。
+### 编辑配置文件
+```
+nano ~/.zshrc
+```
+nano 是一个命令行文本编辑器
+nano 文件名          # 打开或创建文件
+### 添加加载脚本
+在打开的文件末尾，添加以下三行内容
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # 加载 nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # 加载 nvm 的自动补全
+```
+### 保存并生效
+保存文件（nano 编辑器按 Ctrl + X，然后按 Y，最后按回车）
+运行以下命令让配置立即生效，或者直接关闭并重新打开终端
+```
+source ~/.zshrc
+```
+
+# node的安装（旧 可忽略）
 
 ## 安装
 要学会看文档，这个时候就体现到英文的重要性了。打开github把文档仔细读一读。
