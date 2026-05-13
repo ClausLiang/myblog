@@ -1,7 +1,7 @@
 ---
 title: claude code的使用记录
 date: 2026-05-09 17:40:11
-updated: 2026-05-12
+updated: 2026-05-13
 tags: ai
 categories: ai
 ---
@@ -94,3 +94,25 @@ $env:CLAUDE_CODE_EFFORT_LEVEL="max"
 1. CLAUDE.md 现在就有价值。重构本身是个多阶段工程（按我们之前的方案至少 5–9 天），这期间你/同事/Claude 都需要一份能描述现状的文档。先有总比等到重构完才有要好。
 2. CLAUDE.md 描述"现状"，不是"理想态"。它本来就会随代码演进，这是常态，不是返工。
 3. 重构过程本身会用到 CLAUDE.md。比如阶段 2 要把 pageId === ... 收敛进配置时，那一段"17 处分支"的描述刚好是工作起点。
+
+## ! 用法
+! 是输入框的 shell 直通前缀，如`! git push origin main`
+  具体行为：
+
+  - 命令直接在你的 $SHELL 里跑，和你自己在终端敲完全等价——同样的环境变量、同样的权限、同样的工作目录
+  - 输出（stdout/stderr）和命令本身会以 `<bash-input>` / `<bash-stdout>` 标签的形式喂回给我作为上下文，所以你看到我(指CLAUDE CODE)能"知道"刚才推送成功了
+  - 不经过 Claude Code 的权限系统——既不弹 permission prompt，也不过 auto 模式分类器。因为执行主体是你，不是我
+
+  这就是为什么我代你 git push origin main 被 auto 拦了，但你用 ! 推就没事——分类器管的是"Claude 主动做的事"，不管"用户自己敲的命令"。
+
+  所以 ! 适合两类场景：
+  1. 需要交互的命令（gcloud auth login、vim、docker run -it）
+  2. 我被权限系统拦住但你判断没问题、不想动 settings 的命令（push main、rm -rf、force 系列）
+  
+  代价：因为是你的 shell，敏感操作不要随便用 —— 没有任何 review/guard，敲下回车就执行。
+
+## 幻觉
+
+## 内建工具及mcp工具
+
+## plan文件方案
