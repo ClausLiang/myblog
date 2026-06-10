@@ -69,9 +69,15 @@ ssh-copy-id claus@192.168.1.100
 ```
 或者，如果没有ssh-copy-id命令，可以手动将公钥内容追加到远程服务器的~/.ssh/authorized_keys文件中。以下是手动复制的方法：
 ```
-cat ~/.ssh/id_rsa.pub | ssh claus@192.168.1.100 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh claus@192.168.1.100 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
 ```
-这将在远程服务器上创建一个~/.ssh目录（如果不存在），并将您的公钥添加到authorized_keys文件中，允许您通过密钥进行身份验证。
+
+这条命令会：
+1. 读取本地公钥内容
+2. 通过 SSH 登录到远程服务器（需要输入一次密码）
+3. 在服务器上创建 ~/.ssh 目录（如果不存在），并设置正确权限（700）
+4. 将公钥内容追加到 authorized_keys 文件中
+5. 设置 authorized_keys 文件权限为 600
 
 现在，您应该能够通过SSH免密登录到远程服务器，而无需输入密码。
 
