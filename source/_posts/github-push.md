@@ -90,4 +90,10 @@ cat ~/.ssh/id_rsa.pub | ssh claus@192.168.1.100 "mkdir -p ~/.ssh && chmod 700 ~/
 
 禁用密码登录：为确保安全，在确认密钥登录配置成功后，建议在远程服务器的 /etc/ssh/sshd_config 文件中将 PasswordAuthentication 设置为 no，然后重启 SSH 服务。这样，只有拥有私钥的人才能登录，安全性大大提高。
 
-
+# scp上传文件或文件夹到远程服务器
+```
+# 上传文件
+scp xxx.jpg claus@47.74.35.228:/data/claus/tmp/
+# 上传文件夹 参数 -r
+scp -r D:\project\idt-tars-web\dist root@8.145.35.144:/app/nginx/html/tars/
+```
