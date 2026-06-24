@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var headings = document.querySelectorAll(".post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6");
   // 初始化计数器
   var counter = [0, 0, 0, 0, 0, 0];
-  var colors = ["orange", "green", "blue", "purple", "black", "black"];
+  var colors = ["green", "orange", "blue", "purple", "black", "black"];
   
   // 遍历每个标题元素
   headings.forEach(function (heading) {
