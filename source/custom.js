@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var headings = document.querySelectorAll(".post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6");
   // 初始化计数器
   var counter = [0, 0, 0, 0, 0, 0];
-  var colors = ["green", "orange", "blue", "purple", "black", "black"];
+  // var colors = ["#1A2B4A", "#2878B5", "#5B7A99", "#8A9CB0", "black", "black"];
+  // var colors = ["#0F2A43", "#C0392B", "#2C7873", "#555555", "black", "black"];
+  var colors = ["#12395B", "#1E88E5", "#17A398", "#E8833A", "black", "black"];
   
   // 遍历每个标题元素
   headings.forEach(function (heading) {
