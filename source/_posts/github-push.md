@@ -97,3 +97,85 @@ scp xxx.jpg claus@47.74.35.228:/data/claus/tmp/
 # 上传文件夹 参数 -r
 scp -r D:\project\idt-tars-web\dist root@8.145.35.144:/app/nginx/html/tars/
 ```
+
+# linux常用命令
+## 解压缩
+```bash
+yum install -y unzip zip
+unzip xx.zip -d xx
+```
+## mv更名或移动
+当第二个参数是文件名时更名，当第二个参数是目录时移动
+```bash
+mv file1.txt file2.txt   # 将 file1.txt 重命名为 file2.txt
+mv file1.txt /home/user/Documents/   # 将文件移动到 Documents 目录下
+```
+## rm删除文件/文件夹
+```bash
+rm index.html #删除文件
+rm -rf static #删除文件夹
+```
+-r 代表向下递归，不管有多少级目录
+-f 代表不提示
+
+## 创建目录
+```bash
+mkdir xxx
+```
+
+## 后台跑服务（命令后加 &）
+```bash
+xxx &
+```
+
+## 查看正在运行的进程状态（process status）
+```bash
+ps -ef
+```
+
+# yum
+yum是 Linux 系统中一款基于 `RPM 包管理`的命令行软件包管理器。它主要用于 Red Hat 系的发行版，如 RHEL（红帽企业版）、CentOS 和 Fedora（较旧版本）
+它的核心价值在于自动处理软件依赖关系。如果你手动用 rpm 命令安装一个软件，经常遇到“缺 A 依赖，装了 A 又缺 B”的依赖地狱；而 yum 会像贴心的管家一样，自动从软件源（Repository）里把所需的所有依赖包一起下载并安装好。
+```bash
+yum install <包名>	# 安装指定软件
+yum remove <包名> # 卸载指定软件（保留配置文件）
+yum erase <包名> # 彻底卸载（连带配置文件一起删）
+yum update <包名> # 更新指定软件
+
+yum list installed # 可以查看yum已经安装过的软件(能查到你系统上所有通过 RPM 机制安装的软件，但不是“所有能运行的程序”)
+```
+## 现代替代品 dnf
+如果你使用的是 RHEL 8/9、CentOS 8+ 或 Fedora 最新版，系统默认的包管理器已经换成了 dnf（Dandified YUM）
+- 虽然为了兼容性，输入 yum 通常仍然生效（软链接到 dnf），但在这些新系统上，建议直接使用 dnf，因为它的依赖解析算法更先进，性能更好，且用 C++ 重写了内核。
+- 好消息是：dnf 的命令用法和 yum 几乎 99% 相同，把上面的命令里的 yum 直接换成 dnf 即可无缝使用。
+
+## 其他安装软件的方式
+### wget
+wget 本身不是一种“安装方式”，而是一个“下载工具”。
+```bash
+wget https://example.com/nginx.rpm    # 下载
+rpm -ivh nginx.rpm                    # 安装（如果缺依赖会报错）
+```
+### curl
+万能数据传输。它不仅能下载，还能模拟浏览器发请求、调 API 接口、查看网页源码。它默认把内容打印在屏幕上
+网络“管道”安装：`curl ... | bash`
+这是网上教程最常见也最危险的“一行命令”：
+```bash
+curl -fsSL https://example.com/install.sh | bash
+```
+它本质上是从网上下载一个 Shell 脚本，并直接交给 Bash 解释执行。这个脚本里写什么，系统就执行什么（可能是在线安装、配置环境变量、甚至删除文件）
+### “即下即用”的单文件格式：AppImage
+这是一种无需安装的格式。软件被打包成一个单独的 .AppImage 文件，下载后给它加上执行权限（chmod +x），双击就能运行，不用解压、不用安装、不用 root 权限。用完直接删掉文件，系统干干净净，不留任何痕迹。
+### 内核级驱动安装：DKMS（动态内核模块支持）
+这不是安装普通应用，而是安装内核驱动模块（如显卡驱动、VirtualBox 内核增强）。它会在你每次升级 Linux 内核时，自动重新编译驱动，确保驱动版本与最新内核匹配。如果你用 yum 装显卡驱动，底层往往调用的就是 DKMS 机制。
+### 不可变系统的“原子更新”：rpm-ostree
+这是 CentOS 8/9 中 CoreOS 或 Silverblue 变种使用的技术。它不直接修改根文件系统，而是把整个操作系统当成一个 Git 仓库来管理。你执行 rpm-ostree install nginx，它不会立刻改动当前系统，而是下载一个完整的系统镜像层，重启时直接切换到这个新镜像。
+
+# 主流操作系统的包管理器
+| 操作系统 | 包管理器 | 说明 |
+| - | - | - |
+|Red Hat 系 (CentOS/RHEL/Fedora)| yum / dnf | 后缀为 .rpm|
+|Debian 系 (Ubuntu/Debian)| apt / apt-get | 同样自动解决依赖，后缀为 .deb（最流行的 Linux 桌面/服务器）|
+|Arch 系 (Manjaro/Arch)| pacman |滚动更新，软件包极新，深受极客喜爱|
+|macOS| brew (Homebrew) |  Mac 上的包管理器，用来装命令行工具（如 wget、node）。注意：brew 在 Linux 上也能装，但一般不作为主力，Linux 还是优先用系统自带的 apt/yum|
+|Windows| winget / choco | Windows 原生包管理器，还在发展中|
