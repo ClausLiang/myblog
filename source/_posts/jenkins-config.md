@@ -2,8 +2,8 @@
 title: Linux下jenkins的安装与配置
 date: 2022-08-23 17:48:59
 updated: 2022-09-02
-tags: linux
-categories: 前端得懂的运维技能
+tags: 运维
+categories: 运维技能
 ---
 ## 安装jenkins
 上jenkins官网查看其安装方法 https://www.jenkins.io/zh/download/

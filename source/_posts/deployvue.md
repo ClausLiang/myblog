@@ -3,7 +3,7 @@ title: 在github pages部署vue项目
 date: 2025-12-26 15:49:47
 updated: 2025-12-26
 tags: githubpages
-categories: 前端得懂的运维技能
+categories: 运维技能
 ---
 <script type="text/javascript" src="/myblog/custom.js"></script>
 

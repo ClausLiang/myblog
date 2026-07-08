@@ -2,8 +2,8 @@
 title: linux下安装nginx
 date: 2022-08-18
 updated: 2022-08-18
-tags: linux
-categories: 前端得懂的运维技能
+tags: 运维
+categories: 运维技能
 ---
 作为一个前端，阿里云买台服务器能干啥，可以搭建一下自己的个人博客。首先需要安装个nginx
 ## 1.我是如何安装的
