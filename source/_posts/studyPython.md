@@ -223,3 +223,35 @@ m = 20
 n = 20
 print(m is n) #True
 ```
+
+# 流程控制语句
+## 分支
+### 单分支
+python里没有{}，if后面不需要写小括号，条件语句后面写冒号，4个空格缩进
+```py
+from random import randint
+balance = randint(10, 100)
+print(balance)
+if balance < 20:
+    print('余额不足')
+```
+### 双分支
+```py
+if balance < 20:
+    print('余额不足')
+else:
+    print('余额充足')
+```
+### 多分支
+```py
+if balance < 50:
+    print('情况1')
+elif balance < 60:
+    print('情况2')
+elif balance < 70:
+    print('情况3')
+else:
+    print('充足')
+```
+
+
