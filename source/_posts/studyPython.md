@@ -217,7 +217,7 @@ print(1 in list1) #True
 ```
 
 ## 身份运算符
-`is` `is not`
+`is` `is not` 判断两个标识符是不是引用同一个地址
 ```py
 m = 20
 n = 20
@@ -225,6 +225,7 @@ print(m is n) #True
 ```
 
 # 流程控制语句
+## 顺序
 ## 分支
 ### 单分支
 python里没有{}，if后面不需要写小括号，条件语句后面写冒号，4个空格缩进
@@ -253,5 +254,73 @@ elif balance < 70:
 else:
     print('充足')
 ```
+### match case
+类比js switch case
+```py
+age = 25
+match(age // 10):
+  case 0:
+    print("还是个儿童")
+  case 1:
+    print("十岁多了，是个少年了")
+  case 2:
+    print("20+了，是个青年了")
+```
+对比js
+```js
+let age = 25
+switch(Math.floor(age / 10)) {
+  case 0:
+    console.log("还是个儿童")
+    break
+  case 1:
+    console.log("十岁多了，是个少年了")
+    break
+  case 2:
+    console.log("20+了，是个青年了")
+    break
+}
+```
+### 三目运算符
+`num1 if num1 > num2 else num2`
+```py
+num1 = 10
+num2 = 20
+max_num = num1 if num1 > num2 else num2
+print(max_num)
+```
+对比js
+```js
+let num1 = 10, num2 = 20
+let max = num1 > num2 ? num1 : num2
+console.log(max)
+```
+## 循环
+### `while`
+```py
+counter = 0
+while counter < 5:
+    i = 0
+    while i <= counter:
+        if i < counter:
+            print('*', end='')
+        else:
+            print('*')
+        i += 1
+    counter += 1
 
+# 另一种写法
+counter = 0
+while counter < 5:
+    i = 0
+    print('*' * (counter + 1))
+    counter += 1
 
+# 打印结果
+# *
+# **
+# ***
+# ****
+# *****
+```
+### `for in`
