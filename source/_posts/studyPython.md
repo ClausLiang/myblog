@@ -323,4 +323,12 @@ while counter < 5:
 # ****
 # *****
 ```
+while 后面可以跟else，只有循环结束才会进else，break中断的循环不会执行else
 ### `for in`
+语法和js有一定差别
+```py
+for a in [1, 2, 3]:
+    print(a)
+for i in 'abc':
+    print(i)
+```
