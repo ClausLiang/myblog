@@ -332,3 +332,85 @@ for a in [1, 2, 3]:
 for i in 'abc':
     print(i)
 ```
+# 序列
+## 列表list
+### 切片
+```py
+list1 = [1, 2, 3, 4, 5]
+print(list1) 
+print(list1[2:4]) # [3, 4] 切片
+print(list1[::-1]) # [5, 4, 3, 2, 1] 倒序
+```
+### append
+```py
+list1.append(6)
+print(list1) # [1, 2, 3, 4, 5, 6]
+```
+### insert
+```py
+list1.insert(0, 0)
+print(list1) # [0, 1, 2, 3, 4, 5, 6]
+```
+### 列表相加 相乘
+```py
+list1 = [1, 2, 3, 4, 5]
+list2 = ['a', 'b', 'c']
+print(list1 + list2) # [1, 2, 3, 4, 5, 'a', 'b', 'c']
+print(list2 * 2) # ['a', 'b', 'c', 'a', 'b', 'c']
+```
+### 修改
+```py
+list1[0] = 'a'
+print(list1) # ['a', 2, 3, 4, 5]
+list1[1:3] = ['b', 'c']
+print(list1) # ['a', 'b', 'c', 4, 5]
+```
+### 判断对象是否在列表中
+```py
+print(1 in list2) # False
+```
+### 判断list的长度
+```py
+print(len(list2)) # 3
+```
+### 列表的最小值 最大值 求和
+```py
+print(min(list1)) # 1
+print(max(list1)) # 5
+print(sum(list1)) # 15
+```
+### 遍历
+```py
+for item in list2:
+    print(item)
+
+for i,item in enumerate(list1):
+    print(i, item)
+```
+### 删除
+```py
+list2.remove('b') # 删除第一次出现的b
+del list2[0]
+```
+```py
+list1 = [100, 200, 200, 300, 400, 500,200]
+for item in list1[:]: # 注意这里是遍历了一个新的列表，如果是遍历原列表，一边遍历一边删，可能会出问题
+    if item == 200:
+        list1.remove(item)
+print(list1)
+```
+### 列表推导式
+```py
+list1 = [100, 200, 300, 400, 500]
+list2 = [i * 2 for i in list1] # 列表推导式
+print(list2) # [200, 400, 600, 800, 1000]
+```
+### zip()
+```py
+list1 = [1,2,3,4,5]
+list2 = ['a','b','c','d','e']
+zip1 = zip(list1, list2) # <zip object at 0x0000020376E6D380>
+print(list(zip1)) # [(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd'), (5, 'e')]
+```
+### 其他常用方法
+略
