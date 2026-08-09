@@ -414,3 +414,28 @@ print(list(zip1)) # [(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd'), (5, 'e')]
 ```
 ### 其他常用方法
 略
+
+## 字符串
+### 很多方法同list
+略
+### strip()去前后空格 lstrip rstrip
+```py
+str1 = '  abc def '
+print(str1.strip())
+print(str1.lstrip())
+print(str1.rstrip())
+
+# 还可以传参
+str2 = '111abc111'
+print(str2.lstrip('1'))
+```
+js中是str1.trim()
+### 大小写转化
+```py
+str1 = 'hellO World'
+print(str1.upper())
+print(str1.lower())
+print(str1.title()) # 每个单词首字母大写，其他小写
+print(str1.capitalize()) # 第一个字母大写，其他小写
+print(str1.swapcase()) # 大小写互换
+```
