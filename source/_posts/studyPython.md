@@ -439,3 +439,15 @@ print(str1.title()) # 每个单词首字母大写，其他小写
 print(str1.capitalize()) # 第一个字母大写，其他小写
 print(str1.swapcase()) # 大小写互换
 ```
+
+## 元组tuple
+通过()定义元组对象
+```py
+tuple1 = (1, 2, 3, 4, 5)
+print(tuple1) # (1, 2, 3, 4, 5)
+```
+### tuple不支持修改
+```py
+tuple1 = (1, 2, 3, 4, 5)
+tuple1[0] = 9 # 报错 TypeError: 'tuple' object does not support item assignment
+```
