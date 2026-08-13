@@ -14,17 +14,7 @@ categories: python
 mac：要用python3 test1.py（历史原因导致的，python指向python2）
 windows：python/py test1.py（py是别名）
 
-# 数据类型6种（总览）
-数值（int float complex(复数) bool）
-字符串str
-列表list（可变序列）
-元组tuple（不可变序列）
-集合set（元素唯一无序）
-字典dict（键值对）
-特殊数据类型None
 
-不可变：数值 字符串 元组
-可变：list set dict
 # 内置函数
 - type()获取数据类型
 ```py
@@ -57,103 +47,8 @@ print('你好，' + name)
 print('a')
 print('a', 'b', 'c', sep='-', end='!') # end 指定行的结尾， sep 指定用什么拼接
 ```
-# 数值类型
-## float类型计算会有精度问题，可以引入decimal
-```py
-from decimal import Decimal
-f1 = Decimal('0.1')
-f2 = Decimal('0.2')
-f3 = f1 + f2
-print(f3)
-```
-## python3中，bool是int的子类
-True False的值分别是1 0
 
-# 字符串str
-## 编码解码
-编码：将字符串转换为字节的过程
-```py
-str1 = '你好中国'
-b1 = str1.encode(encoding='utf-8')
-print(b1) #b'\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\xad\xe5\x9b\xbd'
-```
-解码：将字节数据转换为字符串的过程
-```py
-str1 = '你好中国'
-b1 = str1.encode(encoding='utf-8')
-str2 = b1.decode(encoding='utf-8')
-print(str2) #你好中国
-```
-## 字符串中用 % 占位
-```py
-int1 = 1
-float1 = 1.0
-str1 = 'int1=%d, float1=%f' % (int1, float1)
-print(str1) #int1=1, float1=1.000000
-```
-格式符号列表
-| 格式符号 | 说明 |
-| - | - |
-| %d | 十进制整数 |
-| %f | 浮点数 |
-| %s | 字符串 |
-| %o | 八进制整数 |
-| %x | 十六进制整数 |
-| %e | 科学计数法 |
 
-## 字符串format()方法
-不指定顺序
-```py
-int1 = 1
-float1 = 1.0
-bool1 = True
-str1 = 'int1={}, float1={}, bool1={}'.format(int1, float1, bool1)
-print(str1) #int1=1, float1=1.0, bool1=True
-```
-指定顺序
-```py
-int1 = 1
-float1 = 1.0
-bool1 = True
-str1 = 'int1={2}, float1={1}, bool1={0}'.format(int1, float1, bool1)
-print(str1) #int1=True, float1=1.0, bool1=1
-```
-设置参数
-```py
-int1 = 1
-float1 = 1.0
-bool1 = True
-str1 = 'int1={a}, float1={b}, bool1={c}'.format(a = int1, b = float1, c = bool1)
-print(str1)  # int1=1, float1=1.0, bool1=True
-```
-数字格式化
-```py
-# 以*填充，宽度为20，
-# < 居左 > 居右 ^ 居中
-# 逗号表示每3位一分割
-# .3f保留3位小数
-float1 = 334443.1489
-str1 = '{:*^20.3f}'.format(float1)
-print(str1) #*****334443.149*****
-
-str2 = '{:*>20,.4f}'.format(float1)
-print(str2) #********334,443.1489
-```
-
-## f字符串
-```py
-int1 = 1
-float1 = 1.0
-str1 = f'int1={int1}, float1={float1}'
-print(str1) #int1=1, float1=1.0
-```
-另一种简写方法
-```py
-int1 = 1
-float1 = 1.0
-str1 = f'{int1=}, {float1=}'
-print(str1) #int1=1, float1=1.0
-```
 # 运算符
 ## 算术运算符6个
 `+` `-` `*` `/` `//`(整除，向下取整) `%`(模运算，取余数) `**`(幂运算，`10**3==1000`)
@@ -332,8 +227,32 @@ for a in [1, 2, 3]:
 for i in 'abc':
     print(i)
 ```
-# 序列
-## 列表list
+# 数据类型6种
+数值（int float complex(复数) bool）
+字符串str
+列表list（可变序列）
+元组tuple（不可变序列）
+集合set（元素唯一无序）
+字典dict（键值对）
+特殊数据类型None
+
+不可变：数值 字符串 元组
+可变：list set dict
+
+## 数值类型
+### float类型计算会有精度问题，可以引入decimal
+```py
+from decimal import Decimal
+f1 = Decimal('0.1')
+f2 = Decimal('0.2')
+f3 = f1 + f2
+print(f3)
+```
+### python3中，bool是int的子类
+True False的值分别是1 0
+
+## 列表list（有序）
+通过[]定义，可变的
 ### 切片
 ```py
 list1 = [1, 2, 3, 4, 5]
@@ -415,9 +334,94 @@ print(list(zip1)) # [(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd'), (5, 'e')]
 ### 其他常用方法
 略
 
-## 字符串
+## 字符串（有序）
+不可变，可以通过单引号 双引号 三个引号定义字符串
 ### 很多方法同list
 略
+### 编码解码
+编码：将字符串转换为字节的过程
+```py
+str1 = '你好中国'
+b1 = str1.encode(encoding='utf-8')
+print(b1) #b'\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\xad\xe5\x9b\xbd'
+```
+解码：将字节数据转换为字符串的过程
+```py
+str1 = '你好中国'
+b1 = str1.encode(encoding='utf-8')
+str2 = b1.decode(encoding='utf-8')
+print(str2) #你好中国
+```
+### 字符串中用 % 占位
+```py
+int1 = 1
+float1 = 1.0
+str1 = 'int1=%d, float1=%f' % (int1, float1)
+print(str1) #int1=1, float1=1.000000
+```
+格式符号列表
+| 格式符号 | 说明 |
+| - | - |
+| %d | 十进制整数 |
+| %f | 浮点数 |
+| %s | 字符串 |
+| %o | 八进制整数 |
+| %x | 十六进制整数 |
+| %e | 科学计数法 |
+
+### 字符串format()方法
+不指定顺序
+```py
+int1 = 1
+float1 = 1.0
+bool1 = True
+str1 = 'int1={}, float1={}, bool1={}'.format(int1, float1, bool1)
+print(str1) #int1=1, float1=1.0, bool1=True
+```
+指定顺序
+```py
+int1 = 1
+float1 = 1.0
+bool1 = True
+str1 = 'int1={2}, float1={1}, bool1={0}'.format(int1, float1, bool1)
+print(str1) #int1=True, float1=1.0, bool1=1
+```
+设置参数
+```py
+int1 = 1
+float1 = 1.0
+bool1 = True
+str1 = 'int1={a}, float1={b}, bool1={c}'.format(a = int1, b = float1, c = bool1)
+print(str1)  # int1=1, float1=1.0, bool1=True
+```
+数字格式化
+```py
+# 以*填充，宽度为20，
+# < 居左 > 居右 ^ 居中
+# 逗号表示每3位一分割
+# .3f保留3位小数
+float1 = 334443.1489
+str1 = '{:*^20.3f}'.format(float1)
+print(str1) #*****334443.149*****
+
+str2 = '{:*>20,.4f}'.format(float1)
+print(str2) #********334,443.1489
+```
+
+### f字符串
+```py
+int1 = 1
+float1 = 1.0
+str1 = f'int1={int1}, float1={float1}'
+print(str1) #int1=1, float1=1.0
+```
+另一种简写方法
+```py
+int1 = 1
+float1 = 1.0
+str1 = f'{int1=}, {float1=}'
+print(str1) #int1=1, float1=1.0
+```
 ### strip()去前后空格 lstrip rstrip
 ```py
 str1 = '  abc def '
@@ -440,8 +444,8 @@ print(str1.capitalize()) # 第一个字母大写，其他小写
 print(str1.swapcase()) # 大小写互换
 ```
 
-## 元组tuple
-通过()定义元组对象
+## 元组tuple（有序）
+通过()定义元组对象，不可变，元素可以重复
 ```py
 tuple1 = (1, 2, 3, 4, 5)
 print(tuple1) # (1, 2, 3, 4, 5)
@@ -451,3 +455,46 @@ print(tuple1) # (1, 2, 3, 4, 5)
 tuple1 = (1, 2, 3, 4, 5)
 tuple1[0] = 9 # 报错 TypeError: 'tuple' object does not support item assignment
 ```
+## 集合set（无序）
+集合是无序的，且不包含重复元素。使用{}定义，也可以使用set()定义。
+集合没有索引，所以不能通过切片方式访问集合元素
+### 创建集合对象
+```py
+# 创建集合
+set1 = {1, 2, 3, 4, 5}
+
+# 将列表转化为集合，一般可用于去重场景
+set2 = set([1, 2, 2, 4, 4])
+print(set2) # {1, 2, 4}
+
+# 通过推导式创建集合对象
+set3 = {i for i in range(10) if i % 2 == 0}
+print(set3) # {0, 2, 4, 6, 8}
+```
+
+### 添加元素
+```py
+set1.add(6)
+```
+
+### 删除元素
+```py
+set1.remove(3)
+```
+### 判断是不是成员
+```py
+print(1 in set1) # True
+```
+### 长度 最大值 最小值 求和
+```py
+print(len(set1), max(set1), min(set1), sum(set1))
+```
+### 遍历
+```py
+set1 = {1, 2, 3, 4, 5}
+for item in set1:
+    print(item)
+```
+
+## 字典dict（无序）
+通过{}定义
