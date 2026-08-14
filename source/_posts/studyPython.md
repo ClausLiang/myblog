@@ -479,7 +479,10 @@ set1.add(6)
 
 ### 删除元素
 ```py
-set1.remove(3)
+set1.remove(3) # 不存在会报错
+set1.discard(5) # 不存在不报错
+set1.pop() # 随机删一个
+set1.clear() # 清空
 ```
 ### 判断是不是成员
 ```py
@@ -494,6 +497,45 @@ print(len(set1), max(set1), min(set1), sum(set1))
 set1 = {1, 2, 3, 4, 5}
 for item in set1:
     print(item)
+```
+### update 并集，改变原集合
+```py
+set1 = {1, 2, 3}
+set1.update({4,})
+print(set1) # {1, 2, 3, 4}
+```
+### union 并集，不改变原集合，返回新集合；intersection 交集，返回新集合
+```py
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+set1.union(set2) # {1, 2, 3, 4, 5}
+set1.intersection(set2) # {3}
+```
+### difference 差集（我有你没有）
+```py
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(set1.difference(set2)) # {1,2} 不改set1
+set1.difference_update(set2) # 求差集，并更新
+print(set1) # {1, 2}
+```
+### 运算符求交集 并集 差集
+```py
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(set1 & set2) # {3}
+print(set1 | set2) # {1, 2, 3, 4, 5}
+print(set1 ^ set2) # {1, 2, 4, 5}
+print(set1 - set2) # {1, 2}
+```
+
+### 其他方法
+```py
+print(set1.isdisjoint(set2)) # False 是否无交集
+print(set1.issubset(set2)) # False 是否是子集
+print(set1.issuperset(set2)) # False 是否是父集
+set1.symmetric_difference_update(set2) # 求两集合不重复的元素
+print(set1) # {1, 2, 4, 5}
 ```
 
 ## 字典dict（无序）
