@@ -539,4 +539,29 @@ print(set1) # {1, 2, 4, 5}
 ```
 
 ## 字典dict（无序）
-通过{}定义
+通过{}定义，也可以通过dict()定义，键值对
+### 获取值
+```py
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+print(dict1['a']) # 1
+print(dict1.get('c', '不存在'))
+```
+### 设置
+```py
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict1['d'] = 4
+dict1.update({'e': 5})
+print(dict1) # {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+```
+### 删除
+```py
+del dict1['a']
+```
+### 遍历
+```py
+dict1.keys() # dict_keys(['a', 'b', 'c'])
+dict1.values() # dict_values([1, 2, 3])
+dict1.items() # dict_items([('a', 1), ('b', 2), ('c', 3)])
+for key, value in dict1.items():
+    print(key, value)
+```
