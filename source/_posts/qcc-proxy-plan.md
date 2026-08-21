@@ -1,7 +1,7 @@
 ---
 title: 企查查代理访问方案
 date: 2026-07-08 15:34:58
-updated: 2026-7-8 15:45:00
+updated: 2026-8-20
 tags: 运维
 categories: 运维技能
 ---
@@ -29,8 +29,8 @@ categories: 运维技能
 | 节点 | IP | 角色 |
 |------|-----|------|
 | 澳洲 Windows 主机 | （待确认是否固定 IP） | 客户端，仅配置浏览器代理 |
-| 东京服务器（当前服务器） | 47.74.*.* | 代理入口 + 中继，托管 PAC 文件 |
-| 北京 ECS（华北2） | 39.107.*.* | 代理出口，大陆 IP |
+| 东京服务器（当前服务器） | 47.74.\*.* | 代理入口 + 中继，托管 PAC 文件 |
+| 北京 ECS（华北2） | 39.107.\*.* | 代理出口，大陆 IP |
 
 # 关键设计决策
 
@@ -45,14 +45,14 @@ categories: 运维技能
 
 4. **安全收口**
    - 东京入口：Basic 认证（长随机密码）+ 非常规端口；若澳洲主机 IP 固定，防火墙额外限源。
-   - 北京 ECS：安全组仅放行东京服务器 IP（47.74.*.*），对公网完全不可见。
+   - 北京 ECS：安全组仅放行东京服务器 IP（47.74.\*.*），对公网完全不可见。
    - 严禁形成开放代理，否则可能被扫描滥用，导致阿里云封端口/停机。
 
 # 前期验证（已完成）
 
 | 检查项 | 结果 | 状态 |
 |--------|------|------|
-| 当前服务器位置与出口 IP | 阿里云国际·东京，47.74.*.* | ✅ |
+| 当前服务器位置与出口 IP | 阿里云国际·东京，47.74.\*.* | ✅ |
 | 东京 → 北京 ECS 链路质量 | 30 包 0% 丢包，平均 61ms，抖动 1.3ms | ✅ |
 | 端到端延迟预估 | 澳洲→东京→北京约 170~220ms，浏览可用 | ✅ |
 
@@ -87,7 +87,7 @@ curl -sI --max-time 10 https://www.qcc.com/ | head -5
     - `RELAY_USER = rly_77b4fc`
     - `RELAY_PASS = xxxxxxx`
     - 暂存于东京 `/tmp/relay_creds.txt`。
-  - systemd 服务 `gost-exit.service`：`ExecStart=/usr/local/bin/gost -L "relay+tls://rly_77b4fc:xxxxxxx@:18443"`，状态 active、已 enabled 开机自启。
+  - systemd 服务 `gost-exit.service`：`ExecStart=/usr/local/bin/gost -L "relay+tls://rly_77b4fc:{RELAY_PASS}@:18443"`，状态 active、已 enabled 开机自启。
   - 日志确认：`listening on [::]:18443/tcp`，无报错。
   - 安全组 18443 已由用户在阿里云控制台放行东京 IP。ECS 主机防火墙 firewalld/iptables 均无规则（inactive/空）。
 
@@ -122,11 +122,13 @@ curl -sI --max-time 10 https://www.qcc.com/ | head -5
        return "DIRECT";
    }
    ```
-2. 托管服务 unit 已创建 `~/.config/systemd/user/qcc-pac.service`（python3 http.server 监听 28081），
-   PAC URL 将为 `http://47.74.*.*:28081/qcc.pac`。
+2. 托管服务 unit 已创建 `~/.config/systemd/user/qcc-pac.service`（python3 http.server(后改为caddy服务26-8-20) 监听 28081），PAC URL 将为 `http://47.74.*.*:28081/qcc.pac`。
 
 - 执行结果：✅ **完成**（用户已授权公网暴露）。
   - 服务 `qcc-pac.service`（user systemd）状态 active，监听 `0.0.0.0:28081`。
+  - 2026-08-20：原 Python 3.6 单线程 http.server 被公网不完整连接长期占用，导致 PAC 请求超时；已替换为 Caddy v2.11.4 用户服务，对外地址和端口不变。
+  - Caddy 安装于 ~/.local/bin/caddy，配置文件为 ~/.config/caddy/qcc-pac.Caddyfile；只提供 /qcc.pac，其他路径返回 404，PAC MIME 为 application/x-ns-proxy-autoconfig；请求头、请求体、写响应和空闲连接超时统一为 60 秒
+  - 原 Python unit 已备份为 ~/.config/systemd/user/qcc-pac.service.python-backup-20260820。
   - 本地取 PAC 内容正确。
   - **PAC URL：`http://47.74.*.*:28081/qcc.pac`**（澳洲浏览器填这个）。
   - ⚠️ 同样受 `Linger=no` 影响，重启后需 linger 才能自动拉起。
@@ -140,7 +142,7 @@ curl -sI --max-time 10 https://www.qcc.com/ | head -5
 curl -sI --max-time 15 -x "http://<user>:<password>@127.0.0.1:28080" https://www.qcc.com/ | head -5
 ```
 
-**预期**：返回正常响应，且出口 IP 为 39.107.*.*（可通过代理访问 ipinfo.io 确认）。
+**预期**：返回正常响应，且出口 IP 为 39.107.\*.*（可通过代理访问 ipinfo.io 确认）。
 
 - 执行结果：✅ **全部通过**。
   - 经代理查出口 IP：`China Beijing 39.107.*.*` —— 确认最终以北京大陆 IP 出网。
@@ -182,6 +184,97 @@ curl -sI --max-time 15 -x "http://<user>:<password>@127.0.0.1:28080" https://www
 
 - 执行结果：✅ **完成**（用户已执行）。核实：`Linger=yes`；gost-entry、qcc-pac 均 enabled + active。
   东京重启后自动拉起；北京 gost-exit 为系统级 systemd，已 enabled，一并具备重启自恢复。
+
+## 步骤 8：端到端链路监控 —— ✅ 已完成（2026-08-20）
+- 已创建 `qcc-chain-monitor.service` 与 `qcc-chain-monitor.timer`，计划每 3 分钟检查一次 PAC、代理认证、北京出口 IP 和企查查页面。
+- 已实现首次故障告警、持续故障每小时限频提醒和恢复通知。
+- 健康检查与故障注入测试均通过，实际 oneshot 检查结果为 `healthy`。
+- 飞书群机器人 Webhook 与签名校验已配置在权限为 600 的 `~/.config/qcc-monitor/monitor.env`；测试通知发送成功。
+- `qcc-chain-monitor.timer` 已 enabled + active，仅在周一至周五悉尼时间 08:00–20:00 每 3 分钟执行一次（自动处理夏令时）；首次自动检查结果为 `healthy`。
+- 详细操作见 `monitor/README.md`。
+
+## 8-20服务升级干了什么
+7月8号搭建的这个qcc代理服务，可能用户也一直没用，等到8-20用户开始用的时候发现用不了，用AI排查以后发现pac文件的托管服务挂了，更换了caddy服务，最后又加了监控，详细操作如下：
+### 该目录下有个企查查代理访问的方案，之前已经可以成功访问了，帮忙看看现在有什么问题（我问AI）
+目前问题已经定位：代理链路正常，PAC 文件服务卡死了。
+- gost-entry 正常运行，东京 → 北京链路可用。
+- 实测经代理访问企查查返回 HTTP/2 200。
+- 实测代理出口仍是北京 IP 39.107.\*.*。
+- qcc-pac 虽显示 active，但访问 127.0.0.1:28081/qcc.pac 已超时。
+- 原因是服务器使用 Python 3.6 的单线程 http.server。公网 IP 194.195.\*.* 建立了 3 个不完整 HTTP 连接，持续约 27 天：一个占住服务线程，另外两个填满监听队列，导致正常请求无法处理。这很像扫描器或 Slowloris 式连接。
+- 28080、28081 都持续遭受公网扫描；目前没发现代理认证被绕过。
+
+所以澳洲 Windows 下载不到 `qcc.pac`，PAC 配置无法生效，浏览器便不会按预期走代理。
+临时恢复只需重启：
+`systemctl --user restart qcc-pac.service`
+但还会复发。长期应改成**带并发和读取超时的 PAC 服务**，并尽可能在阿里云安全组中把 28080/28081 限制到澳洲出口 IP；同时建议轮换已明文写入文档和 unit 文件的代理凭据。
+本次只做了诊断，没有修改配置或重启服务。
+
+### qcc-pac.service这个服务是个什么东西，是自己写的，还是安装的
+qcc-pac.service 是这个方案中自己创建的 systemd 用户服务，不是通过软件包安装的成品服务。
+它本身非常简单：
+```
+WorkingDirectory=%h/pac
+ExecStart=/usr/bin/python3 -m http.server 28081 --bind 0.0.0.0
+```
+作用是：
+- 调用系统自带的 Python 3.6
+- 在 28081 端口启动一个简易 HTTP 文件服务器
+- 对外提供 /data/claus/pac/qcc.pac
+- 让澳洲 Windows 通过 http://47.74.*.*:28081/qcc.pac 下载代理规则
+
+相关文件：
+- 服务定义：`/data/claus/.config/systemd/user/qcc-pac.service`
+- PAC 规则：`/data/claus/pac/qcc.pac`
+名称 qcc-pac.service 也是部署时自行取的。它没有专门编写服务程序，只是把 Python 自带的 http.server 包装成常驻服务。这也正是此前容易卡死的原因：当前 Python 3.6 的这个简易服务器是单线程实现，不适合直接长期暴露在公网。
+### 有成熟软件可替代这个服务吗
+有。针对“只提供一个 PAC 文件”的场景，建议使用 Caddy。
+原因：
+- 成熟的并发 Web 服务器，不会被一个半开连接堵死。
+- 单个二进制文件，可以继续作为当前用户的 systemd 服务运行，不一定需要 root。
+- 配置很简单，官方也将其文件服务定位为可用于生产的静态服务器。[Caddy 官方文档](https://caddyserver.com/docs/quick-starts/static-files)
+
+替换后的核心命令类似：
+```
+caddy file-server \
+  --root /data/claus/pac \
+  --listen :28081
+```
+同时最好做到：
+- 只允许访问 /qcc.pac，不开放目录浏览。
+- 明确返回 PAC 的 MIME 类型：application/x-ns-proxy-autoconfig。
+- 保留 systemd 自动重启和开机启动。
+- 最好在安全组限制澳洲来源 IP。
+
+另一个选择是 Nginx，也非常成熟，但安装和系统级配置通常需要 root；对于当前只有一个 PAC 文件的场景略显重。当前服务器上 Caddy、Nginx 和 lighttpd 都还没有安装。
+综合现有权限和部署结构，建议使用 Caddy 用户服务直接替换 qcc-pac.service。更换时可以保持 PAC URL 和端口完全不变，澳洲电脑无需重新配置。
+
+### 使用 Caddy 用户服务直接替换 qcc-pac.service，对外端口不要修改
+...
+已完成替换，对外端口和 PAC URL 均未改变。
+
+### 能否写一个额外的监控任务，每隔3min检查一下整个链路是否健康，当不健康是发送告警到飞书。
+监控任务已编写、安装并通过测试：
+- 每 3 分钟检查 PAC、服务状态、代理认证、北京出口 IP 和企查查页面。
+- 首次故障立即告警。
+- 持续故障每小时最多提醒一次。
+- 恢复后发送恢复通知和故障持续时间。
+- 当前真实检查结果：healthy。
+- 故障注入测试：能正确识别异常并进入告警流程。
+
+相关文件：
+- [监控脚本](/data/claus/project/vpntest/monitor/qcc-chain-monitor)
+- [systemd 服务](/data/claus/project/vpntest/monitor/qcc-chain-monitor.service)
+- [3 分钟 timer](/data/claus/project/vpntest/monitor/qcc-chain-monitor.timer)
+- [使用说明](/data/claus/project/vpntest/monitor/README.md)
+
+目前 timer 暂未启用，因为还缺飞书配置。请提供：
+1. 飞书群自定义机器人的 Webhook URL。
+2. 如果启用了“签名校验”，再提供签名密钥。
+3. 如果启用了关键词校验且关键词不是 QCC，请提供实际关键词。
+
+飞书官方建议妥善保管 Webhook 地址。飞书自定义机器人文档
+收到后我会将凭据写入权限为 600 的配置文件、发送测试告警，确认成功后启用 timer。
 
 # 遗留风险与备注
 
@@ -431,3 +524,114 @@ linger 就是解决这个的开关
 linger 是专门用来弥补"用户级服务"这一个短板的。我们东京用普通用户 claus 部署(前面聊过,这样更安全),代价就是要手动开一次 linger 来换取常驻能力。你已经执行了,我也核实过 Linger=yes,所以这个短板已经补上,东京服务现在具备和 root 服务一样的"开机自启、稳定常驻"能力。
 
 一句话记忆:linger = 让用户登出后,他的后台服务"继续逗留"运行的许可证。
+
+## 我对Linux懂的不是很多，gost-entry.service是不是就是通过这个文件启动了gost服务，可以这样理解吗
+可以这样理解。
+gost-entry.service 是一份交给 systemd 的“启动说明书”，文件位于：
+/data/claus/.config/systemd/user/gost-entry.service
+它告诉 systemd：
+- 启动哪个程序：/data/claus/.local/bin/gost
+- 使用哪些代理参数和账号密码
+- 监听东京服务器的 28080 端口
+- 将流量转发至北京服务器
+- 程序退出后等待 3 秒自动重启
+- Linux 启动时自动运行
+
+关系可以简单理解为：
+```
+gost-entry.service（启动配置）
+        ↓
+gost 程序（真正提供代理功能）
+        ↓
+东京 28080 → 北京 18443
+```
+常用管理命令是：
+```bash
+# 查看状态
+systemctl --user status gost-entry.service
+
+# 重启
+systemctl --user restart gost-entry.service
+
+# 停止
+systemctl --user stop gost-entry.service
+
+# 启动
+systemctl --user start gost-entry.service
+
+# 查看是否开机启动
+systemctl --user is-enabled gost-entry.service
+```
+所以严格来说，gost-entry.service 不是 gost 程序本身，而是 systemd 用来启动和管理 gost 的配置文件。
+## Linux的systemd服务是什么意思
+要理解Linux的systemd服务，首先要明白systemd本身是什么。简单来说，systemd是Linux操作系统的一个核心“系统和服务管理器”。它是当今绝大多数主流Linux发行版的默认初始化系统（init系统）
+你可以把它想象成Linux系统的“大总管”，负责在电脑开机后，启动、维护和管理所有其他系统服务。
+**核心角色：PID 1 进程**
+systemd最特别的地方在于，它是内核启动后第一个运行的用户空间进程，其进程ID（PID）永远是1。
+- **所有进程之祖**：系统中的所有其他进程，要么由systemd直接启动，要么由它启动的进程衍生而来。
+- **系统守护者**：它从开机运行到关机，全程负责系统的状态。
+
+**管理的基本单元：Unit（单元）**
+为了高效管理，systemd将所有系统资源抽象为Unit（单元）。一个单元就是一个被systemd管理的对象，并通过一个单元配置文件（Unit File） 来定义。
+其中，最常见的单元类型就是Service（服务单元），也就是我们通常所说的“systemd服务”。
+
+## qcc-pac.service就是通过这个文件启动了caddy服务，把qcc.pac文件暴露到公网供澳洲那边访问，是这样吗
+是的，完全正确
+
+## 东京服务器的角色是代理入口+中继，这个中继是什么意思
+这里的“中继”可以理解为“转运站”。
+东京服务器做两件事：
+1. 代理入口：在 28080 接收澳洲浏览器的代理请求，并检查用户名和密码。
+2. 中继转发：不直接从东京访问企查查，而是把请求通过加密的 relay+tls 链路转交给北京服务器。
+
+完整路径是：
+```
+澳洲浏览器
+   ↓ HTTP 代理请求
+东京 gost-entry:28080
+   ↓ relay+tls 加密转发
+北京 gost-exit:18443
+   ↓ 以北京 IP 访问
+企查查
+```
+可以类比为快递：
+- 澳洲电脑：寄件人
+- 东京服务器：收件和转运中心
+- 北京服务器：最终派送点
+- 企查查：收件地址
+
+东京不作为最终互联网出口，因此企查查看到的不是东京 IP，而是北京 IP 39.107.\*.\*。
+另外，企查查本身是 HTTPS。东京和北京只是转发加密数据，不会解密或读取浏览器与企查查之间的 HTTPS 内容。“中继”指的是转发网络连接，不是修改网页内容。严格来说，东京是“代理入口 + 中继客户端”，北京才是“中继接收端 + 最终出口”。
+
+## vpntest目录下的caddy和monitor目录下的.service和.timer等文件只是拷贝过来的备份，方便我阅读，而真正生效的配置文件是在.config目录下的，是这样吗
+基本正确，但更准确地说，vpntest 下的是“部署源文件/参考副本”，不是真正被 systemd 直接读取的文件。仅修改这些副本不会影响正在运行的服务。
+| 项目源文件 |	真正生效的位置 |
+| - | - |
+| caddy/qcc-pac.Caddyfile |	/data/claus/.config/caddy/qcc-pac.Caddyfile|
+| caddy/qcc-pac.service |	/data/claus/.config/systemd/user/qcc-pac.service|
+|monitor/qcc-chain-monitor.service	|/data/claus/.config/systemd/user/qcc-chain-monitor.service|
+|monitor/qcc-chain-monitor.timer	|/data/claus/.config/systemd/user/qcc-chain-monitor.timer|
+|monitor/qcc-chain-monitor	|/data/claus/.local/bin/qcc-chain-monitor|
+|monitor/monitor.env.example	|/data/claus/.config/qcc-monitor/monitor.env|
+
+此外：
+- 真正的 PAC 文件是 /data/claus/pac/qcc.pac
+- Caddy 程序是 /data/claus/.local/bin/caddy
+- gost 程序是 /data/claus/.local/bin/gost
+
+可以这样理解：
+```
+vpntest/caddy 和 vpntest/monitor
+        ↓ 部署、复制
+~/.config/systemd/user、~/.config/caddy、~/.local/bin
+        ↓ systemd 实际读取并运行
+当前服务
+```
+修改不同文件后的生效方式：
+- 修改 vpntest 下的副本：不会直接生效，需要重新部署。
+- 修改真正的 .service 或 .timer：需要执行 systemctl --user daemon-reload，然后重启服务或 timer。
+- 修改真正的 Caddyfile：需要重启 qcc-pac.service。
+- 修改 /data/claus/pac/qcc.pac：服务器端直接生效，无需重启 Caddy。
+- 修改监控的 monitor.env：下一次监控执行时直接读取新配置，无需重启 timer。
+
+因此，建议把 vpntest 中的文件视为“可阅读、可维护的源文件”，修改后再同步部署到真正生效的位置。
