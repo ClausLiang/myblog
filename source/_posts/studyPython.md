@@ -565,3 +565,169 @@ dict1.items() # dict_items([('a', 1), ('b', 2), ('c', 3)])
 for key, value in dict1.items():
     print(key, value)
 ```
+# 函数
+```py
+def func1(a, b, c=3, d=4):
+    print(a, b, c, d)
+func1(1, 2) # 1 2 3 4
+```
+## 参数
+### 必须参数（按照参数的位置传参）
+### 关键字参数（函数调用使用关键字参数来确定每个变量传入的参数值）
+### 默认值参数
+非默认参数(必须参数)必须放默认值参数之前
+```py
+def fun(a, b=1)
+```
+### 不定长参数
+一个星号的不定长参数传进去是tuple形式接受，不定长参数后面还有参数，传参时必须用关键字参数传参
+```py
+def func2(a, b, *args, age):
+    print(a, b)
+    print(args)
+    print(age)
+func2(1, 2, 3, 4, 5, age=20)
+# 1 2
+# (3, 4, 5)
+# 20
+```
+两个星号的不定长参数传进去是dict形式接受，后面不能再跟其他参数了，实参也需要用关键字的形式传入
+```py
+def func3(a, b, **kwargs):
+    print(a, b)
+    print(kwargs)
+func3(1, 2, name='张三', age=20)
+# 1 2
+# {'name': '张三', 'age': 20}
+```
+### 解包传参
+星号对元组进行解包
+```py
+def func(a,b,c):
+    print(a,b,c)
+func(*(1,2,3))
+```
+两个星号对字典解包
+```py
+def func(a,b,c):
+    print(a,b,c)
+func(*{a:1,b:2,c:3})
+```
+### 强制使用位置参数或关键字参数
+```py
+# / 前面的参数必须使用位置参数，* 后面的参数必须使用关键字参数
+def func1(a,b,c,/,d,e,*,f,g):
+    print(a,b,c,d,e,f,g)
+func1(1,2,3,4,5,f=6,g=7)
+```
+## 深拷贝
+```py
+import copy
+list1 = [1,2,3,[10,20]]
+list2 = copy.deepcopy(list1)
+list2[3][0] = 100
+print(list1) # [1, 2, 3, [10, 20]]
+```
+
+## 几个关键字
+pass 占位语句
+return 结束函数返回一个结果
+continue 跳过本次循环，进入下次循环
+break 中断循环
+
+## 闭包
+在一个函数体内定义另一个函数
+外层函数的返回值是内层的函数对象
+在内层函数中访问了外层函数的变量
+```py
+def outer(a):
+    def inner(b):
+        return a + b
+    return inner
+out = outer(10)
+print(out(20)) # 30
+# 第二种调用方式
+print(outer(10)(20)) # 30
+```
+在闭包中，会延长外层函数中定义的变量的生命周期（相当于外层变量的生命周期和内层函数绑定了，内层函数结束后，变量才会销毁）
+
+## 变量的作用域
+局部local -> 嵌套Enclosing -> 全局global -> 内建build-in
+LEGB
+```py
+a = 10 # 全局
+def func1():
+    a = 20 # 嵌套
+    def func2():
+        a = 30 # 局部
+        print(a)
+    return func2
+func1()() # 30
+```
+
+## 全局变量和局部变量
+全局变量：定义在模块下，函数外
+局部变量：定义在函数内
+
+### global声明变量是全局变量
+如果在函数体重对变量进行赋值操作，python会将变量当做局部变量进行处理。哪怕存在同名的全局变量
+```py
+var1 = 10
+def func1():
+    # global关键字声明操作的变量为全局变量，就不会再创建局部变量了
+    global var1
+    var1 = 20
+    print(var1)
+```
+### nonlocal声明变量不是局部变量
+```py
+def func1():
+    var1 = 20
+    def func2():
+        nonlocal var1
+        var1 = 30
+        print(var1)
+    func2()
+    print(var1)
+func1() # 30 30
+```
+## 匿名函数
+```py
+# 定义一个计算函数
+def caculatef(a, b, op):
+    return op(a, b)
+
+# 匿名函数当参数传入
+print(caculatef(10, 20, lambda x, y: x + y)) # 30
+
+# lambda定义的x,y: x + y就是匿名函数
+# 等价以下函数
+def add(x, y):
+    return x + y
+
+print(caculatef(10, 20, add)) # 30
+```
+lambda只是一个表达式，而不是一个代码块，所以仅仅能在lambda表达式中封装有限的逻辑进去。
+
+### 匿名函数作为内置函数的参数
+排序sorted
+```py
+ls1 = [{'name': '张三', 'age': 20}, {'name': '李四', 'age': 18}, {'name': '王五', 'age': 40}]
+sorted_ls1 = sorted(ls1, key=lambda x: x['age'], reverse=False)
+print(sorted_ls1)
+# [{'name': '李四', 'age': 18}, {'name': '张三', 'age': 20}, {'name': '王五', 'age': 40}]
+```
+map filter reduce
+```py
+list1 = [1, 2, 3, 4, 5]
+list2 = list(map(lambda x: x * 2, list1))
+print(list2) # [2, 4, 6, 8, 10]
+
+list3 = list(filter(lambda x: x % 2 == 0, list1))
+print(list3) # [2, 4]
+
+
+from functools import reduce
+reduce1 = reduce(lambda x, y: x + y, list1)
+print(reduce1) # 15
+```
