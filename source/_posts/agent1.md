@@ -128,3 +128,18 @@ RLHF / RLAIF （优化偏好）
 2基于LangChain/LangGraph等框架开发智能体
 ## 工作流workflow
 可以看做是一种智能体的设计模式，用于将复杂任务拆解为一系列可控、有序的步骤，并按照预先定义的流程逐步执行。
+
+# LangChain
+lang就是大语言模型chain是链条。LangChain就是连接程序与大模型的桥梁。
+LangChain 是一个用于构建大语言模型（LLM）应用的开源`编排框架`。是一个`开发工具包`，旨在简化将 LLM 与外部数据源、工具和复杂工作流集成的过程，让开发者能更高效地创建基于 LLM 的应用程序。
+LangChain 是目前快速构建 LLM 应用的重要工具，尤其适合需要快速原型验证和集成多种外部能力的场景。
+
+LangChain相当于Java开发中的springBoot
+
+## LangChain有哪些组成（ 6 大金刚）
+Model
+Memory
+Retrieval（检索）
+Chains
+Agent
+Callback
