@@ -115,6 +115,10 @@ mv file1.txt /home/user/Documents/   # 将文件移动到 Documents 目录下
 rm index.html #删除文件
 rm -rf static #删除文件夹
 ```
+### 删除服务器文件夹
+```bash
+ssh root@ip 'rm -rf /app/nginx/html/dist' # rm是本地命令，必须先登录远端服务器后再执行
+```
 -r 代表向下递归，不管有多少级目录
 -f 代表不提示
 
