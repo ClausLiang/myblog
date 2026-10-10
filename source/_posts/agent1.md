@@ -134,7 +134,7 @@ lang就是大语言模型chain是链条。LangChain就是连接程序与大模�
 LangChain 是一个用于构建大语言模型（LLM）应用的开源`编排框架`。是一个`开发工具包`，旨在简化将 LLM 与外部数据源、工具和复杂工作流集成的过程，让开发者能更高效地创建基于 LLM 的应用程序。
 LangChain 是目前快速构建 LLM 应用的重要工具，尤其适合需要快速原型验证和集成多种外部能力的场景。
 
-LangChain相当于Java开发中的springBoot
+LangChain相当于Java开发中的spring
 
 ## LangChain有哪些组成（ 6 大金刚）
 Model
@@ -143,3 +143,16 @@ Retrieval（检索）
 Chains
 Agent
 Callback
+
+## 三步完成第一个智能体封装
+模型 提示词 工具
+1. 定义工具
+2. 构建prompt
+3. 调用`create_agent`
+
+# LangGraph
+基于LangChain构建的、面向智能体多轮交互/状态持久化/分支并行执行的`图结构工作流框架`
+LangGraph = LangChain + 图编排 + 状态机
+LangGraph相当于Java开发中的springBoot
+## LangGraph4件套
+state(状态) Node(节点) edges(边) graph(图)
