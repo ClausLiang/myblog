@@ -3,7 +3,7 @@ title: nvm或者n管理node版本
 date: 2022-02-13 13:56:03
 updated: 2026-04-07
 tags: npm
-categories: 基础
+categories: node
 ---
 <script type="text/javascript" src="/myblog/custom.js"></script>
 
