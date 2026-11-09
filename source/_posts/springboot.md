@@ -130,3 +130,4 @@ mvn -v
 ## 安装idea
 官网下载最新版，然后想办法破解，或者不破解。最新版的idea免费部分已经支持创建springboot项目了。
 创建springboot项目时，注意有个服务器url，可以改成阿里云https://start.aliyun.com ，原路径https://start.spring.io 可能访问较慢，下载不了依赖。
+但是阿里云的只能创建springboot版本最高3.0.2的项目，最后还是换成了start.spring.io，创建了默认以springboot4.1.2为模板的项目。
