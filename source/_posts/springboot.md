@@ -158,3 +158,9 @@ public class HelloController {
 @RequestMapping("/api") 什么时候用？常见用途是在类上设置一组接口共同的路径前缀，放在controller的类上
 
 这样在浏览的地址栏输入localhost:8080/hello?name=claus, 就会显示hello claus
+
+# 读取项目的配置
+在项目的src下的main下的resource下有个application.properties或者application.yml
+在java代码里读它的配置有几种方式：
+## @value
+
