@@ -131,3 +131,30 @@ mvn -v
 官网下载最新版，然后想办法破解，或者不破解。最新版的idea免费部分已经支持创建springboot项目了。
 创建springboot项目时，注意有个服务器url，可以改成阿里云https://start.aliyun.com ，原路径https://start.spring.io 可能访问较慢，下载不了依赖。
 但是阿里云的只能创建springboot版本最高3.0.2的项目，最后还是换成了start.spring.io，创建了默认以springboot4.1.2为模板的项目。
+
+# 第一个接口
+用idea创建了一个引入springboot4.1.2的项目，写第一个接口
+在myfirstspringboot文件夹下创建controller文件夹，创建一个HelloController.java
+```java
+package com.claus.myfirstspringboot.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+// @RequestMapping("/api")
+public class HelloController {
+
+    @GetMapping("/hello")
+    public String hello(@RequestParam(defaultValue = "world") String name) {
+        return "hello " + name;
+    }
+}
+```
+注解@RestController 声明这是处理请求的类，方法返回值直接作为 HTTP 响应内容
+@GetMapping 把指定 URL 的 GET 请求交给这个方法
+@RequestParam 获取参数
+@RequestMapping("/api") 什么时候用？常见用途是在类上设置一组接口共同的路径前缀，放在controller的类上
+
+这样在浏览的地址栏输入localhost:8080/hello?name=claus, 就会显示hello claus
