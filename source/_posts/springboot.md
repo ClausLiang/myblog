@@ -152,15 +152,110 @@ public class HelloController {
     }
 }
 ```
-注解@RestController 声明这是处理请求的类，方法返回值直接作为 HTTP 响应内容
-@GetMapping 把指定 URL 的 GET 请求交给这个方法
-@RequestParam 获取参数
-@RequestMapping("/api") 什么时候用？常见用途是在类上设置一组接口共同的路径前缀，放在controller的类上
+`@RestController` 声明这是处理请求的类，方法返回值直接作为 HTTP 响应内容
+`@GetMapping` 把指定 URL 的 GET 请求交给这个方法
+`@RequestParam` 获取参数
+`@RequestMapping("/api")` 什么时候用？常见用途是在类上设置一组接口共同的路径前缀，放在controller的类上
 
 这样在浏览的地址栏输入localhost:8080/hello?name=claus, 就会显示hello claus
 
 # 读取项目的配置
 在项目的src下的main下的resource下有个application.properties或者application.yml
 在java代码里读它的配置有几种方式：
-## @value
+## @value("${xxx}") 将配置绑定到变量上
+```java
+package com.claus.myfirstspringboot.config;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+// 该注解表示让spring管理这个类
+@Component
+public class EmailConfigPrinter {
+
+    @Value("${email.user}")
+    private String emailUser;
+
+    @Value("${email.host}")
+    private String emailHost;
+
+    @PostConstruct
+    // 该注解表示 Spring 创建好这个对象、并注入两个配置值之后，调用这个方法一次
+    public void printConfig() {
+        System.out.println("email.user=" + emailUser);
+        System.out.println("email.host=" + emailHost);
+    }
+}
+```
+`@component` 表示让spring管理这个类，spring会自动在初始化的时候管理它
+`@Value("${email.user}")` 获取配置在application.properties里的值
+`@PostConstruct` Spring 创建好这个对象、并注入两个配置值之后，会调用这个方法一次
+
+上面的方式是项目启动的时候就会自动读取配置并执行postContruct标注的方法，
+也可以在@getMapping标注的接口里去读取配置的内容。
+```java
+// controller里读配置
+@RestController
+public class HelloController {
+    @Value("${email.user}")
+    private String emailUser;
+
+    @Value("${email.host}")
+    private String emailHost;
+    // 在接口里读配置
+    @GetMapping("/getProperties")
+    public Map<String, String> getProperties() {
+        return Map.of("email.user", emailUser, "email.host", emailHost);
+    }
+}
+```
+## @ConfigurationProperties(prefix = "email")将配置批量绑定到类上
+```java
+package com.claus.myfirstspringboot.config;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+// 将配置批量绑定到一个类
+@ConfigurationProperties(prefix = "email")
+// 想让@ConfigurationProperties标注的类被spring管理到，还得在入口类上加@ConfigurationPropertiesScan
+// 如果不用@ConfigurationPropertiesScan，也可以用@Component
+public class EmailProperties {
+
+    private String user;
+    private String host;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+}
+
+```
+在Controller里使用配置
+```java
+@RestController
+public class HelloController {
+    private final EmailProperties emailProperties;
+
+    // 通过构造方法注入 EmailProperties，并保存对象引用
+    public HelloController(EmailProperties emailProperties) {
+        this.emailProperties = emailProperties;
+    }
+    // 第二种方式读取配置用@ConfigurationProperties(prefix = "email")
+    @GetMapping("/getEmailProperties")
+    public EmailProperties getEmailProperties() {
+        return emailProperties;
+    }
+}
+```
